@@ -1,6 +1,4 @@
-
-{
-  "name": "PflegeDok",
+name": "PflegeDok",
   "short_name": "PflegeDok",
   "description": "Lokaler Demonstrationsprototyp für Pflegedokumentation",
   "start_url": "./index.html",
