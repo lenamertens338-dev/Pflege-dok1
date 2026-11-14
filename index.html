@@ -1,104 +1,1520 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#153b4a"><meta name="description" content="PflegeDok – lokaler Demonstrationsprototyp">
-<link rel="manifest" href="manifest.webmanifest"><title>PflegeDok</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b68">
+<title>PflegeDok</title>
 <style>
-:root{--navy:#153b4a;--teal:#1d6870;--mint:#e8f3f1;--bg:#f3f6f7;--ink:#20343c;--muted:#61747b;--line:#d9e2e5;--white:#fff;--red:#a33333;--amber:#946200;--shadow:0 5px 18px #16374412}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:var(--navy);color:white;padding:18px max(16px,env(safe-area-inset-left));position:sticky;top:0;z-index:5;box-shadow:var(--shadow)}header .top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:auto}h1{font-size:21px;margin:0}header small{opacity:.8}.wrap{max-width:1200px;margin:auto;padding:14px}.notice{background:#fff5df;border:1px solid #f0d49b;border-radius:12px;padding:12px;margin:12px auto;color:#664900;font-size:13px}.patientbar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;background:white;padding:13px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px}.patientbar label{margin:0}.tabs{display:flex;gap:7px;overflow:auto;padding:3px 1px 12px;scrollbar-width:thin}.tabs button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 12px;border-radius:999px;font-weight:650}.tabs button.active{background:var(--teal);color:white;border-color:var(--teal)}.panel{display:none}.panel.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:16px;margin:0 0 13px;box-shadow:var(--shadow)}h2{font-size:18px;margin:0 0 12px;color:var(--navy)}h3{font-size:15px;margin:16px 0 8px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}label{display:block;font-size:13px;font-weight:650;color:#42575f;margin:0 0 4px}input,select,textarea{width:100%;padding:10px 11px;border:1px solid #cbd7db;border-radius:9px;background:white;color:var(--ink);font:inherit;min-width:0}textarea{min-height:82px;resize:vertical}input[type=checkbox]{width:auto;accent-color:var(--teal);transform:scale(1.1);margin-right:6px}input[type=file]{padding:8px;font-size:13px}.field{min-width:0}.full{grid-column:1/-1}.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--teal);color:white;font-weight:700;font-size:14px}.btn.secondary{background:#e8eff1;color:var(--navy);border:1px solid var(--line)}.btn.danger{background:#a33333}.btn.small{padding:7px 10px;font-size:12px}.muted{color:var(--muted);font-size:12px}.entry{border:1px solid var(--line);border-radius:11px;padding:11px;margin:8px 0;background:#fbfdfd}.entry strong{color:var(--navy)}.entry p{margin:5px 0;white-space:pre-wrap}.pill{display:inline-block;border-radius:99px;background:var(--mint);padding:3px 8px;font-size:11px;font-weight:700;color:var(--teal);margin:2px}.risklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.riskitem{padding:9px;border:1px solid var(--line);border-radius:9px}.riskitem label{margin:0;font-weight:550}.photo{width:100%;max-height:240px;object-fit:contain;background:#f3f6f7;border-radius:8px;margin-top:8px}.labelpreview{border:1px dashed #7c8e95;padding:12px;margin:10px 0;max-width:430px;background:white;color:#111}.labelpreview.large{font-size:15px}.labelpreview small{display:block}.actions{display:flex;gap:8px;flex-wrap:wrap}.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:11px;padding:24px 10px}@media(max-width:650px){.grid,.grid.three{grid-template-columns:1fr 1fr}.patientbar{grid-template-columns:1fr}.wrap{padding:10px}.card{padding:13px}}@media print{header,.notice,.patientbar,.tabs,.no-print,footer{display:none!important}body{background:white}.wrap{padding:0}.panel{display:none!important}#labels{display:block!important}body.print-letter #labels{display:none!important}body.print-letter #letter{display:block!important}body.print-letter #letter textarea{border:0;resize:none;min-height:0;overflow:visible;font:12pt/1.5 Georgia,serif;color:#111;padding:0}body.print-letter #letter .card{border:0;box-shadow:none;padding:0}.card{border:0;box-shadow:none;padding:0}.labelpreview{break-inside:avoid;margin:8px 0}.labelpreview.large{width:100%}}
-</style></head>
+:root {
+ --green:#176b68;
+ --light:#e6f3f1;
+ --bg:#f3f7f7;
+ --text:#243238;
+ --border:#dce5e5;
+ --red:#b23b45;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
+header{background:var(--green);color:white;padding:18px;position:sticky;top:0;z-index:10}
+header h1{margin:0;font-size:23px}
+header small{opacity:.85}
+main{max-width:1100px;margin:18px auto;padding:0 12px 40px}
+nav{display:flex;gap:7px;overflow-x:auto;position:sticky;top:68px;background:var(--bg);padding:8px 0;z-index:8}
+nav button{white-space:nowrap}
+button{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-size:14px;font-weight:bold;cursor:pointer}
+button.secondary{background:#e5eeee;color:#243238}
+button.danger{background:#fff0f0;color:var(--red)}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font:inherit;background:white}
+textarea{min-height:75px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
+.card{background:white;border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:13px;box-shadow:0 3px 12px #00000008}
+.card h2{font-size:18px;color:var(--green);margin:0 0 13px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}
+.field{min-width:0}
+.panel{display:none}.panel.active{display:block}
+.record{border:1px solid var(--border);border-radius:9px;padding:11px;margin:8px 0;background:#fcfefe}
+.record small{color:#68777b}
+.pill{display:inline-block;background:var(--light);color:var(--green);padding:4px 9px;border-radius:20px;font-size:12px;margin:2px}
+.warning{background:#fff7e8;border:1px solid #f0dfbd;color:#76511a;padding:12px;border-radius:9px;margin-bottom:14px;font-size:13px}
+.photo{max-width:180px;max-height:180px;display:block;margin-top:8px}
+.labelbox{border:2px dashed #aaa;padding:14px;background:white;margin:10px 0;max-width:420px}
+.hidden{display:none!important}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+@media(max-width:650px){.s6,.s4,.s3{grid-column:span 12}nav{top:75px}}
+@media print{header,nav,.no-print,button{display:none!important}.panel{display:block!important}body{background:white}.card{box-shadow:none}}
+</style>
+</head>
 <body>
-<header><div class="top"><div><h1>✚ PflegeDok</h1><small>Pflegedokumentation · lokale Testversion</small></div><button class="btn secondary small" onclick="exportData()">Backup</button></div></header>
-<main class="wrap">
-<div class="notice"><b>Wichtiger Hinweis:</b> Dies ist ein nicht zertifizierter Demonstrationsprototyp. Keine echten Patientendaten, Fotos, Adressen oder Gesundheitsdaten eingeben. Die lokale Speicherung ist nicht verschlüsselt und ersetzt kein klinisches Dokumentationssystem.</div>
-<div class="patientbar"><div class="field"><label for="patientSelect">Aktueller Testpatient</label><select id="patientSelect" onchange="switchPatient(this.value)"></select></div><div class="actions no-print"><button class="btn" onclick="newPatient()">＋ Neuer Patient</button><button class="btn secondary" onclick="deletePatient()">Patient löschen</button></div></div>
-<nav class="tabs no-print" id="tabs">
-<button class="active" data-tab="quick">Schnellinfo</button><button data-tab="master">Stammdaten</button><button data-tab="status">Pflegestatus</button><button data-tab="risks">Risiken</button><button data-tab="wounds">Wunden & Fotos</button><button data-tab="labs">Labor</button><button data-tab="history">Krankengeschichte</button><button data-tab="care">Pflegeverlauf</button><button data-tab="doctor">Ärztlicher Verlauf</button><button data-tab="vitals">Vitalwerte</button><button data-tab="meds">Medikation</button><button data-tab="labels">Etiketten</button><button data-tab="letter">Arztbrief</button><button data-tab="backup">Daten</button>
-</nav>
-<section id="quick" class="panel active"><div class="card"><h2>⚡ Patienten-Schnellinfo</h2><p class="muted">Wichtige Hinweise für die schnelle Orientierung. Änderungen werden lokal gespeichert.</p><div class="grid"><div class="field full"><label>Hauptdiagnosen</label><textarea data-field="quickDiagnosis" placeholder="Wichtigste Diagnosen"></textarea></div><div class="field full"><label>Vorerkrankungen / relevante Vorgeschichte</label><textarea data-field="quickHistory"></textarea></div><div class="field"><label>Allergien / Unverträglichkeiten</label><textarea data-field="allergies"></textarea></div><div class="field"><label>Besondere pflegerische Hinweise</label><textarea data-field="quickCare"></textarea></div><div class="field"><label>Mobilität / Hilfebedarf</label><textarea data-field="quickMobility"></textarea></div><div class="field"><label>Behandlungsentscheidungen / Therapielimitationen</label><textarea data-field="treatmentLimits"></textarea></div></div><div class="btnrow"><button class="btn" onclick="saveFields()">Schnellinfo speichern</button></div></div></section>
-
-<section id="master" class="panel"><div class="card"><h2>Patienten-Stammdaten</h2><div class="grid"><div class="field"><label>Vorname</label><input data-field="firstName"></div><div class="field"><label>Nachname</label><input data-field="lastName"></div><div class="field"><label>Geburtsdatum</label><input type="date" data-field="dob"></div><div class="field"><label>Geschlecht (optional)</label><select data-field="gender"><option value="">Keine Angabe</option><option>Divers</option><option>Weiblich</option><option>Männlich</option></select></div><div class="field"><label>Fallnummer</label><input data-field="caseNo"></div><div class="field"><label>Aufnahmedatum</label><input type="date" data-field="admission"></div><div class="field"><label>Größe (cm)</label><input type="number" data-field="height" oninput="calcBMI()"></div><div class="field"><label>Gewicht (kg)</label><input type="number" step="0.1" data-field="weight" oninput="calcBMI()"></div><div class="field"><label>BMI (automatisch)</label><input data-field="bmi" readonly></div><div class="field"><label>Hauptdiagnose</label><input data-field="mainDiagnosis"></div><div class="field full"><label>Adresse</label><input data-field="address"></div><div class="field"><label>Postleitzahl</label><input data-field="zip"></div><div class="field"><label>Wohnort</label><input data-field="city"></div><div class="field"><label>Telefon (Testdaten)</label><input data-field="phone"></div><div class="field"><label>Aufnahmestation</label><input data-field="ward"></div></div><div class="btnrow"><button class="btn" onclick="saveFields()">Stammdaten speichern</button></div></div></section>
-<section id="status" class="panel"><div class="card"><h2>Pflegestatus & soziales Umfeld</h2><div class="grid"><div class="field"><label>Wohnsituation</label><select data-field="living"><option value="">Bitte wählen</option><option>Alleinlebend</option><option>Mit Partner/in</option><option>Mit Familie</option><option>Pflegeeinrichtung</option><option>Betreutes Wohnen</option><option>Wohnungslos / Übergangsunterkunft</option><option>Sonstiges</option></select></div><div class="field"><label>Pflegegrad</label><select data-field="careGrade"><option value="">Nicht bekannt</option><option>Keiner</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="field"><label>Pflegedienst / Versorgung</label><input data-field="homeCare"></div><div class="field"><label>Angehörige / Kontaktperson</label><input data-field="relative"></div><div class="field"><label>Beziehung</label><input data-field="relativeRelation"></div><div class="field"><label>Kontakttelefon</label><input data-field="relativePhone"></div><div class="field"><label>Hilfsmittel vorhanden</label><input data-field="aids" placeholder="z. B. Rollator, Rollstuhl"></div><div class="field"><label>Kommunikation / Sprache</label><input data-field="communication"></div><div class="field"><label>Mobilität</label><select data-field="mobility"><option value="">Bitte wählen</option><option>Selbstständig</option><option>Mit Hilfsmittel</option><option>Mit Unterstützung einer Person</option><option>Mit Unterstützung von zwei Personen</option><option>Bettlägerig</option></select></div><div class="field"><label>Transfer</label><input data-field="transfer"></div><div class="field"><label>Körperpflege</label><input data-field="hygiene"></div><div class="field"><label>Ernährung</label><input data-field="nutrition"></div><div class="field"><label>Ausscheidung</label><input data-field="elimination"></div><div class="field"><label>Orientierung</label><input data-field="orientation"></div><div class="field"><label>Entlassungs-/Versorgungsbedarf</label><input data-field="dischargeNeeds"></div><div class="field full"><label>Weitere pflegerische Einschätzung</label><textarea data-field="statusNotes"></textarea></div></div><div class="btnrow"><button class="btn" onclick="saveFields()">Pflegestatus speichern</button></div></div></section>
-<section id="risks" class="panel"><div class="card"><h2>Risiken & Assessments</h2><p class="muted">Dokumentiere Einschätzung, Datum, Ergebnis und daraus abgeleitete Maßnahmen nach eurem gültigen Standard.</p><div class="risklist" id="riskChecks"></div><div class="grid" style="margin-top:12px"><div class="field"><label>Assessment / Skala</label><input id="riskScale" placeholder="z. B. hausinterne Skala"></div><div class="field"><label>Ergebnis / Einstufung</label><input id="riskResult"></div><div class="field"><label>Datum</label><input id="riskDate" type="date"></div><div class="field full"><label>Maßnahmen / Beobachtung</label><textarea id="riskMeasures"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addRisk()">Assessment dokumentieren</button></div><div id="riskEntries"></div></div></section>
-<section id="wounds" class="panel"><div class="card"><h2>Wund- und Fotodokumentation</h2><div class="grid"><div class="field"><label>Wundbezeichnung / Lokalisation</label><input id="wLocation"></div><div class="field"><label>Wundart</label><select id="wType"><option>Druckulcus / Dekubitus</option><option>Operationswunde</option><option>Traumatische Wunde</option><option>Ulcus cruris</option><option>Diabetisches Fußsyndrom</option><option>Sonstige</option></select></div><div class="field"><label>Länge (cm)</label><input id="wLength" type="number" step="0.1"></div><div class="field"><label>Breite (cm)</label><input id="wWidth" type="number" step="0.1"></div><div class="field"><label>Tiefe (cm)</label><input id="wDepth" type="number" step="0.1"></div><div class="field"><label>Wundgrund</label><input id="wBed"></div><div class="field"><label>Wundrand / Umgebung</label><input id="wEdge"></div><div class="field"><label>Exsudat / Geruch</label><input id="wExudate"></div><div class="field"><label>Schmerz (0–10)</label><input id="wPain" type="number" min="0" max="10"></div><div class="field"><label>Versorgung / Verbandmaterial</label><input id="wDressing"></div><div class="field"><label>Nächster Verbandwechsel</label><input id="wNext" type="datetime-local"></div><div class="field full"><label>Verlauf / Besonderheiten</label><textarea id="wNotes"></textarea></div><div class="field full"><label>Foto (nur Testbild, lokal im Browser)</label><input id="wPhoto" type="file" accept="image/*" capture="environment"></div></div><div class="btnrow"><button class="btn" onclick="addWound()">Wunddokumentation speichern</button></div><div id="woundEntries"></div></div></section>
-<section id="labs" class="panel"><div class="card"><h2>Laborwerte</h2><div class="grid"><div class="field"><label>Parameter</label><input id="labName" placeholder="z. B. CRP"></div><div class="field"><label>Wert</label><input id="labValue" type="number" step="any"></div><div class="field"><label>Einheit</label><input id="labUnit" placeholder="z. B. mg/l"></div><div class="field"><label>Referenzbereich</label><input id="labRef"></div><div class="field"><label>Datum / Uhrzeit</label><input id="labDate" type="datetime-local"></div><div class="field"><label>Markierung</label><select id="labFlag"><option>Unauffällig</option><option>Erhöht</option><option>Erniedrigt</option><option>Kritisch – ärztlich abklären</option></select></div><div class="field full"><label>Kommentar</label><textarea id="labNote"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addLab()">Laborwert speichern</button></div><div id="labEntries"></div></div></section>
-<section id="history" class="panel"><div class="card"><h2>Krankengeschichte</h2><div class="grid"><div class="field"><label>Datum</label><input id="histDate" type="date"></div><div class="field"><label>Kategorie</label><select id="histType"><option>Diagnose</option><option>Operation</option><option>Krankenhausaufenthalt</option><option>Vorerkrankung</option><option>Allergie</option><option>Sonstiges Ereignis</option></select></div><div class="field full"><label>Eintrag</label><textarea id="histText" placeholder="Chronologischer Eintrag"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addHistory()">Eintrag hinzufügen</button></div><div id="historyEntries"></div></div></section>
-<section id="care" class="panel"><div class="card"><h2>Pflegeverlauf</h2><div class="grid"><div class="field"><label>Datum / Uhrzeit</label><input id="careDate" type="datetime-local"></div><div class="field"><label>Bereich</label><select id="careType"><option>Grundpflege</option><option>Behandlungspflege</option><option>Mobilisation</option><option>Ernährung</option><option>Ausscheidung</option><option>Schmerz</option><option>Beobachtung</option><option>Sonstiges</option></select></div><div class="field full"><label>Pflegebericht / Maßnahme / Wirkung</label><textarea id="careText"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addEntry('care')">Pflegeeintrag speichern</button></div><div id="careEntries"></div></div></section>
-<section id="doctor" class="panel"><div class="card"><h2>Ärztlicher Verlauf</h2><div class="grid"><div class="field"><label>Datum / Uhrzeit</label><input id="docDate" type="datetime-local"></div><div class="field"><label>Eintragende Person</label><input id="docAuthor"></div><div class="field full"><label>Ärztlicher Eintrag / Anordnung</label><textarea id="docText"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addEntry('doctor')">Eintrag speichern</button></div><div id="doctorEntries"></div></div></section>
-<section id="vitals" class="panel"><div class="card"><h2>Vitalwerte & Bilanz</h2><div class="grid three"><div class="field"><label>Datum / Uhrzeit</label><input id="vDate" type="datetime-local"></div><div class="field"><label>RR syst./diast.</label><input id="vBP" placeholder="120/80"></div><div class="field"><label>Puls (/min)</label><input id="vHR" type="number"></div><div class="field"><label>Temperatur (°C)</label><input id="vTemp" type="number" step="0.1"></div><div class="field"><label>SpO₂ (%)</label><input id="vSpo" type="number"></div><div class="field"><label>Atemfrequenz (/min)</label><input id="vRR" type="number"></div><div class="field"><label>O₂ (l/min)</label><input id="vO2" type="number" step="0.1"></div><div class="field"><label>BZ (mg/dl)</label><input id="vGlucose" type="number"></div><div class="field"><label>Schmerz NRS (0–10)</label><input id="vPain" type="number" min="0" max="10"></div><div class="field"><label>Einfuhr (ml)</label><input id="vIn" type="number"></div><div class="field"><label>Ausfuhr (ml)</label><input id="vOut" type="number"></div><div class="field"><label>Bilanz (ml)</label><input id="vBalance" readonly></div><div class="field full"><label>Bemerkung</label><textarea id="vNote"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addVital()">Vitalwerte speichern</button></div><div id="vitalEntries"></div></div></section>
-<section id="meds" class="panel"><div class="card"><h2>Medikationsdokumentation</h2><div class="grid"><div class="field"><label>Medikament</label><input id="mName"></div><div class="field"><label>Dosis</label><input id="mDose"></div><div class="field"><label>Applikationsweg</label><select id="mRoute"><option>Oral</option><option>Intravenös</option><option>Subkutan</option><option>Intramuskulär</option><option>Sublingual</option><option>Inhalativ</option><option>Über Sonde</option><option>Sonstiges</option></select></div><div class="field"><label>Datum / Uhrzeit</label><input id="mDate" type="datetime-local"></div><div class="field"><label>Status</label><select id="mStatus"><option>Verabreicht</option><option>Nicht verabreicht</option><option>Abgesetzt</option><option>Zurückgestellt</option></select></div><div class="field"><label>Dokumentierende Person</label><input id="mAuthor"></div><div class="field full"><label>Bemerkung</label><textarea id="mNote"></textarea></div></div><div class="btnrow"><button class="btn" onclick="addMed()">Medikation dokumentieren</button></div><div id="medEntries"></div></div></section>
-<section id="labels" class="panel"><div class="card"><h2>Patientenetiketten</h2><p class="muted">Die Etiketten übernehmen die Stammdaten. Verwende ausschließlich fiktive Testdaten.</p><div class="actions no-print"><button class="btn" onclick="renderLabel('small')">Kleines Etikett</button><button class="btn" onclick="renderLabel('large')">Großes Etikett</button><button class="btn secondary" onclick="window.print()">Drucken</button></div><div id="labelPreview"><p class="muted">Etikettenvorschau auswählen.</p></div></div></section>
-<section id="backup" class="panel"><div class="card"><h2>Lokale Datenverwaltung</h2><p>Die Daten dieser Demo liegen im lokalen Speicher dieses Browsers. Beim Löschen der Browserdaten können sie verloren gehen.</p><div class="btnrow"><button class="btn" onclick="exportData()">JSON-Backup herunterladen</button><label class="btn secondary" style="cursor:pointer">Backup importieren<input type="file" accept="application/json" onchange="importData(event)" hidden></label></div><p class="muted">Ein Backup kann personenbezogene und besonders schützenswerte Daten enthalten. In dieser Testversion ausschließlich fiktive Daten nutzen und Backups nicht ungeschützt weitergeben.</p></div></section>
-
-<section id="letter" class="panel"><div class="card">
-<h2>Arztbrief erstellen</h2>
-<p class="muted">Erstellt einen bearbeitbaren Entwurf aus den lokal gespeicherten Testdaten. Bitte alle Angaben fachlich prüfen und vervollständigen.</p>
-<div class="btnrow no-print">
-<button class="btn" onclick="generateArztbrief()">Arztbrief aus Daten erstellen</button>
-<button class="btn secondary" onclick="saveArztbrief()">Entwurf speichern</button>
-<button class="btn secondary" onclick="printArztbrief()">Arztbrief drucken</button>
+<header>
+<h1>PflegeDok</h1>
+<small>Digitale Pflegedokumentation</small>
+</header>
+<main>
+<div class="warning">
+<strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp ohne geprüfte Zugriffskontrolle oder Verschlüsselung. Keine echten Patientendaten oder Patientenfotos eingeben. Nicht für klinische oder rechtsverbindliche Dokumentation verwenden.
 </div>
-<div class="field" style="margin-top:12px"><label for="letterText">Arztbrief – bearbeitbarer Entwurf</label>
-<textarea id="letterText" style="min-height:520px" placeholder="Klicke auf „Arztbrief aus Daten erstellen“ oder schreibe den Entwurf hier."></textarea></div>
-<p class="muted">Hinweis: Automatisch erzeugte Texte können unvollständig oder fehlerhaft sein. Keine automatische medizinische Bewertung oder Freigabe.</p>
-</div></section>
-<footer>PflegeDok · Demonstrationsprototyp · Keine medizinische oder rechtliche Freigabe</footer>
-</main>
+<div class="card no-print">
+<div class="grid">
+<div class="field s6">
+<label>Patient auswählen</label>
+<select id="patientSelect" onchange="selectPatient(this.value)">
+<option value="">Patient auswählen</option>
+</select>
+</div>
+<div class="field s3">
+<label>&nbsp;</label>
+<button onclick="newPatient()">+ Patient anlegen</button>
+</div>
+<div class="field s3">
+<label>&nbsp;</label>
+<button class="secondary" onclick="exportBackup()">Backup exportieren</button>
+</div>
+</div>
+<div class="toolbar">
+<button class="secondary" onclick="document.getElementById('backupFile').click()">Backup importieren</button>
+<button class="secondary" onclick="window.print()">Drucken</button>
+<input id="backupFile" type="file" accept=".json" class="hidden" onchange="importBackup(event)">
+</div>
+</div>
+<div id="empty" class="card">
+<h2>Willkommen bei PflegeDok</h2>
+<p>Lege zunächst einen Testpatienten an.</p>
+<button onclick="newPatient()">Ersten Patienten anlegen</button>
+</div>
+<div id="application" class="hidden">
+<nav class="no-print">
+<button onclick="tab('quick')">Schnellinfo</button>
+<button onclick="tab('master')">Stammdaten</button>
+<button onclick="tab('status')">Pflegestatus</button>
+<button onclick="tab('history')">Krankengeschichte</button>
+<button onclick="tab('risks')">Risiken</button>
+<button onclick="tab('wounds')">Wunden</button>
+<button onclick="tab('labs')">Labor</button>
+<button onclick="tab('vitals')">Vitalwerte</button>
+<button onclick="tab('balance')">Bilanz</button>
+<button onclick="tab('devices')">Zugänge</button>
+<button onclick="tab('meds')">Medikamente</button>
+<button onclick="tab('notes')">Verlauf</button>
+<button onclick="tab('labels')">Etiketten</button>
+</nav>
+
+<section id="quick" class="panel">
+  <div class="card">
+    <h2>Schnellinfo</h2>
+    <div id="quickInfo"></div>
+  </div>
+</section>
+
+<section id="master" class="panel">
+  <div class="card">
+    <h2>Patientenstammdaten</h2>
+    <div class="grid">
+      <div class="field s6">
+        <label>Vorname</label>
+        <input id="firstName">
+      </div>
+      <div class="field s6">
+        <label>Nachname</label>
+        <input id="lastName">
+      </div>
+      <div class="field s4">
+        <label>Geburtsdatum</label>
+        <input id="birthDate" type="date">
+      </div>
+      <div class="field s4">
+        <label>Geschlecht</label>
+        <select id="gender">
+          <option value="">Bitte wählen</option>
+          <option>Weiblich</option>
+          <option>Männlich</option>
+          <option>Divers</option>
+        </select>
+      </div>
+      <div class="field s4">
+        <label>Fallnummer</label>
+        <input id="caseNumber">
+      </div>
+      <div class="field s4">
+        <label>Aufnahmedatum</label>
+        <input id="admissionDate" type="date">
+      </div>
+      <div class="field s4">
+        <label>Station</label>
+        <input id="ward">
+      </div>
+      <div class="field s4">
+        <label>Behandelnder Arzt</label>
+        <input id="doctor">
+      </div>
+      <div class="field s6">
+        <label>Adresse</label>
+        <input id="address">
+      </div>
+      <div class="field s6">
+        <label>Telefon</label>
+        <input id="phone">
+      </div>
+      <div class="field s6">
+        <label>Allergien</label>
+        <textarea id="allergies"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Diagnosen</label>
+        <textarea id="diagnoses"></textarea>
+      </div>
+      <div class="field s4">
+        <label>Körpergröße (cm)</label>
+        <input id="height" type="number">
+      </div>
+      <div class="field s4">
+        <label>Gewicht (kg)</label>
+        <input id="weight" type="number" step="0.1">
+      </div>
+      <div class="field s4">
+        <label>BMI</label>
+        <input id="bmi" readonly>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="status" class="panel">
+  <div class="card">
+    <h2>Pflegestatus</h2>
+    <div class="grid">
+      <div class="field s6">
+        <label>Angehörige / Bezugspersonen</label>
+        <textarea id="relatives"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Wohnsituation</label>
+        <textarea id="living"></textarea>
+      </div>
+      <div class="field s4">
+        <label>Pflegegrad</label>
+        <select id="careLevel">
+          <option value="">Nicht bekannt</option>
+          <option>Kein Pflegegrad</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="field s4">
+        <label>Mobilität</label>
+        <select id="mobility">
+          <option value="">Bitte wählen</option>
+          <option>Selbstständig</option>
+          <option>Mit Hilfsmittel</option>
+          <option>Mit Unterstützung</option>
+          <option>Bettlägerig</option>
+        </select>
+      </div>
+      <div class="field s4">
+        <label>Selbstversorgung</label>
+        <select id="selfCare">
+          <option value="">Bitte wählen</option>
+          <option>Selbstständig</option>
+          <option>Teilweise Unterstützung</option>
+          <option>Vollständige Unterstützung</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Ernährung / Kostform</label>
+        <textarea id="nutrition"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Kommunikation / Orientierung</label>
+        <textarea id="communication"></textarea>
+      </div>
+      <div class="field s12">
+        <label>Hilfsmittel</label>
+        <textarea id="aids"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="panel">
+  <div class="card">
+    <h2>Krankengeschichte / Anamnese</h2>
+    <div class="grid">
+      <div class="field s6">
+        <label>Vorerkrankungen</label>
+        <textarea id="medicalHistory"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Operationen</label>
+        <textarea id="operations"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Krankenhausaufenthalte / Ereignisse</label>
+        <textarea id="events"></textarea>
+      </div>
+      <div class="field s6">
+        <label>Weitere Hinweise</label>
+        <textarea id="historyNotes"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="risks" class="panel">
+  <div class="card">
+    <h2>Risikoeinschätzungen</h2>
+    <p>Freitextbasierte Erfassung, keine validierten Scores.</p>
+    <div class="grid">
+      <div class="field s6">
+        <label>Dekubitusrisiko</label>
+        <select id="riskPressure">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Sturzrisiko</label>
+        <select id="riskFall">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Thromboserisiko</label>
+        <select id="riskThrombosis">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Mangelernährungsrisiko</label>
+        <select id="riskNutrition">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Aspirationsrisiko</label>
+        <select id="riskAspiration">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s6">
+        <label>Delirrisiko</label>
+        <select id="riskDelirium">
+          <option>Nicht beurteilt</option>
+          <option>Kein erkennbares Risiko</option>
+          <option>Risiko vorhanden</option>
+          <option>Hohes Risiko</option>
+        </select>
+      </div>
+      <div class="field s12">
+        <label>Prophylaxen / Maßnahmen</label>
+        <textarea id="prophylaxis"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wounds" class="panel">
+  <h2>🩹 Wunddokumentation</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="woundDate">
+    </label>
+    <label>Lokalisation
+      <input id="woundLocation" placeholder="z. B. Sakral, Ferse, rechter Unterschenkel">
+    </label>
+    <label>Wundart
+      <select id="woundType">
+        <option value="">Bitte auswählen</option>
+        <option>Dekubitus</option>
+        <option>Postoperative Wunde</option>
+        <option>Chronische Wunde</option>
+        <option>Ulcus cruris</option>
+        <option>Diabetisches Fußsyndrom</option>
+        <option>Hautdefekt / Läsion</option>
+        <option>Sonstige Wunde</option>
+      </select>
+    </label>
+    <label>Länge (cm)
+      <input type="number" id="woundLength" step="0.1" min="0">
+    </label>
+    <label>Breite (cm)
+      <input type="number" id="woundWidth" step="0.1" min="0">
+    </label>
+    <label>Tiefe (cm)
+      <input type="number" id="woundDepth" step="0.1" min="0">
+    </label>
+    <label>Exsudat
+      <select id="woundExudate">
+        <option value="">Bitte auswählen</option>
+        <option>Trocken</option>
+        <option>Gering</option>
+        <option>Mäßig</option>
+        <option>Stark</option>
+      </select>
+    </label>
+    <label>Wundumgebung
+      <input id="woundSurrounding" placeholder="z. B. reizlos, gerötet, mazeriert">
+    </label>
+    <label>Wundgrund
+      <input id="woundBed" placeholder="z. B. Granulation, Fibrin, Nekrose">
+    </label>
+    <label>Geruch
+      <select id="woundSmell">
+        <option value="">Bitte auswählen</option>
+        <option>Kein auffälliger Geruch</option>
+        <option>Leicht</option>
+        <option>Deutlich</option>
+      </select>
+    </label>
+    <label class="wide">Wundversorgung / Verbandmaterial
+      <textarea id="woundTreatment" rows="3"></textarea>
+    </label>
+    <label class="wide">Bemerkungen / Verlauf
+      <textarea id="woundNotes" rows="3"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addWound()">Wunddokumentation speichern</button>
+  <div id="woundList" class="entry-list"></div>
+</section>
+
+<section id="labs" class="panel">
+  <h2>🧪 Laborwerte</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="labDate">
+    </label>
+    <label>Parameter
+      <input id="labParameter" placeholder="z. B. Hb, CRP, Leukozyten">
+    </label>
+    <label>Messwert
+      <input id="labValue" placeholder="z. B. 10,2">
+    </label>
+    <label>Einheit
+      <input id="labUnit" placeholder="z. B. g/dl, mg/l">
+    </label>
+    <label>Referenzbereich
+      <input id="labRange" placeholder="Optional">
+    </label>
+    <label>Bewertung / Bemerkung
+      <input id="labNotes" placeholder="Optional">
+    </label>
+  </div>
+  <button type="button" onclick="addLab()">Laborwert speichern</button>
+  <div id="labList" class="entry-list"></div>
+</section>
+
+<section id="vitals" class="panel">
+  <h2>🩺 Vitalzeichen und Schmerz</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="vitalDate">
+    </label>
+    <label>Blutdruck (mmHg)
+      <input id="vitalBP" placeholder="z. B. 120/80">
+    </label>
+    <label>Herzfrequenz (/min)
+      <input type="number" id="vitalHR" min="0">
+    </label>
+    <label>SpO₂ (%)
+      <input type="number" id="vitalSpO2" min="0" max="100">
+    </label>
+    <label>Temperatur (°C)
+      <input type="number" id="vitalTemp" step="0.1">
+    </label>
+    <label>Atemfrequenz (/min)
+      <input type="number" id="vitalRR" min="0">
+    </label>
+    <label>Blutzucker (mg/dl)
+      <input type="number" id="vitalGlucose" min="0">
+    </label>
+    <label>Sauerstoff (l/min)
+      <input type="number" id="vitalOxygen" min="0" step="0.5">
+    </label>
+    <label>Schmerz (NRS 0–10)
+      <input type="number" id="vitalPain" min="0" max="10">
+    </label>
+    <label>Schmerzlokalisation
+      <input id="vitalPainLocation">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="vitalNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addVital()">Vitalwerte speichern</button>
+  <div id="vitalList" class="entry-list"></div>
+</section>
+
+<section id="balance" class="panel">
+  <h2>💧 Ein- und Ausfuhr / Bilanz</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="balanceDate">
+    </label>
+    <label>Art
+      <select id="balanceType">
+        <option value="">Bitte auswählen</option>
+        <option>Orale Flüssigkeit</option>
+        <option>Infusion</option>
+        <option>Enterale Ernährung</option>
+        <option>Urin</option>
+        <option>Stuhlgang</option>
+        <option>Erbrechen</option>
+        <option>Drainage</option>
+        <option>Sonstige Einfuhr</option>
+        <option>Sonstige Ausfuhr</option>
+      </select>
+    </label>
+    <label>Menge (ml)
+      <input type="number" id="balanceAmount" min="0" step="1">
+    </label>
+    <label>Zusatz / Beschreibung
+      <input id="balanceDescription" placeholder="z. B. NaCl 0,9 %, Trinkmenge">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="balanceNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addBalance()">Bilanzwert speichern</button>
+  <div id="balanceList" class="entry-list"></div>
+</section>
+
+<section id="devices" class="panel">
+  <h2>🔌 Zugänge, Katheter und Drainagen</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="deviceDate">
+    </label>
+    <label>Art des Zugangs / Hilfsmittels
+      <select id="deviceType">
+        <option value="">Bitte auswählen</option>
+        <option>PVK</option>
+        <option>ZVK</option>
+        <option>Arterieller Katheter</option>
+        <option>Port</option>
+        <option>Dialysekatheter</option>
+        <option>Peripherer Venenkatheter</option>
+        <option>Blasenkatheter</option>
+        <option>Suprapubischer Katheter</option>
+        <option>DK mit Spülung</option>
+        <option>Nasogastrale Sonde</option>
+        <option>PEG</option>
+        <option>Trachealkanüle</option>
+        <option>Thoraxdrainage</option>
+        <option>Wunddrainage</option>
+        <option>Periduralkatheter</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Lokalisation
+      <input id="deviceLocation" placeholder="z. B. rechter Unterarm">
+    </label>
+    <label>Liegedatum
+      <input type="date" id="deviceInsertion">
+    </label>
+    <label>Status
+      <select id="deviceStatus">
+        <option>Liegt / in Gebrauch</option>
+        <option>Entfernt</option>
+        <option>Gesperrt</option>
+        <option>Kontrollbedürftig</option>
+      </select>
+    </label>
+    <label class="wide">Kontrolle / Verband / Bemerkungen
+      <textarea id="deviceNotes" rows="3"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addDevice()">Zugang / Hilfsmittel speichern</button>
+  <div id="deviceList" class="entry-list"></div>
+</section>
+
+<section id="meds" class="panel">
+  <h2>💊 Medikamentengabe</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="medDate">
+    </label>
+    <label>Medikament
+      <input id="medName" placeholder="Name des Medikaments">
+    </label>
+    <label>Dosis
+      <input id="medDose" placeholder="z. B. 500 mg">
+    </label>
+    <label>Applikationsweg
+      <select id="medRoute">
+        <option value="">Bitte auswählen</option>
+        <option>Oral</option>
+        <option>Intravenös (i.v.)</option>
+        <option>Subkutan (s.c.)</option>
+        <option>Intramuskulär (i.m.)</option>
+        <option>Sublingual</option>
+        <option>Inhalativ</option>
+        <option>Über Sonde</option>
+        <option>Rektal</option>
+        <option>Topisch</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Verabreichungsstatus
+      <select id="medStatus">
+        <option>Verabreicht</option>
+        <option>Zurückgestellt</option>
+        <option>Nicht verabreicht</option>
+        <option>Abgelehnt</option>
+      </select>
+    </label>
+    <label>Applikationsort / Infusionsrate
+      <input id="medDetails" placeholder="Optional">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="medNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addMedication()">Medikamentengabe speichern</button>
+  <div id="medList" class="entry-list"></div>
+</section>
+
+<section id="notes" class="panel">
+  <h2>📝 Pflege- und ärztlicher Verlauf</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="noteDate">
+    </label>
+    <label>Eintragsart
+      <select id="noteType">
+        <option>Pflegebericht</option>
+        <option>Ärztlicher Verlauf</option>
+        <option>Übergabe</option>
+        <option>Besonderes Ereignis</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Dokumentierende Person
+      <input id="noteAuthor" placeholder="Kürzel / Name">
+    </label>
+    <label class="wide">Verlauf / Maßnahme / Beobachtung
+      <textarea id="noteText" rows="6" placeholder="Sachlich, nachvollziehbar und zeitlich zugeordnet dokumentieren ..."></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addNote()">Verlaufseintrag speichern</button>
+  <div id="noteList" class="entry-list"></div>
+</section>
+
+<section id="labels" class="panel">
+  <h2>🏷️ Patientenetiketten</h2>
+  <p>Die Etiketten werden aus den Stammdaten des ausgewählten Patienten erstellt.</p>
+  <div class="label-preview">
+    <h3>Kleines Etikett</h3>
+    <div id="smallLabel" class="patient-label">
+      <strong>Kein Patient ausgewählt</strong>
+    </div>
+    <button type="button" onclick="printLabel('smallLabel')">Kleines Etikett drucken</button>
+  </div>
+  <div class="label-preview">
+    <h3>Großes Etikett</h3>
+    <div id="largeLabel" class="patient-label">
+      <strong>Kein Patient ausgewählt</strong>
+    </div>
+    <button type="button" onclick="printLabel('largeLabel')">Großes Etikett drucken</button>
+  </div>
+</section>
+
+<section id="wounds" class="panel">
+  <h2>🩹 Wunddokumentation</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="woundDate">
+    </label>
+    <label>Lokalisation
+      <input id="woundLocation" placeholder="z. B. Sakral, Ferse, rechter Unterschenkel">
+    </label>
+    <label>Wundart
+      <select id="woundType">
+        <option value="">Bitte auswählen</option>
+        <option>Dekubitus</option>
+        <option>Postoperative Wunde</option>
+        <option>Chronische Wunde</option>
+        <option>Ulcus cruris</option>
+        <option>Diabetisches Fußsyndrom</option>
+        <option>Hautdefekt / Läsion</option>
+        <option>Sonstige Wunde</option>
+      </select>
+    </label>
+    <label>Länge (cm)
+      <input type="number" id="woundLength" step="0.1" min="0">
+    </label>
+    <label>Breite (cm)
+      <input type="number" id="woundWidth" step="0.1" min="0">
+    </label>
+    <label>Tiefe (cm)
+      <input type="number" id="woundDepth" step="0.1" min="0">
+    </label>
+    <label>Exsudat
+      <select id="woundExudate">
+        <option value="">Bitte auswählen</option>
+        <option>Trocken</option>
+        <option>Gering</option>
+        <option>Mäßig</option>
+        <option>Stark</option>
+      </select>
+    </label>
+    <label>Wundumgebung
+      <input id="woundSurrounding" placeholder="z. B. reizlos, gerötet, mazeriert">
+    </label>
+    <label>Wundgrund
+      <input id="woundBed" placeholder="z. B. Granulation, Fibrin, Nekrose">
+    </label>
+    <label>Geruch
+      <select id="woundSmell">
+        <option value="">Bitte auswählen</option>
+        <option>Kein auffälliger Geruch</option>
+        <option>Leicht</option>
+        <option>Deutlich</option>
+      </select>
+    </label>
+    <label class="wide">Wundversorgung / Verbandmaterial
+      <textarea id="woundTreatment" rows="3"></textarea>
+    </label>
+    <label class="wide">Bemerkungen / Verlauf
+      <textarea id="woundNotes" rows="3"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addWound()">Wunddokumentation speichern</button>
+  <div id="woundList" class="entry-list"></div>
+</section>
+
+<section id="labs" class="panel">
+  <h2>🧪 Laborwerte</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="labDate">
+    </label>
+    <label>Parameter
+      <input id="labParameter" placeholder="z. B. Hb, CRP, Leukozyten">
+    </label>
+    <label>Messwert
+      <input id="labValue" placeholder="z. B. 10,2">
+    </label>
+    <label>Einheit
+      <input id="labUnit" placeholder="z. B. g/dl, mg/l">
+    </label>
+    <label>Referenzbereich
+      <input id="labRange" placeholder="Optional">
+    </label>
+    <label>Bewertung / Bemerkung
+      <input id="labNotes" placeholder="Optional">
+    </label>
+  </div>
+  <button type="button" onclick="addLab()">Laborwert speichern</button>
+  <div id="labList" class="entry-list"></div>
+</section>
+
+<section id="vitals" class="panel">
+  <h2>🩺 Vitalzeichen und Schmerz</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="vitalDate">
+    </label>
+    <label>Blutdruck (mmHg)
+      <input id="vitalBP" placeholder="z. B. 120/80">
+    </label>
+    <label>Herzfrequenz (/min)
+      <input type="number" id="vitalHR" min="0">
+    </label>
+    <label>SpO₂ (%)
+      <input type="number" id="vitalSpO2" min="0" max="100">
+    </label>
+    <label>Temperatur (°C)
+      <input type="number" id="vitalTemp" step="0.1">
+    </label>
+    <label>Atemfrequenz (/min)
+      <input type="number" id="vitalRR" min="0">
+    </label>
+    <label>Blutzucker (mg/dl)
+      <input type="number" id="vitalGlucose" min="0">
+    </label>
+    <label>Sauerstoff (l/min)
+      <input type="number" id="vitalOxygen" min="0" step="0.5">
+    </label>
+    <label>Schmerz (NRS 0–10)
+      <input type="number" id="vitalPain" min="0" max="10">
+    </label>
+    <label>Schmerzlokalisation
+      <input id="vitalPainLocation">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="vitalNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addVital()">Vitalwerte speichern</button>
+  <div id="vitalList" class="entry-list"></div>
+</section>
+
+<section id="balance" class="panel">
+  <h2>💧 Ein- und Ausfuhr / Bilanz</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="balanceDate">
+    </label>
+    <label>Art
+      <select id="balanceType">
+        <option value="">Bitte auswählen</option>
+        <option>Orale Flüssigkeit</option>
+        <option>Infusion</option>
+        <option>Enterale Ernährung</option>
+        <option>Urin</option>
+        <option>Stuhlgang</option>
+        <option>Erbrechen</option>
+        <option>Drainage</option>
+        <option>Sonstige Einfuhr</option>
+        <option>Sonstige Ausfuhr</option>
+      </select>
+    </label>
+    <label>Menge (ml)
+      <input type="number" id="balanceAmount" min="0" step="1">
+    </label>
+    <label>Zusatz / Beschreibung
+      <input id="balanceDescription" placeholder="z. B. NaCl 0,9 %, Trinkmenge">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="balanceNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addBalance()">Bilanzwert speichern</button>
+  <div id="balanceList" class="entry-list"></div>
+</section>
+
+<section id="devices" class="panel">
+  <h2>🔌 Zugänge, Katheter und Drainagen</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="deviceDate">
+    </label>
+    <label>Art des Zugangs / Hilfsmittels
+      <select id="deviceType">
+        <option value="">Bitte auswählen</option>
+        <option>PVK</option>
+        <option>ZVK</option>
+        <option>Arterieller Katheter</option>
+        <option>Port</option>
+        <option>Dialysekatheter</option>
+        <option>Peripherer Venenkatheter</option>
+        <option>Blasenkatheter</option>
+        <option>Suprapubischer Katheter</option>
+        <option>DK mit Spülung</option>
+        <option>Nasogastrale Sonde</option>
+        <option>PEG</option>
+        <option>Trachealkanüle</option>
+        <option>Thoraxdrainage</option>
+        <option>Wunddrainage</option>
+        <option>Periduralkatheter</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Lokalisation
+      <input id="deviceLocation" placeholder="z. B. rechter Unterarm">
+    </label>
+    <label>Liegedatum
+      <input type="date" id="deviceInsertion">
+    </label>
+    <label>Status
+      <select id="deviceStatus">
+        <option>Liegt / in Gebrauch</option>
+        <option>Entfernt</option>
+        <option>Gesperrt</option>
+        <option>Kontrollbedürftig</option>
+      </select>
+    </label>
+    <label class="wide">Kontrolle / Verband / Bemerkungen
+      <textarea id="deviceNotes" rows="3"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addDevice()">Zugang / Hilfsmittel speichern</button>
+  <div id="deviceList" class="entry-list"></div>
+</section>
+
+<section id="meds" class="panel">
+  <h2>💊 Medikamentengabe</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="medDate">
+    </label>
+    <label>Medikament
+      <input id="medName" placeholder="Name des Medikaments">
+    </label>
+    <label>Dosis
+      <input id="medDose" placeholder="z. B. 500 mg">
+    </label>
+    <label>Applikationsweg
+      <select id="medRoute">
+        <option value="">Bitte auswählen</option>
+        <option>Oral</option>
+        <option>Intravenös (i.v.)</option>
+        <option>Subkutan (s.c.)</option>
+        <option>Intramuskulär (i.m.)</option>
+        <option>Sublingual</option>
+        <option>Inhalativ</option>
+        <option>Über Sonde</option>
+        <option>Rektal</option>
+        <option>Topisch</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Verabreichungsstatus
+      <select id="medStatus">
+        <option>Verabreicht</option>
+        <option>Zurückgestellt</option>
+        <option>Nicht verabreicht</option>
+        <option>Abgelehnt</option>
+      </select>
+    </label>
+    <label>Applikationsort / Infusionsrate
+      <input id="medDetails" placeholder="Optional">
+    </label>
+    <label class="wide">Bemerkungen
+      <textarea id="medNotes" rows="2"></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addMedication()">Medikamentengabe speichern</button>
+  <div id="medList" class="entry-list"></div>
+</section>
+
+<section id="notes" class="panel">
+  <h2>📝 Pflege- und ärztlicher Verlauf</h2>
+  <div class="form-grid">
+    <label>Datum und Uhrzeit
+      <input type="datetime-local" id="noteDate">
+    </label>
+    <label>Eintragsart
+      <select id="noteType">
+        <option>Pflegebericht</option>
+        <option>Ärztlicher Verlauf</option>
+        <option>Übergabe</option>
+        <option>Besonderes Ereignis</option>
+        <option>Sonstiges</option>
+      </select>
+    </label>
+    <label>Dokumentierende Person
+      <input id="noteAuthor" placeholder="Kürzel / Name">
+    </label>
+    <label class="wide">Verlauf / Maßnahme / Beobachtung
+      <textarea id="noteText" rows="6" placeholder="Sachlich, nachvollziehbar und zeitlich zugeordnet dokumentieren ..."></textarea>
+    </label>
+  </div>
+  <button type="button" onclick="addNote()">Verlaufseintrag speichern</button>
+  <div id="noteList" class="entry-list"></div>
+</section>
+
+<section id="labels" class="panel">
+  <h2>🏷️ Patientenetiketten</h2>
+  <p>Die Etiketten werden aus den Stammdaten des ausgewählten Patienten erstellt.</p>
+  <div class="label-preview">
+    <h3>Kleines Etikett</h3>
+    <div id="smallLabel" class="patient-label">
+      <strong>Kein Patient ausgewählt</strong>
+    </div>
+    <button type="button" onclick="printLabel('smallLabel')">Kleines Etikett drucken</button>
+  </div>
+  <div class="label-preview">
+    <h3>Großes Etikett</h3>
+    <div id="largeLabel" class="patient-label">
+      <strong>Kein Patient ausgewählt</strong>
+    </div>
+    <button type="button" onclick="printLabel('largeLabel')">Großes Etikett drucken</button>
+  </div>
+</section>
+
+<section id="arztbrief" class="panel">
+  <div class="card">
+    <h2>📄 Arztbrief erstellen</h2>
+
+    <p>Erstelle einen bearbeitbaren Arztbrief-Entwurf aus den vorhandenen Patientendaten und Dokumentationseinträgen.</p>
+
+    <div class="toolbar no-print">
+      <button type="button" onclick="generateArztbrief()">
+        Arztbrief aktualisieren
+      </button>
+      <button type="button" onclick="window.print()">
+        Drucken / PDF
+      </button>
+    </div>
+
+    <div class="warning">
+      Der Arztbrief ist ein Entwurf und muss vor einer tatsächlichen Verwendung fachlich geprüft und freigegeben werden.
+    </div>
+
+    <label for="letterText">Arztbrief – bearbeitbarer Entwurf</label>
+    <textarea id="letterText" rows="30"
+      placeholder="Hier erscheint der erstellte Arztbrief..."></textarea>
+  </div>
+</section>
 
 <script>
-const KEY='pflegeDokDemoV2';let db={patients:[],active:null};const riskNames=['Dekubitusrisiko','Sturzrisiko','Thromboserisiko','Aspirationsrisiko','Mangelernährungsrisiko','Exsikkoserisiko','Kontrakturrisiko','Delirrisiko','Schmerzproblematik','Infektionsrisiko'];
-function uid(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}function blank(){return {id:uid(),firstName:'',lastName:'',caseNo:'',entries:{care:[],doctor:[],vitals:[],meds:[],labs:[],wounds:[],history:[],risks:[]},riskChecks:{}}}
-function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.patients))db=x}catch(e){}if(!db.patients.length){const p=blank();p.firstName='Muster';p.lastName='Patient';p.caseNo='TEST-001';db.patients=[p];db.active=p.id;save()}if(!db.active||!db.patients.some(p=>p.id===db.active))db.active=db.patients[0].id;renderAll()}
-function save(){localStorage.setItem(KEY,JSON.stringify(db))}function patient(){return db.patients.find(p=>p.id===db.active)}function switchPatient(id){db.active=id;save();renderAll()}function newPatient(){const p=blank();db.patients.push(p);db.active=p.id;save();renderAll();document.querySelector('[data-tab="master"]').click()}
-function deletePatient(){if(db.patients.length<2){alert('Mindestens ein Testpatient muss vorhanden bleiben.');return}if(!confirm('Diesen Testpatienten samt lokalen Einträgen löschen?'))return;db.patients=db.patients.filter(p=>p.id!==db.active);db.active=db.patients[0].id;save();renderAll()}
-function renderSelect(){const s=document.getElementById('patientSelect');s.innerHTML=db.patients.map(p=>`<option value="${p.id}">${esc((p.firstName+' '+p.lastName).trim()||'Unbenannter Patient')} · ${esc(p.caseNo||'ohne Fallnummer')}</option>`).join('');s.value=db.active}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderFields(){const p=patient();document.querySelectorAll('[data-field]').forEach(el=>{el.value=p[el.dataset.field]??''})}
-function saveFields(){const p=patient();document.querySelectorAll('[data-field]').forEach(el=>p[el.dataset.field]=el.value);save();renderSelect();calcBMI();alert('Lokal gespeichert.')}
-function calcBMI(){const h=Number(document.querySelector('[data-field="height"]').value)/100,w=Number(document.querySelector('[data-field="weight"]').value);document.querySelector('[data-field="bmi"]').value=h>0&&w>0?(w/(h*h)).toFixed(1):''}
-function tabSetup(){document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab));if(b.dataset.tab==='labels')renderLabel('small')}))}
-function addTo(type,obj){const p=patient();p.entries[type].unshift({...obj,id:uid(),created:new Date().toISOString()});save();renderEntries(type)}function entryHTML(e,fields){return `<div class="entry"><strong>${esc(e.title||e.type||e.name||'Eintrag')}</strong><span class="pill">${esc(e.date||new Date(e.created).toLocaleString('de-DE'))}</span>${fields.map(k=>e[k]?`<p>${esc(e[k])}</p>`:'').join('')}<button class="btn danger small no-print" onclick="removeEntry('${e.id}')">Löschen</button></div>`}
-function removeEntry(id){if(!confirm('Eintrag löschen?'))return;const p=patient();for(const k in p.entries)p.entries[k]=p.entries[k].filter(e=>e.id!==id);save();renderAll()}
-const configs={care:['careEntries',['type','text']],doctor:['doctorEntries',['author','text']],vitals:['vitalEntries',['date','bp','hr','temp','spo','rr','o2','glucose','pain','in','out','balance','note']],meds:['medEntries',['dose','route','date','status','author','note']],labs:['labEntries',['value','unit','ref','date','flag','note']],history:['historyEntries',['date','text']],risks:['riskEntries',['date','scale','result','measures']],wounds:['woundEntries',['date','location','type','dimensions','bed','edge','exudate','pain','dressing','next','notes']]};
-function renderEntries(type){const cfg=configs[type];if(!cfg)return;const el=document.getElementById(cfg[0]);el.innerHTML=patient().entries[type].map(e=>entryHTML(e,cfg[1])).join('')||'<p class="muted">Noch keine Einträge.</p>'}
-function addEntry(type){const pre=type==='care'?'care':'doc';const obj=type==='care'?{title:document.getElementById('careType').value,type:document.getElementById('careType').value,date:document.getElementById('careDate').value,text:document.getElementById('careText').value}:{title:'Ärztlicher Verlauf',date:document.getElementById('docDate').value,author:document.getElementById('docAuthor').value,text:document.getElementById('docText').value};if(!obj.text.trim()){alert('Bitte einen Eintrag eingeben.');return}addTo(type,obj);document.getElementById(pre+'Text').value=''}
-function addVital(){const ids=['vDate','vBP','vHR','vTemp','vSpo','vRR','vO2','vGlucose','vPain','vIn','vOut','vBalance','vNote'];const vals=ids.map(id=>document.getElementById(id).value);const [date,bp,hr,temp,spo,rr,o2,glucose,pain,inn,out,balance,note]=vals;addTo('vitals',{title:'Vitalwerte',date,bp:'RR: '+bp,hr:'Puls: '+hr,temp:'Temp.: '+temp,spo:'SpO₂: '+spo,rr:'AF: '+rr,o2:'O₂: '+o2,glucose:'BZ: '+glucose,pain:'NRS: '+pain,in:'Einfuhr: '+inn,out:'Ausfuhr: '+out,balance:'Bilanz: '+balance,note})}
-document.addEventListener('input',e=>{if(['vIn','vOut'].includes(e.target.id)){const a=Number(document.getElementById('vIn').value)||0,b=Number(document.getElementById('vOut').value)||0;document.getElementById('vBalance').value=a-b}});
-function addMed(){const g=id=>document.getElementById(id).value;if(!g('mName').trim()){alert('Bitte Medikament eintragen.');return}addTo('meds',{title:g('mName'),dose:g('mDose'),route:g('mRoute'),date:g('mDate'),status:g('mStatus'),author:g('mAuthor'),note:g('mNote')});['mName','mDose','mDate','mAuthor','mNote'].forEach(id=>document.getElementById(id).value='')}
-function addLab(){const g=id=>document.getElementById(id).value;if(!g('labName').trim()||!g('labValue')){alert('Bitte Parameter und Wert angeben.');return}addTo('labs',{title:g('labName'),value:'Wert: '+g('labValue'),unit:'Einheit: '+g('labUnit'),ref:'Referenz: '+g('labRef'),date:g('labDate'),flag:'Bewertung: '+g('labFlag'),note:g('labNote')})}
-function addHistory(){const g=id=>document.getElementById(id).value;if(!g('histText').trim())return alert('Bitte Text eingeben.');addTo('history',{title:g('histType'),date:g('histDate'),text:g('histText')});document.getElementById('histText').value=''}
-function setupRisks(){document.getElementById('riskChecks').innerHTML=riskNames.map((n,i)=>`<div class="riskitem"><label><input type="checkbox" data-risk="${i}"> ${n}</label></div>`).join('')}
-function renderRiskChecks(){const p=patient();document.querySelectorAll('[data-risk]').forEach(x=>x.checked=!!p.riskChecks[x.dataset.risk])}
-document.addEventListener('change',e=>{if(e.target.matches('[data-risk]')){patient().riskChecks[e.target.dataset.risk]=e.target.checked;save()}});
-function addRisk(){const g=id=>document.getElementById(id).value;const selected=riskNames.filter((n,i)=>patient().riskChecks[i]);addTo('risks',{title:'Risikoassessment: '+(selected.join(', ')||'keine Auswahl'),date:g('riskDate'),scale:g('riskScale'),result:g('riskResult'),measures:g('riskMeasures')})}
-async function addWound(){const g=id=>document.getElementById(id).value;const f=document.getElementById('wPhoto').files[0];let photo='';if(f){if(f.size>1500000){alert('Das Testfoto ist zu groß (max. 1,5 MB). Bitte kleineres Bild wählen.');return}photo=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}const dims=`Maße L×B×T: ${g('wLength')} × ${g('wWidth')} × ${g('wDepth')} cm`;addTo('wounds',{title:'Wunde: '+g('wLocation'),date:new Date().toLocaleString('de-DE'),location:g('wLocation'),type:g('wType'),dimensions:dims,bed:g('wBed'),edge:g('wEdge'),exudate:g('wExudate'),pain:g('wPain'),dressing:g('wDressing'),next:g('wNext'),notes:g('wNotes'),photo});document.getElementById('wPhoto').value=''}
-function renderWounds(){const el=document.getElementById('woundEntries');el.innerHTML=patient().entries.wounds.map(e=>`<div class="entry"><strong>${esc(e.title)}</strong><span class="pill">${esc(e.date)}</span>${['type','dimensions','bed','edge','exudate','pain','dressing','next','notes'].map(k=>e[k]?`<p>${esc(e[k])}</p>`:'').join('')}${e.photo?`<img class="photo" src="${e.photo}" alt="Test-Wundfoto">`:''}<button class="btn danger small no-print" onclick="removeEntry('${e.id}')">Löschen</button></div>`).join('')||'<p class="muted">Noch keine Wunddokumentation.</p>'}
-function renderLabel(size){const p=patient(),name=(p.firstName+' '+p.lastName).trim()||'Testpatient';const html=`<div class="labelpreview ${size}"><b>${esc(name)}</b><small>Fallnummer: ${esc(p.caseNo||'—')}</small>${size==='large'?`<small>${esc(p.address||'')}</small><small>${esc([p.zip,p.city].filter(Boolean).join(' '))}</small>`:''}</div>`;document.getElementById('labelPreview').innerHTML=html}
-function renderAll(){renderSelect();renderFields();calcBMI();setupRisks();renderRiskChecks();Object.keys(configs).forEach(renderEntries);renderWounds();renderArztbrief()}
-function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pflegeDok-testbackup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href)}
-function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.patients)||!d.patients.length)throw Error();db=d;if(!db.active)db.active=db.patients[0].id;save();renderAll();alert('Backup importiert.')}catch(e){alert('Datei konnte nicht als PflegeDok-Backup gelesen werden.')}};r.readAsText(f)}
+/* =========================================
+   PflegeDok – Patientenverwaltung
+   Speicherung lokal im Browser
+========================================= */
 
-function formatLetterDate(value){if(!value)return '—';const d=new Date(value);return isNaN(d)?String(value):d.toLocaleDateString('de-DE')}
-function entryLines(items, mapper){if(!Array.isArray(items)||!items.length)return 'Keine Einträge dokumentiert.';return items.map((e,i)=>`${i+1}. ${e.date||formatLetterDate(e.created)}${e.title?' – '+e.title:''}\n${mapper(e)}`).join('\n\n')}
-function generateArztbrief(){
- const p=patient(); if(!p)return;
- const fullName=[p.firstName,p.lastName].filter(Boolean).join(' ')||'Nicht angegeben';
- const history=entryLines(p.entries.history,e=>e.text||'');
- const care=entryLines(p.entries.care,e=>[e.type,e.text].filter(Boolean).join(': '));
- const doctor=entryLines(p.entries.doctor,e=>[e.author,e.text].filter(Boolean).join(' – '));
- const vitals=entryLines(p.entries.vitals,e=>['bp','hr','temp','spo','rr','o2','glucose','pain','in','out','balance','note'].map(k=>e[k]).filter(Boolean).join(' | '));
- const meds=entryLines(p.entries.meds,e=>[e.dose,e.route,e.status,e.author,e.note].filter(Boolean).join(' | '));
- const labs=entryLines(p.entries.labs,e=>[e.value,e.unit,e.ref,e.flag,e.note].filter(Boolean).join(' | '));
- const wounds=entryLines(p.entries.wounds,e=>['location','type','dimensions','bed','edge','exudate','pain','dressing','next','notes'].map(k=>e[k]).filter(Boolean).join(' | '));
- const risks=entryLines(p.entries.risks,e=>[e.scale,e.result,e.measures].filter(Boolean).join(' | '));
- const text=`ARZTBRIEF – ENTWURF\n\nPatient/in: ${fullName}\nGeburtsdatum: ${formatLetterDate(p.dob)}\nFallnummer: ${p.caseNo||'—'}\nAufnahmedatum: ${formatLetterDate(p.admission)}\nStation: ${p.ward||'—'}\n\nHAUPTDIAGNOSE\n${p.mainDiagnosis||p.quickDiagnosis||'Nicht dokumentiert.'}\n\nRELEVANTE VORERKRANKUNGEN UND VORGESCHICHTE\n${p.quickHistory||'Nicht dokumentiert.'}\n\nALLERGIEN / UNVERTRÄGLICHKEITEN\n${p.allergies||'Keine Angabe dokumentiert.'}\n\nAUFNAHMESITUATION UND STAMMDATEN\nGröße: ${p.height||'—'} cm | Gewicht: ${p.weight||'—'} kg | BMI: ${p.bmi||'—'}\n\nKLINISCHER / ÄRZTLICHER VERLAUF\n${doctor}\n\nPFLEGERISCHER VERLAUF\n${care}\n\nVITALWERTE UND BILANZ\n${vitals}\n\nLABORWERTE\n${labs}\n\nWUNDSTATUS UND WUNDVERSORGUNG\n${wounds}\n\nMEDIKATIONSDOKUMENTATION\n${meds}\n\nRISIKEN UND ASSESSMENTS\n${risks}\n\nWEITERE KRAKENGESCHICHTE / EREIGNISSE\n${history}\n\nPFLEGERISCHE BESONDERHEITEN / ENTLASSUNGSBEDARF\n${[p.quickCare,p.statusNotes,p.dischargeNeeds].filter(Boolean).join('\n')||'Nicht dokumentiert.'}\n\nZusammenfassung / Weiteres Vorgehen:\n[Bitte ergänzen und fachlich prüfen]\n\nOrt, Datum: __________________________\nName / Unterschrift: __________________________\n\n— Automatisch erzeugter, ungeprüfter Entwurf —`;
- document.getElementById('letterText').value=text;
- p.letterDraft=text; save();
+const STORAGE_KEY = "pflegeDok_patients_v1";
+
+let patients = [];
+let currentPatientId = null;
+
+const fieldIds = [
+  "firstName","lastName","birthDate","gender","caseNumber",
+  "admissionDate","ward","doctor","address","phone",
+  "allergies","diagnoses","height","weight","bmi",
+  "relatives","living","careLevel","mobility","selfCare",
+  "nutrition","communication","aids",
+  "medicalHistory","operations","events","historyNotes",
+  "riskPressure","riskFall","riskThrombosis","riskNutrition",
+  "riskAspiration","riskDelirium","prophylaxis",
+  "letterText"
+];
+
+const entryTypes = {
+  wound: {
+    list: "woundList",
+    fields: ["woundDate","woundLocation","woundType","woundLength",
+      "woundWidth","woundDepth","woundExudate","woundSurrounding",
+      "woundBed","woundSmell","woundTreatment","woundNotes"]
+  },
+  lab: {
+    list: "labList",
+    fields: ["labDate","labParameter","labValue","labUnit",
+      "labRange","labNotes"]
+  },
+  vital: {
+    list: "vitalList",
+    fields: ["vitalDate","vitalBP","vitalHR","vitalSpO2",
+      "vitalTemp","vitalRR","vitalGlucose","vitalOxygen",
+      "vitalPain","vitalPainLocation","vitalNotes"]
+  },
+  balance: {
+    list: "balanceList",
+    fields: ["balanceDate","balanceType","balanceAmount",
+      "balanceDescription","balanceNotes"]
+  },
+  device: {
+    list: "deviceList",
+    fields: ["deviceDate","deviceType","deviceLocation",
+      "deviceInsertion","deviceStatus","deviceNotes"]
+  },
+  medication: {
+    list: "medList",
+    fields: ["medDate","medName","medDose","medRoute",
+      "medStatus","medDetails","medNotes"]
+  },
+  note: {
+    list: "noteList",
+    fields: ["noteDate","noteType","noteAuthor","noteText"]
+  }
+};
+
+function loadPatients() {
+  try {
+    patients = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch (error) {
+    patients = [];
+  }
+  renderPatientSelect();
 }
-function saveArztbrief(){if(!patient())return;patient().letterDraft=document.getElementById('letterText').value;save();alert('Arztbrief-Entwurf lokal gespeichert.')}
-function printArztbrief(){saveArztbrief();document.body.classList.add('print-letter');window.print();setTimeout(()=>document.body.classList.remove('print-letter'),800)}
-function renderArztbrief(){const el=document.getElementById('letterText');if(el&&patient())el.value=patient().letterDraft||''}
 
-function initDates(){const now=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);['careDate','docDate','vDate','mDate','labDate'].forEach(id=>document.getElementById(id).value=now);['histDate','riskDate'].forEach(id=>document.getElementById(id).value=now.slice(0,10))}
-tabSetup();initDates();load();if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-</script></body></html>
+function savePatients() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(patients));
+}
+
+function getCurrentPatient() {
+  return patients.find(p => p.id === currentPatientId);
+}
+
+function newPatient() {
+  const name = prompt("Name des Testpatienten:");
+
+  if (name === null || !name.trim()) return;
+
+  const patient = {
+    id: String(Date.now()),
+    name: name.trim(),
+    fields: {},
+    entries: {
+      wound: [], lab: [], vital: [], balance: [],
+      device: [], medication: [], note: []
+    }
+  };
+
+  patients.push(patient);
+  savePatients();
+  selectPatient(patient.id);
+}
+
+function selectPatient(id) {
+  if (currentPatientId) saveCurrentPatient();
+
+  currentPatientId = id || null;
+
+  const patient = getCurrentPatient();
+
+  document.getElementById("empty").classList.toggle("hidden", !!patient);
+  document.getElementById("application").classList.toggle("hidden", !patient);
+
+  renderPatientSelect();
+
+  if (!patient) return;
+
+  fieldIds.forEach(fieldId => {
+    const element = document.getElementById(fieldId);
+    if (element) {
+      element.value = patient.fields[fieldId] || "";
+    }
+  });
+
+  renderAllEntries();
+  updateQuickInfo();
+  updateLabels();
+  calculateBMI();
+  tab("quick");
+}
+
+function renderPatientSelect() {
+  const select = document.getElementById("patientSelect");
+  if (!select) return;
+
+  select.innerHTML = '<option value="">Patient auswählen</option>';
+
+  patients.forEach(patient => {
+    const option = document.createElement("option");
+    option.value = patient.id;
+    option.textContent = patient.name;
+    select.appendChild(option);
+  });
+
+  select.value = currentPatientId || "";
+}
+
+function saveCurrentPatient() {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  fieldIds.forEach(fieldId => {
+    const element = document.getElementById(fieldId);
+    if (element) patient.fields[fieldId] = element.value;
+  });
+
+  patient.name = [
+    patient.fields.firstName,
+    patient.fields.lastName
+  ].filter(Boolean).join(" ") || patient.name;
+
+  savePatients();
+  renderPatientSelect();
+  updateQuickInfo();
+  updateLabels();
+}
+
+function tab(id) {
+  document.querySelectorAll(".panel").forEach(panel => {
+    panel.classList.remove("active");
+  });
+
+  const selected = document.getElementById(id);
+  if (selected) selected.classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.style.opacity = "0.7";
+  });
+
+  const activeButton = [...document.querySelectorAll("nav button")]
+    .find(button => button.getAttribute("onclick") === `tab('${id}')`);
+
+  if (activeButton) activeButton.style.opacity = "1";
+}
+
+function calculateBMI() {
+  const height = Number(document.getElementById("height")?.value);
+  const weight = Number(document.getElementById("weight")?.value);
+  const bmi = document.getElementById("bmi");
+
+  if (!bmi) return;
+
+  bmi.value = height > 0 && weight > 0
+    ? (weight / Math.pow(height / 100, 2)).toFixed(1)
+    : "";
+}
+
+function updateQuickInfo() {
+  const patient = getCurrentPatient();
+  const target = document.getElementById("quickInfo");
+  if (!patient || !target) return;
+
+  const f = patient.fields;
+
+  target.innerHTML = `
+    <h3>${escapeHTML(patient.name)}</h3>
+    <p><strong>Geburtsdatum:</strong> ${escapeHTML(f.birthDate || "–")}</p>
+    <p><strong>Fallnummer:</strong> ${escapeHTML(f.caseNumber || "–")}</p>
+    <p><strong>Station:</strong> ${escapeHTML(f.ward || "–")}</p>
+    <p><strong>Aufnahme:</strong> ${escapeHTML(f.admissionDate || "–")}</p>
+    <p><strong>Diagnosen:</strong> ${escapeHTML(f.diagnoses || "–")}</p>
+    <p><strong>Allergien:</strong> ${escapeHTML(f.allergies || "–")}</p>
+  `;
+}
+
+function updateLabels() {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  const f = patient.fields;
+  const name = patient.name;
+  const details = `
+    <strong>${escapeHTML(name)}</strong><br>
+    Geb.: ${escapeHTML(f.birthDate || "–")}<br>
+    Fallnr.: ${escapeHTML(f.caseNumber || "–")}<br>
+    Station: ${escapeHTML(f.ward || "–")}
+  `;
+
+  document.getElementById("smallLabel").innerHTML = details;
+  document.getElementById("largeLabel").innerHTML = details;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+/* =========================================
+   Dokumentationseinträge
+========================================= */
+
+function addEntry(type) {
+  const patient = getCurrentPatient();
+  if (!patient) {
+    alert("Bitte zuerst einen Patienten auswählen.");
+    return;
+  }
+
+  const config = entryTypes[type];
+  if (!config) return;
+
+  const data = {};
+
+  config.fields.forEach(id => {
+    const element = document.getElementById(id);
+    data[id] = element ? element.value.trim() : "";
+  });
+
+  if (!Object.values(data).some(value => value !== "")) {
+    alert("Bitte zuerst Angaben eintragen.");
+    return;
+  }
+
+  if (!patient.entries[type]) patient.entries[type] = [];
+
+  patient.entries[type].unshift({
+    id: String(Date.now()) + Math.random().toString(16).slice(2),
+    created: new Date().toLocaleString("de-DE"),
+    data
+  });
+
+  savePatients();
+  renderEntries(type);
+
+  config.fields.forEach(id => {
+    const element = document.getElementById(id);
+    if (element && !id.toLowerCase().includes("date")) {
+      element.value = "";
+    }
+  });
+}
+
+function renderEntries(type) {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  const config = entryTypes[type];
+  const target = document.getElementById(config.list);
+  if (!target) return;
+
+  const entries = patient.entries[type] || [];
+
+  if (!entries.length) {
+    target.innerHTML = "<p>Noch keine Einträge vorhanden.</p>";
+    return;
+  }
+
+  target.innerHTML = entries.map(entry => {
+    const content = Object.entries(entry.data)
+      .filter(([key, value]) => value)
+      .map(([key, value]) => `
+        <div><strong>${escapeHTML(key)}:</strong>
+        ${escapeHTML(value)}</div>
+      `).join("");
+
+    return `
+      <div class="record">
+        <small>${escapeHTML(entry.created)}</small>
+        ${content}
+        <div class="toolbar no-print">
+          <button class="danger" type="button"
+            onclick="deleteEntry('${type}','${entry.id}')">
+            Eintrag löschen
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function deleteEntry(type, id) {
+  const patient = getCurrentPatient();
+  if (!patient || !confirm("Diesen Eintrag wirklich löschen?")) return;
+
+  patient.entries[type] = (patient.entries[type] || [])
+    .filter(entry => entry.id !== id);
+
+  savePatients();
+  renderEntries(type);
+}
+
+function renderAllEntries() {
+  Object.keys(entryTypes).forEach(renderEntries);
+}
+
+function addWound() { addEntry("wound"); }
+function addLab() { addEntry("lab"); }
+function addVital() { addEntry("vital"); }
+function addBalance() { addEntry("balance"); }
+function addDevice() { addEntry("device"); }
+function addMedication() { addEntry("medication"); }
+function addNote() { addEntry("note"); }
+
+/* =========================================
+   Backup
+========================================= */
+
+function exportBackup() {
+  const data = JSON.stringify(patients, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "PflegeDok-Backup.json";
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function importBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+
+      if (!Array.isArray(imported)) {
+        throw new Error("Ungültiges Backup");
+      }
+
+      if (!confirm("Backup importieren und vorhandene Daten ersetzen?")) {
+        return;
+      }
+
+      patients = imported;
+      currentPatientId = null;
+      savePatients();
+      renderPatientSelect();
+      selectPatient("");
+
+      alert("Backup wurde importiert.");
+    } catch (error) {
+      alert("Das Backup konnte nicht gelesen werden.");
+    }
+
+    event.target.value = "";
+  };
+
+  reader.readAsText(file);
+}
+
+/* =========================================
+   Arztbrief
+========================================= */
+
+function generateArztbrief() {
+  const patient = getCurrentPatient();
+  if (!patient) {
+    alert("Bitte zuerst einen Patienten auswählen.");
+    return;
+  }
+
+  saveCurrentPatient();
+
+  const f = patient.fields;
+
+  let text = `ARZTBRIEF – ENTWURF
+
+Patient: ${patient.name}
+Geburtsdatum: ${f.birthDate || ""}
+Fallnummer: ${f.caseNumber || ""}
+Aufnahmedatum: ${f.admissionDate || ""}
+Station: ${f.ward || ""}
+Behandelnder Arzt: ${f.doctor || ""}
+
+DIAGNOSEN
+${f.diagnoses || "Keine Angaben"}
+
+ALLERGIEN
+${f.allergies || "Keine Angaben"}
+
+VORERKRANKUNGEN
+${f.medicalHistory || "Keine Angaben"}
+
+OPERATIONEN
+${f.operations || "Keine Angaben"}
+
+PFLEGESTATUS
+Mobilität: ${f.mobility || ""}
+Selbstversorgung: ${f.selfCare || ""}
+Ernährung: ${f.nutrition || ""}
+Kommunikation: ${f.communication || ""}
+
+RISIKEN
+Dekubitus: ${f.riskPressure || ""}
+Sturz: ${f.riskFall || ""}
+Thrombose: ${f.riskThrombosis || ""}
+Mangelernährung: ${f.riskNutrition || ""}
+Aspiration: ${f.riskAspiration || ""}
+Delir: ${f.riskDelirium || ""}
+
+PFLEGERISCHER VERLAUF
+`;
+
+  (patient.entries.note || []).forEach(entry => {
+    const d = entry.data;
+    text += `\n${d.noteDate || entry.created} – ${d.noteType || ""}
+${d.noteText || ""}
+Dokumentiert von: ${d.noteAuthor || ""}\n`;
+  });
+
+  text += "\nWUNDEN\n";
+  (patient.entries.wound || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nVITALWERTE\n";
+  (patient.entries.vital || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nLABORWERTE\n";
+  (patient.entries.lab || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nMEDIKAMENTENGABEN\n";
+  (patient.entries.medication || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  document.getElementById("letterText").value = text;
+  saveCurrentPatient();
+}
+
+/* =========================================
+   Etiketten drucken
+========================================= */
+
+function printLabel(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) {
+    alert("Bitte Pop-ups für diese Seite erlauben.");
+    return;
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+      <meta charset="UTF-8">
+      <title>Patientenetikett</title>
+      <style>
+        body { font-family: Arial; padding: 20px; }
+        .label { border: 1px solid #333; padding: 15px; }
+      </style>
+    </head>
+    <body>
+      <div class="label">${element.innerHTML}</div>
+      <script>window.onload = () => window.print();<\/script>
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+}
+
+/* =========================================
+   Automatisches Speichern
+========================================= */
+
+document.addEventListener("input", function(event) {
+  if (event.target.id === "height" || event.target.id === "weight") {
+    calculateBMI();
+  }
+
+  if (event.target.closest("#application") && currentPatientId) {
+    saveCurrentPatient();
+  }
+});
+
+document.addEventListener("change", function(event) {
+  if (event.target.closest("#application") && currentPatientId) {
+    saveCurrentPatient();
+  }
+});
+
+/* =========================================
+   Start
+========================================= */
+
+loadPatients();
+
+if (patients.length > 0) {
+  selectPatient(patients[0].id);
+} else {
+  document.getElementById("empty").classList.remove("hidden");
+  document.getElementById("application").classList.add("hidden");
+}
+</script>
+
+</main>
+</body>
+</html>
