@@ -1,8 +1,7 @@
-
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#176b68">
@@ -966,3 +965,556 @@ label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
       placeholder="Hier erscheint der erstellte Arztbrief..."></textarea>
   </div>
 </section>
+
+<script>
+/* =========================================
+   PflegeDok – Patientenverwaltung
+   Speicherung lokal im Browser
+========================================= */
+
+const STORAGE_KEY = "pflegeDok_patients_v1";
+
+let patients = [];
+let currentPatientId = null;
+
+const fieldIds = [
+  "firstName","lastName","birthDate","gender","caseNumber",
+  "admissionDate","ward","doctor","address","phone",
+  "allergies","diagnoses","height","weight","bmi",
+  "relatives","living","careLevel","mobility","selfCare",
+  "nutrition","communication","aids",
+  "medicalHistory","operations","events","historyNotes",
+  "riskPressure","riskFall","riskThrombosis","riskNutrition",
+  "riskAspiration","riskDelirium","prophylaxis",
+  "letterText"
+];
+
+const entryTypes = {
+  wound: {
+    list: "woundList",
+    fields: ["woundDate","woundLocation","woundType","woundLength",
+      "woundWidth","woundDepth","woundExudate","woundSurrounding",
+      "woundBed","woundSmell","woundTreatment","woundNotes"]
+  },
+  lab: {
+    list: "labList",
+    fields: ["labDate","labParameter","labValue","labUnit",
+      "labRange","labNotes"]
+  },
+  vital: {
+    list: "vitalList",
+    fields: ["vitalDate","vitalBP","vitalHR","vitalSpO2",
+      "vitalTemp","vitalRR","vitalGlucose","vitalOxygen",
+      "vitalPain","vitalPainLocation","vitalNotes"]
+  },
+  balance: {
+    list: "balanceList",
+    fields: ["balanceDate","balanceType","balanceAmount",
+      "balanceDescription","balanceNotes"]
+  },
+  device: {
+    list: "deviceList",
+    fields: ["deviceDate","deviceType","deviceLocation",
+      "deviceInsertion","deviceStatus","deviceNotes"]
+  },
+  medication: {
+    list: "medList",
+    fields: ["medDate","medName","medDose","medRoute",
+      "medStatus","medDetails","medNotes"]
+  },
+  note: {
+    list: "noteList",
+    fields: ["noteDate","noteType","noteAuthor","noteText"]
+  }
+};
+
+function loadPatients() {
+  try {
+    patients = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch (error) {
+    patients = [];
+  }
+  renderPatientSelect();
+}
+
+function savePatients() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(patients));
+}
+
+function getCurrentPatient() {
+  return patients.find(p => p.id === currentPatientId);
+}
+
+function newPatient() {
+  const name = prompt("Name des Testpatienten:");
+
+  if (name === null || !name.trim()) return;
+
+  const patient = {
+    id: String(Date.now()),
+    name: name.trim(),
+    fields: {},
+    entries: {
+      wound: [], lab: [], vital: [], balance: [],
+      device: [], medication: [], note: []
+    }
+  };
+
+  patients.push(patient);
+  savePatients();
+  selectPatient(patient.id);
+}
+
+function selectPatient(id) {
+  if (currentPatientId) saveCurrentPatient();
+
+  currentPatientId = id || null;
+
+  const patient = getCurrentPatient();
+
+  document.getElementById("empty").classList.toggle("hidden", !!patient);
+  document.getElementById("application").classList.toggle("hidden", !patient);
+
+  renderPatientSelect();
+
+  if (!patient) return;
+
+  fieldIds.forEach(fieldId => {
+    const element = document.getElementById(fieldId);
+    if (element) {
+      element.value = patient.fields[fieldId] || "";
+    }
+  });
+
+  renderAllEntries();
+  updateQuickInfo();
+  updateLabels();
+  calculateBMI();
+  tab("quick");
+}
+
+function renderPatientSelect() {
+  const select = document.getElementById("patientSelect");
+  if (!select) return;
+
+  select.innerHTML = '<option value="">Patient auswählen</option>';
+
+  patients.forEach(patient => {
+    const option = document.createElement("option");
+    option.value = patient.id;
+    option.textContent = patient.name;
+    select.appendChild(option);
+  });
+
+  select.value = currentPatientId || "";
+}
+
+function saveCurrentPatient() {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  fieldIds.forEach(fieldId => {
+    const element = document.getElementById(fieldId);
+    if (element) patient.fields[fieldId] = element.value;
+  });
+
+  patient.name = [
+    patient.fields.firstName,
+    patient.fields.lastName
+  ].filter(Boolean).join(" ") || patient.name;
+
+  savePatients();
+  renderPatientSelect();
+  updateQuickInfo();
+  updateLabels();
+}
+
+function tab(id) {
+  document.querySelectorAll(".panel").forEach(panel => {
+    panel.classList.remove("active");
+  });
+
+  const selected = document.getElementById(id);
+  if (selected) selected.classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.style.opacity = "0.7";
+  });
+
+  const activeButton = [...document.querySelectorAll("nav button")]
+    .find(button => button.getAttribute("onclick") === `tab('${id}')`);
+
+  if (activeButton) activeButton.style.opacity = "1";
+}
+
+function calculateBMI() {
+  const height = Number(document.getElementById("height")?.value);
+  const weight = Number(document.getElementById("weight")?.value);
+  const bmi = document.getElementById("bmi");
+
+  if (!bmi) return;
+
+  bmi.value = height > 0 && weight > 0
+    ? (weight / Math.pow(height / 100, 2)).toFixed(1)
+    : "";
+}
+
+function updateQuickInfo() {
+  const patient = getCurrentPatient();
+  const target = document.getElementById("quickInfo");
+  if (!patient || !target) return;
+
+  const f = patient.fields;
+
+  target.innerHTML = `
+    <h3>${escapeHTML(patient.name)}</h3>
+    <p><strong>Geburtsdatum:</strong> ${escapeHTML(f.birthDate || "–")}</p>
+    <p><strong>Fallnummer:</strong> ${escapeHTML(f.caseNumber || "–")}</p>
+    <p><strong>Station:</strong> ${escapeHTML(f.ward || "–")}</p>
+    <p><strong>Aufnahme:</strong> ${escapeHTML(f.admissionDate || "–")}</p>
+    <p><strong>Diagnosen:</strong> ${escapeHTML(f.diagnoses || "–")}</p>
+    <p><strong>Allergien:</strong> ${escapeHTML(f.allergies || "–")}</p>
+  `;
+}
+
+function updateLabels() {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  const f = patient.fields;
+  const name = patient.name;
+  const details = `
+    <strong>${escapeHTML(name)}</strong><br>
+    Geb.: ${escapeHTML(f.birthDate || "–")}<br>
+    Fallnr.: ${escapeHTML(f.caseNumber || "–")}<br>
+    Station: ${escapeHTML(f.ward || "–")}
+  `;
+
+  document.getElementById("smallLabel").innerHTML = details;
+  document.getElementById("largeLabel").innerHTML = details;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+/* =========================================
+   Dokumentationseinträge
+========================================= */
+
+function addEntry(type) {
+  const patient = getCurrentPatient();
+  if (!patient) {
+    alert("Bitte zuerst einen Patienten auswählen.");
+    return;
+  }
+
+  const config = entryTypes[type];
+  if (!config) return;
+
+  const data = {};
+
+  config.fields.forEach(id => {
+    const element = document.getElementById(id);
+    data[id] = element ? element.value.trim() : "";
+  });
+
+  if (!Object.values(data).some(value => value !== "")) {
+    alert("Bitte zuerst Angaben eintragen.");
+    return;
+  }
+
+  if (!patient.entries[type]) patient.entries[type] = [];
+
+  patient.entries[type].unshift({
+    id: String(Date.now()) + Math.random().toString(16).slice(2),
+    created: new Date().toLocaleString("de-DE"),
+    data
+  });
+
+  savePatients();
+  renderEntries(type);
+
+  config.fields.forEach(id => {
+    const element = document.getElementById(id);
+    if (element && !id.toLowerCase().includes("date")) {
+      element.value = "";
+    }
+  });
+}
+
+function renderEntries(type) {
+  const patient = getCurrentPatient();
+  if (!patient) return;
+
+  const config = entryTypes[type];
+  const target = document.getElementById(config.list);
+  if (!target) return;
+
+  const entries = patient.entries[type] || [];
+
+  if (!entries.length) {
+    target.innerHTML = "<p>Noch keine Einträge vorhanden.</p>";
+    return;
+  }
+
+  target.innerHTML = entries.map(entry => {
+    const content = Object.entries(entry.data)
+      .filter(([key, value]) => value)
+      .map(([key, value]) => `
+        <div><strong>${escapeHTML(key)}:</strong>
+        ${escapeHTML(value)}</div>
+      `).join("");
+
+    return `
+      <div class="record">
+        <small>${escapeHTML(entry.created)}</small>
+        ${content}
+        <div class="toolbar no-print">
+          <button class="danger" type="button"
+            onclick="deleteEntry('${type}','${entry.id}')">
+            Eintrag löschen
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function deleteEntry(type, id) {
+  const patient = getCurrentPatient();
+  if (!patient || !confirm("Diesen Eintrag wirklich löschen?")) return;
+
+  patient.entries[type] = (patient.entries[type] || [])
+    .filter(entry => entry.id !== id);
+
+  savePatients();
+  renderEntries(type);
+}
+
+function renderAllEntries() {
+  Object.keys(entryTypes).forEach(renderEntries);
+}
+
+function addWound() { addEntry("wound"); }
+function addLab() { addEntry("lab"); }
+function addVital() { addEntry("vital"); }
+function addBalance() { addEntry("balance"); }
+function addDevice() { addEntry("device"); }
+function addMedication() { addEntry("medication"); }
+function addNote() { addEntry("note"); }
+
+/* =========================================
+   Backup
+========================================= */
+
+function exportBackup() {
+  const data = JSON.stringify(patients, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "PflegeDok-Backup.json";
+  link.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function importBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+
+      if (!Array.isArray(imported)) {
+        throw new Error("Ungültiges Backup");
+      }
+
+      if (!confirm("Backup importieren und vorhandene Daten ersetzen?")) {
+        return;
+      }
+
+      patients = imported;
+      currentPatientId = null;
+      savePatients();
+      renderPatientSelect();
+      selectPatient("");
+
+      alert("Backup wurde importiert.");
+    } catch (error) {
+      alert("Das Backup konnte nicht gelesen werden.");
+    }
+
+    event.target.value = "";
+  };
+
+  reader.readAsText(file);
+}
+
+/* =========================================
+   Arztbrief
+========================================= */
+
+function generateArztbrief() {
+  const patient = getCurrentPatient();
+  if (!patient) {
+    alert("Bitte zuerst einen Patienten auswählen.");
+    return;
+  }
+
+  saveCurrentPatient();
+
+  const f = patient.fields;
+
+  let text = `ARZTBRIEF – ENTWURF
+
+Patient: ${patient.name}
+Geburtsdatum: ${f.birthDate || ""}
+Fallnummer: ${f.caseNumber || ""}
+Aufnahmedatum: ${f.admissionDate || ""}
+Station: ${f.ward || ""}
+Behandelnder Arzt: ${f.doctor || ""}
+
+DIAGNOSEN
+${f.diagnoses || "Keine Angaben"}
+
+ALLERGIEN
+${f.allergies || "Keine Angaben"}
+
+VORERKRANKUNGEN
+${f.medicalHistory || "Keine Angaben"}
+
+OPERATIONEN
+${f.operations || "Keine Angaben"}
+
+PFLEGESTATUS
+Mobilität: ${f.mobility || ""}
+Selbstversorgung: ${f.selfCare || ""}
+Ernährung: ${f.nutrition || ""}
+Kommunikation: ${f.communication || ""}
+
+RISIKEN
+Dekubitus: ${f.riskPressure || ""}
+Sturz: ${f.riskFall || ""}
+Thrombose: ${f.riskThrombosis || ""}
+Mangelernährung: ${f.riskNutrition || ""}
+Aspiration: ${f.riskAspiration || ""}
+Delir: ${f.riskDelirium || ""}
+
+PFLEGERISCHER VERLAUF
+`;
+
+  (patient.entries.note || []).forEach(entry => {
+    const d = entry.data;
+    text += `\n${d.noteDate || entry.created} – ${d.noteType || ""}
+${d.noteText || ""}
+Dokumentiert von: ${d.noteAuthor || ""}\n`;
+  });
+
+  text += "\nWUNDEN\n";
+  (patient.entries.wound || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nVITALWERTE\n";
+  (patient.entries.vital || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nLABORWERTE\n";
+  (patient.entries.lab || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  text += "\nMEDIKAMENTENGABEN\n";
+  (patient.entries.medication || []).forEach(entry => {
+    text += JSON.stringify(entry.data, null, 2) + "\n";
+  });
+
+  document.getElementById("letterText").value = text;
+  saveCurrentPatient();
+}
+
+/* =========================================
+   Etiketten drucken
+========================================= */
+
+function printLabel(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) {
+    alert("Bitte Pop-ups für diese Seite erlauben.");
+    return;
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+      <meta charset="UTF-8">
+      <title>Patientenetikett</title>
+      <style>
+        body { font-family: Arial; padding: 20px; }
+        .label { border: 1px solid #333; padding: 15px; }
+      </style>
+    </head>
+    <body>
+      <div class="label">${element.innerHTML}</div>
+      <script>window.onload = () => window.print();<\/script>
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+}
+
+/* =========================================
+   Automatisches Speichern
+========================================= */
+
+document.addEventListener("input", function(event) {
+  if (event.target.id === "height" || event.target.id === "weight") {
+    calculateBMI();
+  }
+
+  if (event.target.closest("#application") && currentPatientId) {
+    saveCurrentPatient();
+  }
+});
+
+document.addEventListener("change", function(event) {
+  if (event.target.closest("#application") && currentPatientId) {
+    saveCurrentPatient();
+  }
+});
+
+/* =========================================
+   Start
+========================================= */
+
+loadPatients();
+
+if (patients.length > 0) {
+  selectPatient(patients[0].id);
+} else {
+  document.getElementById("empty").classList.remove("hidden");
+  document.getElementById("application").classList.add("hidden");
+}
+</script>
+
+</main>
+</body>
+</html>
