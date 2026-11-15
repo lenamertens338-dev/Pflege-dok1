@@ -22,7 +22,12 @@
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}.photo-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:white}.photo-card img{width:100%;height:155px;object-fit:contain;background:#f1f4f4;border-radius:6px;cursor:zoom-in}.photo-card small{display:block;margin:7px 0;overflow-wrap:anywhere}.photo-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}.photo-form label{display:block}.photo-form input,.photo-form select,.photo-form textarea{width:100%}.photo-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.photo-compare img{width:100%;max-height:300px;object-fit:contain}.photo-status{font-size:13px;color:#40565b}
 .pd58-warning{border-left:4px solid #b45309}.pd58-allergy-summary{font-size:14px;line-height:1.5}.pd58-allergy-summary ul{margin:7px 0;padding-left:22px}.pd58-allergy-summary li{margin:5px 0}.pd58-muted{color:#58666b}
 .pd58-warning[hidden],.pd58-allergy-summary[hidden]{display:none!important}.pd591-compact{line-height:1.5}.pd58-warning details{margin-top:8px}.pd58-warning summary{cursor:pointer;color:#76511a}.pd591-quick{background:#fff7e8;border-left:4px solid #b45309;padding:10px;border-radius:7px;margin-top:10px}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">5.9.3 · Allergieanzeige korrigiert</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+
+/* 5.9.4: Allergiewarnungen nur in den drei gewuenschten Ansichten. */
+.panel:not(#quick):not(#status):not(#history) .pd58-warning,
+.panel:not(#quick):not(#status):not(#history) [data-allergy-summary],
+.panel:not(#quick):not(#status):not(#history) .pd591-quick{display:none!important}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">5.9.4 · Allergieanzeige begrenzt</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
@@ -706,6 +711,13 @@ function pd58RenderAllergyWarnings(){
  const brief=warnings.map(w=>'<strong>'+escapeHTML(w.title)+'</strong>').join(' · ');
  const full=warnings.map(w=>'<li><strong>'+escapeHTML(w.title)+'</strong>'+(w.detail?'<div>'+escapeHTML(w.detail)+'</div>':'')+'</li>').join('');
  document.querySelectorAll('[data-allergy-summary]').forEach(el=>{
+  const panel=el.closest('section.panel');
+  if(!panel || !['quick','status','history'].includes(panel.id)){
+   el.hidden=true;
+   const card=el.closest('.pd58-warning');
+   if(card)card.hidden=true;
+   return;
+  }
   const section=el.closest('.pd58-warning');
   if(section)section.hidden=!hasWarnings;
   el.innerHTML=hasWarnings?'<div class="pd591-compact">'+brief+'</div><details><summary>Warnhinweise im Detail anzeigen</summary><ul>'+full+'</ul></details>':'';
