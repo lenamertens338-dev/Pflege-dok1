@@ -85,7 +85,7 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd64-dialog .pd64-item small{display:block!important;color:#526d7b!important;font-size:12px!important;}
 .pd64-item small{display:block;color:#647886}.pd64-muted{color:#657989;font-size:.88rem}.pd64-dialog input[type=search],.pd64-dialog select{width:100%;max-width:100%;padding:10px}.pd64-dialog button{margin:3px}.pd64-selected{padding:9px;border-radius:9px;background:#eaf5f8;white-space:pre-wrap}.pd64-status{margin-top:10px}.pd64-status textarea{width:100%;min-height:70px}
 
-/* PflegeDok 6.5.2 – gemeinsame, patientenbezogene Verlaufs-Karten */
+/* PflegeDok 6.6.0 – gemeinsame, patientenbezogene Verlaufs-Karten */
 .pd644-filters{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin:15px 0}
 .pd644-timeline{display:grid;gap:13px}
 .pd644-entry{background:#fff;border:1px solid #dce6ed;border-left:5px solid #718096;border-radius:15px;padding:17px;box-shadow:0 5px 16px #16394c0a;overflow-wrap:anywhere}
@@ -137,9 +137,28 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd650-bed:disabled{opacity:.8;cursor:default}
 .pd650-meta{font-size:12px;color:#637786}
 @media(max-width:620px){.pd650-head label{min-width:100%;width:100%}.pd650-stat{flex:1;min-width:100px}}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.5.2 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+</style><style>
+/* PflegeDok 6.6: klare Hauptnavigation, responsive iPad-Ansicht */
+body{padding-left:236px}
+#pd660Sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;z-index:100;background:#173447;color:#fff;padding:20px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:9px;box-shadow:2px 0 14px #102e3d22}
+.pd660-brand{font-weight:800;font-size:19px;margin:6px 8px 20px}.pd660-brand small{font-size:12px;opacity:.7}
+#pd660Sidebar button{width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;color:white;padding:13px 10px;font-size:14px;cursor:pointer}
+#pd660Sidebar button[aria-current="page"]{background:#e3f2f5;color:#173447;font-weight:700}
+.pd660-sidebar-note{margin-top:auto;font-size:11px;opacity:.75;padding:10px}
+body.pd660-station #pd660PatientView,body.pd660-station #application,body.pd660-station #empty{display:none!important}
+body.pd660-patients #pd650Board,body.pd660-patients #application,body.pd660-patients #empty{display:none!important}
+body.pd660-docs #pd650Board,body.pd660-docs #pd660PatientView{display:none!important}
+body.pd660-docs #empty:not(.hidden){display:block!important}
+body.pd660-docs #application:not(.hidden){display:block!important}
+#pd660PatientView[hidden]{display:none}
+body.pd660-patients #pd660PatientView{display:block}
+body.pd660-station #pd650Board{display:block}
+@media(max-width:780px){body{padding-left:0}#pd660Sidebar{position:sticky;top:0;width:auto;bottom:auto;flex-direction:row;align-items:center;gap:4px;padding:8px;overflow-x:auto;box-shadow:0 2px 10px #102e3d22}#pd660Sidebar .pd660-brand{font-size:13px;white-space:nowrap;margin:0 8px 0 0}#pd660Sidebar button{font-size:12px;white-space:nowrap;width:auto;padding:10px 8px}#pd660Sidebar .pd660-sidebar-note{display:none}}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.6.0 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
+<aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">🏥 PflegeDok <small>6.6</small></div><button type="button" data-pd660-view="station">🏥 Stationsübersicht</button><button type="button" data-pd660-view="patients">👥 Patientenverwaltung</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><div class="pd660-sidebar-note">Demo · Nur fiktive Testdaten</div></aside>
+<div id="pd660PatientView" class="card no-print" hidden><h2>Patientenverwaltung</h2><p>Wähle oben einen Testpatienten aus oder lege einen neuen an. Über „Dokumentation“ gelangst du zu seiner Akte.</p><button type="button" id="pd660OpenDoc">Ausgewählte Patientenakte öffnen</button></div>
 <section class="card no-print" id="pd650Board">
 <div class="pd650-head"><div><p class="pd650-kicker">PFLEGEDOK · STATIONSMANAGEMENT</p><h2>Krankenhausübersicht</h2><p class="pd-note">13 Stationen und Funktionsbereiche · ausschließlich fiktive Testpatienten</p></div><label>Station auswählen<select id="pd650StationFilter"><option value="">Alle Stationen</option></select></label></div>
 <div id="pd650Stats" class="pd650-stats"></div><div id="pd650Stations" class="pd650-stations"></div>
@@ -1532,7 +1551,7 @@ btn.addEventListener('click',function(){
 </script>
 
 <script>
-/* PflegeDok 6.5.2 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
+/* PflegeDok 6.6.0 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
@@ -1594,7 +1613,7 @@ prepareField();refresh();
 </script>
 
 <script>
-/* PflegeDok 6.5.2: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
+/* PflegeDok 6.6.0: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
 (function(){
 'use strict';
 const stations=[
@@ -1693,24 +1712,25 @@ board.addEventListener('click',e=>{
  if(d12bed){
   const matches=assigned('D12').filter(p=>String(p.fields?.room650||'').trim()===d12bed.dataset.pd650Room&&String(p.fields?.bed650||'').trim()===d12bed.dataset.pd650RoomBed);
   if(movingPatient){setBed(movingPatient,'D12',d12bed.dataset.pd650Room,d12bed.dataset.pd650RoomBed);return;}
-  if(movingPatient){
-   const place=bed.dataset.pd650Bed;
-   if(/^G|^CH/.test(place)){alert('Behandlungsräume sind keine regulären Betten.');return;}
-   const room=place.startsWith('AW')?'Überwachungsbereich':place.startsWith('ISO')?'Isolationsbox':'Aufnahmeraum';
-   setBed(movingPatient,'D10',room,place);return;
-  }
-  if(matches.length===1){selectPatient(matches[0].id);tab('master');get('application')?.scrollIntoView({behavior:'smooth'});}
+  if(matches.length===1){selectPatient(matches[0].id);tab('master');window.pd660View?.('docs');}
   else if(matches.length>1)alert('Mehrfachbelegung erkannt. Bitte Patientenzuordnung prüfen.');
-  else alert('Bett noch nicht zugeordnet. Bitte in den Patientenstammdaten Station D12, Zimmer '+d12bed.dataset.pd650Room+' und Bett '+d12bed.dataset.pd650RoomBed+' eintragen.');
+  else alert('Freies Bett. Bitte oben einen Testpatienten auswählen und erneut auf das Bett tippen.');
   return;
  }
  const bed=e.target.closest('[data-pd650-bed]');
  if(bed){
-  const matches=assigned('D10').filter(p=>String(p.fields?.bed650||'').trim().toUpperCase()===bed.dataset.pd650Bed.toUpperCase());
-  if(matches.length===1){selectPatient(matches[0].id);tab('master');get('application')?.scrollIntoView({behavior:'smooth'});}
-  else if(matches.length>1)alert('Mehrfachbelegung erkannt. Bitte Patientenzuordnung in den Stammdaten prüfen.');
-  else alert('Für diesen Platz ist kein Testpatient zugeordnet. Bitte zuerst einen Testpatienten anlegen und in den Stammdaten Station D10 sowie Bett/Platz '+bed.dataset.pd650Bed+' eintragen.');
+  const place=bed.dataset.pd650Bed;
+  if(movingPatient){
+   if(/^(G|CH)/.test(place)){alert('Behandlungsräume sind keine regulären Betten.');return;}
+   const room=place.startsWith('AW')?'Überwachungsbereich':place.startsWith('ISO')?'Isolationsbox':'Aufnahmeraum';
+   setBed(movingPatient,'D10',room,place);return;
+  }
+  const matches=assigned('D10').filter(p=>String(p.fields?.bed650||'').trim().toUpperCase()===place.toUpperCase());
+  if(matches.length===1){selectPatient(matches[0].id);tab('master');window.pd660View?.('docs');}
+  else if(matches.length>1)alert('Mehrfachbelegung erkannt. Bitte Patientenzuordnung prüfen.');
+  else alert('Freier Platz. Bitte oben einen Testpatienten auswählen und erneut auf den Platz tippen.');
  }
+
 });
 const oldSelect=selectPatient;
 selectPatient=function(id){oldSelect(id);update()};
@@ -1726,4 +1746,19 @@ get('bed650')?.addEventListener('change',()=>{if(current())saveCurrentPatient()}
 update();
 })();
 </script>
-</main></body></html>
+<script>
+/* PflegeDok 6.6: Startseite ist die Stationsübersicht. */
+(function(){
+ function view(mode){
+  document.body.classList.remove('pd660-station','pd660-patients','pd660-docs');
+  document.body.classList.add('pd660-'+mode);
+  document.querySelectorAll('[data-pd660-view]').forEach(b=>b.setAttribute('aria-current',b.dataset.pd660View===mode?'page':'false'));
+  window.scrollTo({top:0,behavior:'instant'});
+ }
+ window.pd660View=view;
+ document.querySelectorAll('[data-pd660-view]').forEach(b=>b.addEventListener('click',()=>view(b.dataset.pd660View)));
+ document.getElementById('pd660OpenDoc')?.addEventListener('click',()=>view('docs'));
+ document.getElementById('pdJump')?.addEventListener('change',()=>view('docs'));
+ view('station');
+})();
+</script></main></body></html>
