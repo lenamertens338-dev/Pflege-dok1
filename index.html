@@ -85,7 +85,7 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd64-dialog .pd64-item small{display:block!important;color:#526d7b!important;font-size:12px!important;}
 .pd64-item small{display:block;color:#647886}.pd64-muted{color:#657989;font-size:.88rem}.pd64-dialog input[type=search],.pd64-dialog select{width:100%;max-width:100%;padding:10px}.pd64-dialog button{margin:3px}.pd64-selected{padding:9px;border-radius:9px;background:#eaf5f8;white-space:pre-wrap}.pd64-status{margin-top:10px}.pd64-status textarea{width:100%;min-height:70px}
 
-/* PflegeDok 7.1.2 – gemeinsame, patientenbezogene Verlaufs-Karten */
+/* PflegeDok 7.1.4 – gemeinsame, patientenbezogene Verlaufs-Karten */
 .pd644-filters{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin:15px 0}
 .pd644-timeline{display:grid;gap:13px}
 .pd644-entry{background:#fff;border:1px solid #dce6ed;border-left:5px solid #718096;border-radius:15px;padding:17px;box-shadow:0 5px 16px #16394c0a;overflow-wrap:anywhere}
@@ -155,7 +155,7 @@ body.pd660-patients #pd660PatientView{display:block}
 body.pd660-station #pd650Board{display:block}
 @media(max-width:780px){body{padding-left:0}#pd660Sidebar{position:sticky;top:0;width:auto;bottom:auto;flex-direction:row;align-items:center;gap:4px;padding:8px;overflow-x:auto;box-shadow:0 2px 10px #102e3d22}#pd660Sidebar .pd660-brand{font-size:13px;white-space:nowrap;margin:0 8px 0 0}#pd660Sidebar button{font-size:12px;white-space:nowrap;width:auto;padding:10px 8px}#pd660Sidebar .pd660-sidebar-note{display:none}}
 </style><style>
-/* 7.1.2: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
+/* 7.1.4: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
    Die vorhandene Bereichsauswahl #pdJump übernimmt die Navigation. */
 body.pd660-docs #application{display:block!important;min-width:0}
 body.pd660-docs #application>#navigation{display:none!important}
@@ -166,7 +166,7 @@ body.pd660-docs #application>.panel.active{display:block!important}
 body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 @media(max-width:960px){body.pd660-docs #application{display:block!important}}
 </style><style>
-/* 7.1.2 – Patientenleiste oberhalb der Dokumentation */
+/* 7.1.4 – Patientenleiste oberhalb der Dokumentation */
 .pd663-patientbar{position:sticky;top:0;z-index:40;background:#f2f9fa;border:1px solid #a9d2d5;border-radius:13px;padding:13px 17px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 3px 12px #17344716}
 .pd663-patient-info{min-width:0;display:flex;flex-direction:column;gap:5px}.pd663-eyebrow{font-size:11px;letter-spacing:.07em;color:#446977;font-weight:700}.pd663-patient-info strong{font-size:19px;overflow-wrap:anywhere;color:#173447}.pd663-tags{display:flex;gap:7px;flex-wrap:wrap}.pd663-tags span{border-radius:7px;background:white;border:1px solid #c9e0e2;padding:4px 8px;font-size:12px;color:#234b5c}
 #pd663BackStation{white-space:nowrap;min-height:44px}
@@ -181,7 +181,7 @@ body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 .pd664-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 @media(max-width:780px){.pd664-actions{width:100%;justify-content:stretch}.pd664-actions button{flex:1;white-space:normal}}
 </style><style>
-/* 7.1.2: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
+/* 7.1.4: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
 #pd663PatientBar{display:flex!important;flex-wrap:wrap;align-items:center;gap:12px;overflow:visible!important}
 #pd663PatientBar .pd664-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:10px;justify-content:stretch}
 #pd663PatientBar .pd664-actions button{display:flex!important;align-items:center;justify-content:center;visibility:visible!important;opacity:1!important;min-height:48px;min-width:0;width:100%;white-space:normal!important;line-height:1.25;text-align:center;padding:10px 7px}
@@ -314,11 +314,22 @@ body.pd660-admin #pd650Board,body.pd660-admin #pd660PatientView,body.pd660-admin
 .pd712-patient-picker select{min-height:48px;width:100%}.pd712-patient-actions{display:flex;flex-wrap:wrap;gap:10px}
 @media(max-width:600px){.pd712-admin-grid{grid-template-columns:1fr}#pd712AdminView,#pd660PatientView{margin:8px!important}.pd712-admin-section button{width:100%}}
 @media print{#pd712Safety,#pd712AdminView{display:none!important}}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">7.1.2 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+</style><style id="pd713Style">
+.pd713-case-banner{margin:0 12px 12px;padding:10px 13px;background:#eaf2fa;border:1px solid #b8d0e8;border-radius:7px;color:#214a70;font-size:13px;display:flex;gap:8px;flex-wrap:wrap}
+.pd713-case-banner[hidden]{display:none!important}
+#pd713ClinicalHistory{margin-bottom:14px;border:1px solid #bed2e6;background:#f7fbff}
+#pd713ClinicalHistory textarea{display:block;width:100%;max-width:750px;box-sizing:border-box;margin:8px 0}
+#pd713ClinicalHistory button{min-height:40px}
+.pd713-hint{font-size:13px;color:#50657a}
+.pd713-list{margin:12px 0}
+.pd713-item{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:9px;border-bottom:1px solid #d6e4f0}
+.pd713-item small{color:#5b7183}
+.pd713-prior{padding:10px;margin:7px 0;border:1px solid #ccdbe8;border-radius:6px;background:white}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">7.1.4 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <details id="pd712Safety" class="pd712-safety"><summary>⚠️ Demo-System · ausschließlich fiktive Testdaten · Sicherheitshinweis anzeigen</summary><div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div></details>
-<aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">✚ PflegeDok <small>7.1.2</small><em>Patientenmanagement · Pflege · Dokumentation</em></div><button type="button" data-pd660-view="station">🛏️ Station</button><button type="button" data-pd660-view="patients">👥 Patienten</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><button type="button" data-pd660-view="admin">⚙️ Verwaltung</button><div class="pd660-sidebar-note">DEMO · Nur fiktive Testdaten</div></aside>
+<aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">✚ PflegeDok <small>7.1.4</small><em>Patientenmanagement · Pflege · Dokumentation</em></div><button type="button" data-pd660-view="station">🛏️ Station</button><button type="button" data-pd660-view="patients">👥 Patienten</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><button type="button" data-pd660-view="admin">⚙️ Verwaltung</button><div class="pd660-sidebar-note">DEMO · Nur fiktive Testdaten</div></aside>
 <div id="pd660PatientView" class="card no-print" hidden><h2>Patientenverwaltung</h2><p>Testpatient auswählen und anschließend die Dokumentation öffnen.</p><div class="pd712-patient-picker"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="pd712-patient-actions"><button type="button" id="pd660OpenDoc">Ausgewählte Patientenakte öffnen</button><button type="button" class="secondary" id="pd712GoAdmin">⚙️ Neuen Testpatienten anlegen</button></div></div>
-<section id="pd712AdminView" class="card no-print" aria-label="Verwaltung" hidden><h2>⚙️ Verwaltung</h2><p>Testpatienten und lokale Demodaten verwalten. Alle Funktionen aus den bisherigen Versionen bleiben verfügbar.</p><div class="pd712-admin-grid"><div class="pd712-admin-section"><h3>Testpatienten</h3><p>Neuen fiktiven Patienten anlegen oder den aktuell ausgewählten Testpatienten löschen.</p><button id="newPatient" type="button">＋ Testpatient anlegen</button><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><p class="pd712-muted">Zum Wechseln des ausgewählten Patienten den Reiter „Patienten“ öffnen.</p></div><div class="pd712-admin-section"><h3>Datensicherung</h3><p>JSON-Backups werden unverschlüsselt gespeichert. Keine echten Patientendaten verwenden.</p><button id="exportBackup" class="secondary" type="button">Backup exportieren</button><button id="importButton" class="secondary" type="button">Backup importieren</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div><div class="pd712-admin-section"><h3>Drucken</h3><p>Aktuelle Ansicht für den Ausdruck vorbereiten.</p><button id="printAll" class="secondary" type="button">Aktuelle Ansicht drucken</button></div></div></section>
+<section id="pd712AdminView" class="card no-print" aria-label="Verwaltung" hidden><h2>⚙️ Verwaltung</h2><p>Testpatienten und lokale Demodaten verwalten. Alle Funktionen aus den bisherigen Versionen bleiben verfügbar.</p><div class="pd712-admin-grid"><div class="pd712-admin-section"><h3>Testpatienten</h3><p>Neuen fiktiven Patienten anlegen oder den aktuell ausgewählten Testpatienten löschen.</p><button id="newPatient" type="button">＋ Testpatient anlegen</button><button id="pd713Readmit" class="secondary" type="button">↻ Bekannten Patienten erneut aufnehmen</button><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><p class="pd712-muted">Zum Wechseln des ausgewählten Patienten den Reiter „Patienten“ öffnen.</p></div><div class="pd712-admin-section"><h3>Datensicherung</h3><p>JSON-Backups werden unverschlüsselt gespeichert. Keine echten Patientendaten verwenden.</p><button id="exportBackup" class="secondary" type="button">Backup exportieren</button><button id="importButton" class="secondary" type="button">Backup importieren</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div><div class="pd712-admin-section"><h3>Drucken</h3><p>Aktuelle Ansicht für den Ausdruck vorbereiten.</p><button id="printAll" class="secondary" type="button">Aktuelle Ansicht drucken</button></div></div></section>
 <section class="card no-print" id="pd650Board">
 <div class="pd650-head"><div><p class="pd650-kicker">PFLEGEDOK · STATIONSMANAGEMENT</p><h2>Krankenhausübersicht</h2><p class="pd-note">13 Stationen und Funktionsbereiche · ausschließlich fiktive Testpatienten</p></div><label>Station auswählen<select id="pd650StationFilter"><option value="">Alle Stationen</option></select></label></div>
 <div id="pd650Stats" class="pd650-stats"></div><div class="pd710-station-pane"><div class="pd710-pane-heading">Bereiche / Stationen</div><div id="pd650Stations" class="pd650-stations"></div><div class="pd710-pane-heading pd710-function-heading">Funktionen</div><div class="pd710-quick"><button type="button" data-pd710-action="new">⊕ Patient aufnehmen</button><button type="button" data-pd710-action="patients">▤ Patientenverwaltung</button><button type="button" data-pd710-action="docs">▤ Dokumentation öffnen</button><button type="button" data-pd710-action="export">⇩ Backup exportieren</button></div></div>
@@ -760,7 +771,7 @@ function exportBackup(){alert("Hinweis: Das JSON-Backup enthält keine Wundfotos
 async function importBackup(event){const file=event.target.files?.[0];if(!file)return;try{if(file.size>10*1024*1024)throw Error('Datei ist zu groß (maximal 10 MB).');const parsed=JSON.parse(await file.text());if(!Array.isArray(parsed)||!parsed.every(validPatient)||new Set(parsed.map(p=>p.id)).size!==parsed.length)throw Error('Ungültiges Backup-Format.');if(!confirm('Import ersetzt alle vorhandenen Demo-Daten. Fortfahren?'))return;patients=parsed;currentPatientId=null;savePatients();selectPatient('');renderPatientSelect();alert('Backup importiert.')}catch(e){alert('Backup konnte nicht importiert werden: '+e.message)}finally{event.target.value=''}}
 function formatDate(value){if(!value)return 'Keine Angabe';const d=new Date(value);return Number.isNaN(d.getTime())?String(value).replace('T',' '):d.toLocaleString('de-DE')}
 function generateArztbrief(){const p=current();if(!p)return;saveCurrentPatient();const f=p.fields;const section=(title,content)=>'\n'+title.toUpperCase()+'\n'+'-'.repeat(title.length)+'\n'+(content||'Keine Angaben')+'\n';const listing=type=>{const items=p.entries[type]||[];if(!items.length)return 'Keine Einträge dokumentiert.';const labels=Object.fromEntries(entryGroups[type].map(x=>[x.id,x.label]));return items.map((e,i)=>(i+1)+'. '+Object.entries(e.data||{}).filter(([,v])=>v!==''&&v!=null).map(([k,v])=>(labels[k]||k)+': '+v).join('\n   ')).join('\n\n')};let letter='ARZTBRIEF – ENTWURF\nErstellt am: '+new Date().toLocaleString('de-DE')+'\n\nPATIENTENDATEN\nName: '+p.name+'\nGeburtsdatum: '+(f.birthDate||'')+'\nGeschlecht: '+(f.gender||'')+'\nFallnummer: '+(f.caseNumber||'')+'\nAufnahmedatum: '+(f.admissionDate||'')+'\nStation: '+(f.ward||'')+'\nBehandelnder Arzt: '+(f.doctor||'')+'\n';for(const [title,key] of [['Diagnosen','diagnoses'],['Allergien','allergies'],['Vorerkrankungen','medicalHistory'],['Operationen','operations'],['Krankenhausaufenthalte / Ereignisse','events'],['Weitere Krankengeschichte / Hinweise','historyNotes']])letter+=section(title,f[key]);letter+=section('Pflegestatus',[['Mobilität','mobility'],['Selbstversorgung','selfCare'],['Pflegegrad','careLevel'],['Ernährung','nutrition'],['Kommunikation / Orientierung','communication'],['Hilfsmittel','aids'],['Angehörige / Bezugspersonen','relatives'],['Wohnsituation','living']].map(([label,key])=>label+': '+(f[key]||'Keine Angabe')).join('\n'));letter+=section('Risikoeinschätzungen',[['Dekubitus','riskPressure'],['Sturz','riskFall'],['Thrombose','riskThrombosis'],['Mangelernährung','riskNutrition'],['Aspiration','riskAspiration'],['Delir','riskDelirium'],['Prophylaxen / Maßnahmen','prophylaxis']].map(([label,key])=>label+': '+(f[key]||'Keine Angabe')).join('\n'));for(const [title,key] of [['ISBAR-Übergaben','handover'],['Aufgaben / Maßnahmen','task'],['Assessments','assessment'],['Pflege- und ärztlicher Verlauf','note'],['Konsile','consult'],['Medikationsplan / Anordnungen','medplan'],['Wunddokumentation','wound'],['Vitalwerte und Schmerz','vital'],['Laborwerte','lab'],['Ein- und Ausfuhr / Bilanz','balance'],['Zugänge, Katheter und Drainagen','device'],['Medikamentengaben','medication']])letter+=section(title,listing(key));for(const [title,key] of [['Atem- und Sauerstofftherapie','respiratory'],['Pflegeberatung und Edukation','education'],['Pflegevisiten','carevisit'],['Kontrollen von Zugängen, Drainagen und Kathetern','devicecheck']])letter+=section(title,listing(key));letter+='\nABSCHLIESSENDE BEURTEILUNG / WEITERES VORGEHEN\n\n[Bitte ärztlich ergänzen]\n\nMit freundlichen Grüßen\n\n________________________________\nBehandelnde Ärztin / behandelnder Arzt\n\nHINWEIS: Automatisch erstellter Demo-Entwurf; fachliche Prüfung und Freigabe erforderlich.\n';$('letterText').value=letter;saveCurrentPatient();tab('arztbrief')}
-function printLabel(id){const el=$(id);if(!el||!current())return;const w=window.open('','_blank');if(!w){alert('Bitte Pop-ups für diese Seite erlauben.');return}w.document.open();w.document.write('<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Demo-Patientenetikett</title><style>body{font:14px Arial;padding:20px}.label{border:1px solid #333;padding:15px;display:inline-block;line-height:1.7}</style></head><body><div class="label">'+el.innerHTML+'</div></body></html>');w.document.close();w.onload=()=>{w.focus();w.print()}}
+function printLabel(id){const el=$(id);if(!el||!current())return;const w=window.open('','_blank');if(!w){alert('Bitte Pop-ups für diese Seite erlauben.');return}w.document.open();w.document.write('<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Demo-Patientenetikett</title><style>body{font:14px Arial;padding:20px}.label{border:1px solid #333;padding:15px;display:inline-block;line-height:1.7}</style></head><body><div class="label">'+el.innerHTML+'</div>\n\n</body></html>');w.document.close();w.onload=()=>{w.focus();w.print()}}
 $('deletePatient').addEventListener('click',deleteSelectedPatient);$('newPatient').addEventListener('click',newPatient);$('firstPatient').addEventListener('click',newPatient);$('patientSelect').addEventListener('change',e=>selectPatient(e.target.value));$('exportBackup').addEventListener('click',exportBackup);$('importButton').addEventListener('click',()=>$('backupFile').click());$('backupFile').addEventListener('change',importBackup);$('printAll').addEventListener('click',()=>window.print());$('printLetter').addEventListener('click',()=>window.print());$('generateLetter').addEventListener('click',generateArztbrief);
 $('pdJump').addEventListener('change',e=>{if(e.target.value){tab(e.target.value);if(['graphic','handover','tasks','assessments'].includes(e.target.value))refreshPD3();}});
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.tab)tab(b.dataset.tab);if(b.dataset.add)addEntry(b.dataset.add);if(b.dataset.deleteType)deleteEntry(b.dataset.deleteType,b.dataset.deleteId);if(b.dataset.printLabel)printLabel(b.dataset.printLabel)});
@@ -1802,7 +1813,7 @@ btn.addEventListener('click',function(){
 </script>
 
 <script>
-/* PflegeDok 7.1.2 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
+/* PflegeDok 7.1.4 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
@@ -1864,7 +1875,7 @@ prepareField();refresh();
 </script>
 
 <script>
-/* PflegeDok 7.1.2: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
+/* PflegeDok 7.1.4: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
 (function(){
 'use strict';
 const stations=[
@@ -2311,7 +2322,7 @@ update();
  view('station');
 })();
 </script><script>
-/* PflegeDok 7.1.2: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
+/* PflegeDok 7.1.4: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
 (function(){
  const el=id=>document.getElementById(id);
  function refresh(){
@@ -2342,7 +2353,7 @@ update();
  refresh();
 })();
 </script><script>
-/* PflegeDok 7.1.2: Verlegung und Entlassung von fiktiven Testpatienten. */
+/* PflegeDok 7.1.4: Verlegung und Entlassung von fiktiven Testpatienten. */
 (function(){
  const $=id=>document.getElementById(id);
  const dialog=$('pd664Dialog'),form=$('pd664Form');
@@ -2480,4 +2491,404 @@ update();
  });
  update();
 })();
-</script></body></html>
+</script><script id="pd713CaseManagement">
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const iso=()=>new Date().toISOString();
+const clean=v=>String(v||'').trim();
+const html=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const durable=['firstName','lastName','birthDate','gender','address','phone','allergies','medicalHistory','operations','events','historyNotes','height'];
+const episode=['caseNumber','admissionDate','ward','room650','bed650','doctor','diagnoses','weight','bmi'];
+const counterKey='pflegedok713_case_seq';
+function ensure(p){
+ if(!p.pd680||typeof p.pd680!=='object')p.pd680={};
+ if(!p.pd680.patientNumber)p.pd680.patientNumber='PD-'+String(p.id).replace(/[^a-zA-Z0-9]/g,'').slice(0,12).toUpperCase();
+ if(!Array.isArray(p.pd680.cases))p.pd680.cases=[];
+ if(!Array.isArray(p.pd713Archived))p.pd713Archived=[];
+ if(!Array.isArray(p.pd713LongTerm))p.pd713LongTerm=[];
+}
+function nextCase(){
+ const year=new Date().getFullYear();
+ const existing=patients.flatMap(p=>[p.fields?.caseNumber,...(p.pd680?.cases||[]).map(c=>c.caseNumber),...(p.pd713Archived||[]).map(c=>c.caseNumber)]).filter(Boolean);
+ let seq=Number(localStorage.getItem(counterKey)||0);
+ if(!Number.isSafeInteger(seq)||seq<0)seq=0;
+ let no;
+ do{seq++;no='F-'+year+'-'+String(seq).padStart(6,'0')}while(existing.includes(no));
+ localStorage.setItem(counterKey,String(seq));
+ return no;
+}
+function ensureCurrentCase(p){
+ ensure(p);
+ if(!clean(p.fields.caseNumber)){
+   p.fields.caseNumber=nextCase();
+   p.fields.admissionDate ||=new Date().toISOString().slice(0,10);
+ }
+ if(!p.pd680.cases.some(c=>c.caseNumber===p.fields.caseNumber)){
+   p.pd680.cases.push({caseNumber:p.fields.caseNumber,admissionDate:p.fields.admissionDate||'',ward:p.fields.ward||'',createdAt:iso()});
+ }
+}
+function archivedMarkup(p){
+ ensure(p);
+ const archived=p.pd713Archived.slice().reverse();
+ return '<h3>Frühere Aufenthalte ('+archived.length+')</h3>'+
+ (archived.length?archived.map(c=>'<details class="pd713-prior"><summary><strong>'+html(c.caseNumber)+'</strong> · Aufnahme '+html(c.admissionDate||'–')+' · '+html(c.ward||'–')+'</summary><p><strong>Damals dokumentierte Diagnosen:</strong> '+html(c.diagnoses||'Keine')+'</p><p><strong>Entlassung/Archivierung:</strong> '+html(c.archivedAt||'–')+'</p><p><button type="button" class="secondary" data-pd714-open="'+html(c.caseNumber)+'">Gesamte Fallakte ansehen</button></p></details>').join(''):'<p>Noch kein abgeschlossener Voraufenthalt.</p>');
+}
+function showLongTerm(){
+ const p=current();const area=$('pd713ClinicalHistory');
+ if(!area)return;
+ if(!p){area.innerHTML='';return}
+ ensure(p);
+ area.innerHTML='<h3>Patientenübergreifende Krankengeschichte</h3><p class="pd713-hint">Dauerhafte Befunde (z. B. bestehendes Stoma), Allergien und relevante Vorerkrankungen bleiben bei einer erneuten Aufnahme erhalten. Neue Akutdiagnosen werden nicht automatisch übernommen.</p>'+
+ '<label for="pd713LongTermInput"><strong>Neuen dauerhaften Hinweis erfassen</strong></label>'+
+ '<textarea id="pd713LongTermInput" rows="2" placeholder="z. B. Ileostoma seit 2026, Stomaversorgung erforderlich"></textarea>'+
+ '<button id="pd713LongTermAdd" type="button">Hinweis zur Krankengeschichte hinzufügen</button>'+
+ '<div class="pd713-list">'+(p.pd713LongTerm.length?p.pd713LongTerm.map((x,i)=>'<div class="pd713-item"><strong>'+html(x.text)+'</strong><small>Erfasst: '+html(x.at)+'</small><button type="button" class="secondary" data-pd713-remove="'+i+'">Entfernen</button></div>').join(''):'<p>Keine zusätzlichen dauerhaften Hinweise erfasst.</p>')+'</div>'+archivedMarkup(p);
+}
+function renderBadge(){
+ const p=current();const target=$('pd713CaseBanner');if(!target)return;
+ if(!p){target.hidden=true;return}
+ ensure(p);
+ target.hidden=false;
+ target.innerHTML='<strong>Patienten-ID:</strong> '+html(p.pd680.patientNumber)+' <span>·</span> <strong>Fallnummer:</strong> '+html(p.fields.caseNumber||'Noch keine')+' <span>·</span> <strong>Voraufenthalte:</strong> '+p.pd713Archived.length;
+}
+function refresh(){renderBadge();showLongTerm()}
+function readmit(){
+ const p=current();if(!p){alert('Bitte zuerst einen bestehenden Testpatienten auswählen.');return}
+ saveCurrentPatient();ensureCurrentCase(p);
+ if(!confirm('Neuen stationären Fall für '+p.name+' anlegen?\n\nDer bisherige Aufenthalt wird archiviert. Dauerhafte Stammdaten, Allergien und Krankengeschichte bleiben erhalten. Aktuelle Diagnosen, Medikation, Pflegeberichte und andere fallbezogene Einträge beginnen leer.'))return;
+ const previous=typeof structuredClone==="function"?structuredClone(p):JSON.parse(JSON.stringify(p));
+ const oldNo=p.fields.caseNumber;
+ const snapshot={caseNumber:oldNo,admissionDate:p.fields.admissionDate||'',ward:p.fields.ward||'',diagnoses:p.fields.diagnoses||'',archivedAt:iso(),fields:JSON.parse(JSON.stringify(p.fields)),entries:JSON.parse(JSON.stringify(p.entries)),pd690:p.pd690?JSON.parse(JSON.stringify(p.pd690)):null,
+ fullRecord:(()=>{const copy=JSON.parse(JSON.stringify(p));delete copy.pd713Archived;delete copy.pd713Allergies;delete copy.pd713LongTerm;return copy})()};
+ p.pd713Archived.push(snapshot);
+ const keep={};
+ for(const k of durable)if(p.fields[k]!==undefined)keep[k]=p.fields[k];
+ p.fields={...keep,caseNumber:nextCase(),admissionDate:new Date().toISOString().slice(0,10)};
+ p.entries=Object.fromEntries(Object.keys(entryGroups).map(k=>[k,[]]));
+ p.pd714AllergyReviewed='';
+ // Fallbezogene zusätzliche Module werden ebenfalls für den neuen Aufenthalt geleert.
+ for(const k of ['pd690','opCases','opProtocols'])delete p[k];
+ ensureCurrentCase(p);
+ if(!savePatients()){Object.assign(p,previous);return}
+ selectPatient(p.id);refresh();
+ alert('Neue Fallnummer: '+p.fields.caseNumber+'\nDie Voraufenthalte und dauerhaften Hinweise bleiben in der Krankengeschichte sichtbar.');
+}
+function init(){
+ const h=$('history');
+ if(h&&!$('pd713ClinicalHistory')){
+  const area=document.createElement('div');area.id='pd713ClinicalHistory';area.className='card';h.prepend(area);
+ }
+ const bar=$('pd663PatientBar');
+ if(bar&&!$('pd713CaseBanner')){
+  const el=document.createElement('div');el.id='pd713CaseBanner';el.className='pd713-case-banner';bar.insertAdjacentElement('afterend',el);
+ }
+ $('pd713Readmit')?.addEventListener('click',readmit);
+ document.addEventListener('click',e=>{
+  if(e.target.id==='pd713LongTermAdd'){
+   const p=current(),v=clean($('pd713LongTermInput')?.value);
+   if(!p||!v)return;
+   ensure(p);p.pd713LongTerm.push({text:v,at:new Date().toLocaleString('de-DE')});savePatients();refresh();
+  }
+  const index=e.target.dataset?.pd713Remove;
+  if(index!==undefined){const p=current();if(!p||!confirm('Dauerhaften Hinweis entfernen?'))return;p.pd713LongTerm.splice(Number(index),1);savePatients();refresh()}
+ });
+ // Existing patient selection, backup import and new patient creation retain their original handlers.
+ const originalSelect=selectPatient;
+ selectPatient=function(id){originalSelect(id);const p=current();if(p){ensure(p);ensureCurrentCase(p);savePatients();for(const f of ['caseNumber','admissionDate'])if($(f))$(f).value=p.fields[f]||'';}refresh()};
+ const originalNew=newPatient;
+ newPatient=function(){const ids=new Set(patients.map(p=>p.id));originalNew();const p=current();if(p&&!ids.has(p.id)){ensureCurrentCase(p);savePatients();if($('caseNumber'))$('caseNumber').value=p.fields.caseNumber;refresh()}};
+ // Existing patients are assigned a case number when opened, without changing old diagnosis text.
+ refresh();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<style id="pd714Styles">
+#pd714AllergyPanel{border:2px solid #e5aa80;background:#fff9f3}
+#pd714AllergyPanel h3{color:#913c1c}
+.pd714-alert{border-left:5px solid #c14d26;padding:10px;background:#fff0e6;margin:8px 0;border-radius:4px}
+.pd714-case{background:#fff;border:1px solid #cad8e5;border-radius:7px;margin:10px 0;padding:12px}
+.pd714-case details{padding:7px;border-top:1px solid #d8e2eb}
+.pd714-case summary{cursor:pointer;font-weight:600}
+.pd714-case pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 system-ui;margin:8px 0}
+.pd714-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.pd714-fields div{background:#f3f7fb;padding:7px;border-radius:4px;font-size:12px;overflow-wrap:anywhere}
+#pd714AllergyPanel input,#pd714AllergyPanel select{min-height:42px;max-width:100%;box-sizing:border-box}
+.pd714-allergy-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.pd714-allergy-form label{display:flex;flex-direction:column;gap:4px}
+.pd714-allergy-row{border-top:1px solid #e9cbbb;padding:9px 0}
+.pd714-allergy-row small{display:block;color:#6b5b55}
+</style>
+<script id="pd714CaseHistoryAllergies">
+(function(){
+'use strict';
+const by=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+const stamp=()=>new Date().toLocaleString('de-DE');
+const fieldNames={diagnoses:'Diagnosen',allergies:'Allergien',medicalHistory:'Vorerkrankungen',operations:'Operationen',events:'Ereignisse',historyNotes:'Weitere Anamnese',admissionDate:'Aufnahme',ward:'Station',doctor:'Behandelnde Person',caseNumber:'Fallnummer'};
+const sectionNames={note:'Verlauf',nursingnote:'Pflegerischer Verlauf',medicalvisit:'Ärztlicher Verlauf / Visite',surgery:'Operation / Post-OP',op:'OP',medication:'Medikamentengaben',medplan:'Medikationsplan',order:'Anordnungen',wound:'Wunddokumentation',vital:'Vitalwerte',lab:'Labor',handover:'Übergaben',therapy:'Therapie',discharge:'Entlassmanagement'};
+function get(){return typeof current==='function'?current():null}
+function ensure(p){if(!Array.isArray(p.pd714Allergies))p.pd714Allergies=[];if(!Array.isArray(p.pd713Archived))p.pd713Archived=[]}
+function fieldsHtml(f){return '<div class="pd714-fields">'+Object.entries(f||{}).filter(([,v])=>v!==''&&v!==null&&v!==undefined).map(([k,v])=>'<div><strong>'+esc(fieldNames[k]||k)+'</strong><div>'+esc(typeof v==='object'?JSON.stringify(v):v)+'</div></div>').join('')+'</div>'}
+function renderArchive(c){
+ const full=c.fullRecord||c;
+ const groups=full.entries||c.entries||{};
+ const entries=Object.entries(groups).filter(([,arr])=>Array.isArray(arr)&&arr.length);
+ let out='<article class="pd714-case"><h3>Fall '+esc(c.caseNumber||'ohne Fallnummer')+'</h3><p>Aufnahme: '+esc(c.admissionDate||'–')+' · Station: '+esc(c.ward||'–')+'</p>';
+ out+='<details open><summary>Stammdaten und damalige Diagnosen</summary>'+fieldsHtml(c.fields||full.fields||{})+'</details>';
+ out+='<details><summary>Dokumentation und Verlaufsberichte ('+entries.reduce((n,[,a])=>n+a.length,0)+' Einträge)</summary>';
+ if(!entries.length)out+='<p>Keine Einzeldokumentation gespeichert.</p>';
+ for(const [type,arr] of entries){
+  out+='<details><summary>'+esc(sectionNames[type]||type)+' ('+arr.length+')</summary>';
+  for(const e of arr)out+='<div class="pd714-case"><small>'+esc(e.created||e.at||'')+'</small>'+fieldsHtml(e.data||e)+'</div>';
+  out+='</details>';
+ }
+ out+='</details>';
+ const admission=full.pd690||c.pd690;
+ if(admission)out+='<details><summary>Aufnahme und Pflegeanamnese</summary>'+fieldsHtml(admission)+'</details>';
+ const other=Object.entries(full).filter(([k,v])=>!['fields','entries','pd690','id','name','pd680','pd713Archived','pd713LongTerm','pd714Allergies'].includes(k)&&v&&typeof v==='object');
+ if(other.length)out+='<details><summary>Weitere gespeicherte Fallmodule</summary>'+other.map(([k,v])=>'<details><summary>'+esc(k)+'</summary><pre>'+esc(JSON.stringify(v,null,2))+'</pre></details>').join('')+'</details>';
+ return out+'</article>';
+}
+function refresh(){
+ const p=get(),panel=by('pd714AllergyPanel'),list=by('pd714CaseArchive');
+ if(!panel||!list)return;
+ if(!p){panel.innerHTML='';list.innerHTML='';return}
+ ensure(p);
+ const legacy=(p.fields?.allergies||'').trim();
+ panel.innerHTML='<h3>⚠ Allergien und Unverträglichkeiten – patientenübergreifend</h3>'+
+ '<p>Bekannte Allergien bleiben bei Wiederaufnahme erhalten. Angaben und Reaktionen bei jeder Aufnahme überprüfen.</p>'+
+ (legacy?'<div class="pd714-alert"><strong>Bereits dokumentiert:</strong> '+esc(legacy)+'</div>':'')+
+ '<div class="pd714-allergy-form"><label>Allergen / Wirkstoff<input id="pd714Agent" placeholder="z. B. Penicillin"></label>'+
+ '<label>Beobachtete Reaktion<input id="pd714Reaction" placeholder="z. B. Hautausschlag"></label>'+
+ '<label>Schweregrad<select id="pd714Severity"><option value="Unbekannt">Unbekannt</option><option value="Leicht">Leicht</option><option value="Mittel">Mittel</option><option value="Schwer">Schwer</option></select></label>'+
+ '<label>Status<select id="pd714Status"><option value="Unbestätigt">Unbestätigt</option><option value="Bestätigt">Bestätigt</option><option value="Widerlegt">Widerlegt</option></select></label></div>'+
+ '<div class="toolbar"><button type="button" id="pd714AddAllergy">Allergie hinzufügen</button><button type="button" class="secondary" id="pd714Reviewed">Bei Aufnahme überprüft</button></div>'+
+ '<p><small>Zuletzt überprüft: '+esc(p.pd714AllergyReviewed||'Noch nicht dokumentiert')+'</small></p>'+
+ p.pd714Allergies.map((a,i)=>'<div class="pd714-allergy-row"><strong>'+esc(a.agent)+'</strong> · '+esc(a.severity)+' · '+esc(a.status)+
+ '<div>Reaktion: '+esc(a.reaction||'Nicht angegeben')+'</div><small>Erfasst: '+esc(a.at)+'</small>'+
+ '<button type="button" class="secondary" data-pd714-allergy-remove="'+i+'">Eintrag entfernen</button></div>').join('');
+ const archived=p.pd713Archived.slice().reverse();
+ list.innerHTML='<h3>Vollständige Fallhistorie</h3><p>Frühere Aufenthalte sind schreibgeschützt. Einzeldokumentationen, Pflegeverläufe, OP-Dokumentationen und weitere gespeicherte Module können aufgeklappt werden. Nicht dokumentierte Inhalte werden nicht erfunden.</p>'+
+ (archived.length?archived.map((c,i)=>'<details><summary>Fall '+esc(c.caseNumber||'–')+' · '+esc(c.admissionDate||'–')+'</summary>'+renderArchive(c)+'</details>').join(''):'<p>Es liegen noch keine archivierten Aufenthalte vor.</p>');
+}
+function init(){
+ const h=by('history');if(!h)return;
+ if(!by('pd714AllergyPanel')){const a=document.createElement('div');a.id='pd714AllergyPanel';a.className='card';h.prepend(a)}
+ if(!by('pd714CaseArchive')){const a=document.createElement('div');a.id='pd714CaseArchive';a.className='card';h.append(a)}
+ document.addEventListener('click',e=>{
+  const p=get();if(!p)return;
+  if(e.target.id==='pd714AddAllergy'){
+   const agent=by('pd714Agent')?.value.trim(),reaction=by('pd714Reaction')?.value.trim();
+   if(!agent){alert('Bitte Allergen oder Wirkstoff angeben.');return}
+   ensure(p);p.pd714Allergies.push({agent,reaction,severity:by('pd714Severity').value,status:by('pd714Status').value,at:stamp()});
+   savePatients();refresh();
+  }
+  if(e.target.id==='pd714Reviewed'){p.pd714AllergyReviewed=stamp();savePatients();refresh()}
+  const index=e.target.dataset?.pd714AllergyRemove;
+  if(index!==undefined){if(!confirm('Allergieeintrag wirklich entfernen?'))return;ensure(p);p.pd714Allergies.splice(Number(index),1);savePatients();refresh()}
+ });
+ // Refresh after any existing patient selection, including new admission.
+ const oldSelect=selectPatient;
+ selectPatient=function(id){oldSelect(id);refresh()};
+ const oldTab=tab;
+ tab=function(id){oldTab(id);if(id==='history')refresh()};
+ refresh();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<style id="pd714Styles">
+#pd714AllergyPanel{border:2px solid #e5aa80;background:#fff9f3}
+#pd714AllergyPanel h3{color:#913c1c}
+.pd714-alert{border-left:5px solid #c14d26;padding:10px;background:#fff0e6;margin:8px 0;border-radius:4px}
+.pd714-case{background:#fff;border:1px solid #cad8e5;border-radius:7px;margin:10px 0;padding:12px}
+.pd714-case details{padding:7px;border-top:1px solid #d8e2eb}
+.pd714-case summary{cursor:pointer;font-weight:600}
+.pd714-case pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 system-ui;margin:8px 0}
+.pd714-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.pd714-fields div{background:#f3f7fb;padding:7px;border-radius:4px;font-size:12px;overflow-wrap:anywhere}
+#pd714AllergyPanel input,#pd714AllergyPanel select{min-height:42px;max-width:100%;box-sizing:border-box}
+.pd714-allergy-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.pd714-allergy-form label{display:flex;flex-direction:column;gap:4px}
+.pd714-allergy-row{border-top:1px solid #e9cbbb;padding:9px 0}
+.pd714-allergy-row small{display:block;color:#6b5b55}
+</style>
+<script id="pd714CaseHistoryAllergies">
+(function(){
+'use strict';
+const by=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+const stamp=()=>new Date().toLocaleString('de-DE');
+const fieldNames={diagnoses:'Diagnosen',allergies:'Allergien',medicalHistory:'Vorerkrankungen',operations:'Operationen',events:'Ereignisse',historyNotes:'Weitere Anamnese',admissionDate:'Aufnahme',ward:'Station',doctor:'Behandelnde Person',caseNumber:'Fallnummer'};
+const sectionNames={note:'Verlauf',nursingnote:'Pflegerischer Verlauf',medicalvisit:'Ärztlicher Verlauf / Visite',surgery:'Operation / Post-OP',op:'OP',medication:'Medikamentengaben',medplan:'Medikationsplan',order:'Anordnungen',wound:'Wunddokumentation',vital:'Vitalwerte',lab:'Labor',handover:'Übergaben',therapy:'Therapie',discharge:'Entlassmanagement'};
+function get(){return typeof current==='function'?current():null}
+function ensure(p){if(!Array.isArray(p.pd714Allergies))p.pd714Allergies=[];if(!Array.isArray(p.pd713Archived))p.pd713Archived=[]}
+function fieldsHtml(f){return '<div class="pd714-fields">'+Object.entries(f||{}).filter(([,v])=>v!==''&&v!==null&&v!==undefined).map(([k,v])=>'<div><strong>'+esc(fieldNames[k]||k)+'</strong><div>'+esc(typeof v==='object'?JSON.stringify(v):v)+'</div></div>').join('')+'</div>'}
+function renderArchive(c){
+ const full=c.fullRecord||c;
+ const groups=full.entries||c.entries||{};
+ const entries=Object.entries(groups).filter(([,arr])=>Array.isArray(arr)&&arr.length);
+ let out='<article class="pd714-case"><h3>Fall '+esc(c.caseNumber||'ohne Fallnummer')+'</h3><p>Aufnahme: '+esc(c.admissionDate||'–')+' · Station: '+esc(c.ward||'–')+'</p>';
+ out+='<details open><summary>Stammdaten und damalige Diagnosen</summary>'+fieldsHtml(c.fields||full.fields||{})+'</details>';
+ out+='<details><summary>Dokumentation und Verlaufsberichte ('+entries.reduce((n,[,a])=>n+a.length,0)+' Einträge)</summary>';
+ if(!entries.length)out+='<p>Keine Einzeldokumentation gespeichert.</p>';
+ for(const [type,arr] of entries){
+  out+='<details><summary>'+esc(sectionNames[type]||type)+' ('+arr.length+')</summary>';
+  for(const e of arr)out+='<div class="pd714-case"><small>'+esc(e.created||e.at||'')+'</small>'+fieldsHtml(e.data||e)+'</div>';
+  out+='</details>';
+ }
+ out+='</details>';
+ const admission=full.pd690||c.pd690;
+ if(admission)out+='<details><summary>Aufnahme und Pflegeanamnese</summary>'+fieldsHtml(admission)+'</details>';
+ const other=Object.entries(full).filter(([k,v])=>!['fields','entries','pd690','id','name','pd680','pd713Archived','pd713LongTerm','pd714Allergies'].includes(k)&&v&&typeof v==='object');
+ if(other.length)out+='<details><summary>Weitere gespeicherte Fallmodule</summary>'+other.map(([k,v])=>'<details><summary>'+esc(k)+'</summary><pre>'+esc(JSON.stringify(v,null,2))+'</pre></details>').join('')+'</details>';
+ return out+'</article>';
+}
+function refresh(){
+ const p=get(),panel=by('pd714AllergyPanel'),list=by('pd714CaseArchive');
+ if(!panel||!list)return;
+ if(!p){panel.innerHTML='';list.innerHTML='';return}
+ ensure(p);
+ const legacy=(p.fields?.allergies||'').trim();
+ panel.innerHTML='<h3>⚠ Allergien und Unverträglichkeiten – patientenübergreifend</h3>'+
+ '<p>Bekannte Allergien bleiben bei Wiederaufnahme erhalten. Angaben und Reaktionen bei jeder Aufnahme überprüfen.</p>'+
+ (legacy?'<div class="pd714-alert"><strong>Bereits dokumentiert:</strong> '+esc(legacy)+'</div>':'')+
+ '<div class="pd714-allergy-form"><label>Allergen / Wirkstoff<input id="pd714Agent" placeholder="z. B. Penicillin"></label>'+
+ '<label>Beobachtete Reaktion<input id="pd714Reaction" placeholder="z. B. Hautausschlag"></label>'+
+ '<label>Schweregrad<select id="pd714Severity"><option value="Unbekannt">Unbekannt</option><option value="Leicht">Leicht</option><option value="Mittel">Mittel</option><option value="Schwer">Schwer</option></select></label>'+
+ '<label>Status<select id="pd714Status"><option value="Unbestätigt">Unbestätigt</option><option value="Bestätigt">Bestätigt</option><option value="Widerlegt">Widerlegt</option></select></label></div>'+
+ '<div class="toolbar"><button type="button" id="pd714AddAllergy">Allergie hinzufügen</button><button type="button" class="secondary" id="pd714Reviewed">Bei Aufnahme überprüft</button></div>'+
+ '<p><small>Zuletzt überprüft: '+esc(p.pd714AllergyReviewed||'Noch nicht dokumentiert')+'</small></p>'+
+ p.pd714Allergies.map((a,i)=>'<div class="pd714-allergy-row"><strong>'+esc(a.agent)+'</strong> · '+esc(a.severity)+' · '+esc(a.status)+
+ '<div>Reaktion: '+esc(a.reaction||'Nicht angegeben')+'</div><small>Erfasst: '+esc(a.at)+'</small>'+
+ '<button type="button" class="secondary" data-pd714-allergy-remove="'+i+'">Eintrag entfernen</button></div>').join('');
+ const archived=p.pd713Archived.slice().reverse();
+ list.innerHTML='<h3>Vollständige Fallhistorie</h3><p>Frühere Aufenthalte sind schreibgeschützt. Einzeldokumentationen, Pflegeverläufe, OP-Dokumentationen und weitere gespeicherte Module können aufgeklappt werden. Nicht dokumentierte Inhalte werden nicht erfunden.</p>'+
+ (archived.length?archived.map((c,i)=>'<details><summary>Fall '+esc(c.caseNumber||'–')+' · '+esc(c.admissionDate||'–')+'</summary>'+renderArchive(c)+'</details>').join(''):'<p>Es liegen noch keine archivierten Aufenthalte vor.</p>');
+}
+function init(){
+ const h=by('history');if(!h)return;
+ if(!by('pd714AllergyPanel')){const a=document.createElement('div');a.id='pd714AllergyPanel';a.className='card';h.prepend(a)}
+ if(!by('pd714CaseArchive')){const a=document.createElement('div');a.id='pd714CaseArchive';a.className='card';h.append(a)}
+ document.addEventListener('click',e=>{
+  const p=get();if(!p)return;
+  if(e.target.id==='pd714AddAllergy'){
+   const agent=by('pd714Agent')?.value.trim(),reaction=by('pd714Reaction')?.value.trim();
+   if(!agent){alert('Bitte Allergen oder Wirkstoff angeben.');return}
+   ensure(p);p.pd714Allergies.push({agent,reaction,severity:by('pd714Severity').value,status:by('pd714Status').value,at:stamp()});
+   savePatients();refresh();
+  }
+  if(e.target.id==='pd714Reviewed'){p.pd714AllergyReviewed=stamp();savePatients();refresh()}
+  const index=e.target.dataset?.pd714AllergyRemove;
+  if(index!==undefined){if(!confirm('Allergieeintrag wirklich entfernen?'))return;ensure(p);p.pd714Allergies.splice(Number(index),1);savePatients();refresh()}
+ });
+ // Refresh after any existing patient selection, including new admission.
+ const oldSelect=selectPatient;
+ selectPatient=function(id){oldSelect(id);refresh()};
+ const oldTab=tab;
+ tab=function(id){oldTab(id);if(id==='history')refresh()};
+ refresh();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script><style id="pd714Styles">
+#pd714AllergyPanel{border:2px solid #e5aa80;background:#fff9f3}
+#pd714AllergyPanel h3{color:#913c1c}
+.pd714-alert{border-left:5px solid #c14d26;padding:10px;background:#fff0e6;margin:8px 0;border-radius:4px}
+.pd714-case{background:#fff;border:1px solid #cad8e5;border-radius:7px;margin:10px 0;padding:12px}
+.pd714-case details{padding:7px;border-top:1px solid #d8e2eb}
+.pd714-case summary{cursor:pointer;font-weight:600}
+.pd714-case pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 system-ui;margin:8px 0}
+.pd714-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.pd714-fields div{background:#f3f7fb;padding:7px;border-radius:4px;font-size:12px;overflow-wrap:anywhere}
+#pd714AllergyPanel input,#pd714AllergyPanel select{min-height:42px;max-width:100%;box-sizing:border-box}
+.pd714-allergy-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.pd714-allergy-form label{display:flex;flex-direction:column;gap:4px}
+.pd714-allergy-row{border-top:1px solid #e9cbbb;padding:9px 0}
+.pd714-allergy-row small{display:block;color:#6b5b55}
+</style>
+<script id="pd714CaseHistoryAllergies">
+(function(){
+'use strict';
+const by=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+const stamp=()=>new Date().toLocaleString('de-DE');
+const fieldNames={diagnoses:'Diagnosen',allergies:'Allergien',medicalHistory:'Vorerkrankungen',operations:'Operationen',events:'Ereignisse',historyNotes:'Weitere Anamnese',admissionDate:'Aufnahme',ward:'Station',doctor:'Behandelnde Person',caseNumber:'Fallnummer'};
+const sectionNames={note:'Verlauf',nursingnote:'Pflegerischer Verlauf',medicalvisit:'Ärztlicher Verlauf / Visite',surgery:'Operation / Post-OP',op:'OP',medication:'Medikamentengaben',medplan:'Medikationsplan',order:'Anordnungen',wound:'Wunddokumentation',vital:'Vitalwerte',lab:'Labor',handover:'Übergaben',therapy:'Therapie',discharge:'Entlassmanagement'};
+function get(){return typeof current==='function'?current():null}
+function ensure(p){if(!Array.isArray(p.pd714Allergies))p.pd714Allergies=[];if(!Array.isArray(p.pd713Archived))p.pd713Archived=[]}
+function fieldsHtml(f){return '<div class="pd714-fields">'+Object.entries(f||{}).filter(([,v])=>v!==''&&v!==null&&v!==undefined).map(([k,v])=>'<div><strong>'+esc(fieldNames[k]||k)+'</strong><div>'+esc(typeof v==='object'?JSON.stringify(v):v)+'</div></div>').join('')+'</div>'}
+function renderArchive(c){
+ const full=c.fullRecord||c;
+ const groups=full.entries||c.entries||{};
+ const entries=Object.entries(groups).filter(([,arr])=>Array.isArray(arr)&&arr.length);
+ let out='<article class="pd714-case"><h3>Fall '+esc(c.caseNumber||'ohne Fallnummer')+'</h3><p>Aufnahme: '+esc(c.admissionDate||'–')+' · Station: '+esc(c.ward||'–')+'</p>';
+ out+='<details open><summary>Stammdaten und damalige Diagnosen</summary>'+fieldsHtml(c.fields||full.fields||{})+'</details>';
+ out+='<details><summary>Dokumentation und Verlaufsberichte ('+entries.reduce((n,[,a])=>n+a.length,0)+' Einträge)</summary>';
+ if(!entries.length)out+='<p>Keine Einzeldokumentation gespeichert.</p>';
+ for(const [type,arr] of entries){
+  out+='<details><summary>'+esc(sectionNames[type]||type)+' ('+arr.length+')</summary>';
+  for(const e of arr)out+='<div class="pd714-case"><small>'+esc(e.created||e.at||'')+'</small>'+fieldsHtml(e.data||e)+'</div>';
+  out+='</details>';
+ }
+ out+='</details>';
+ const admission=full.pd690||c.pd690;
+ if(admission)out+='<details><summary>Aufnahme und Pflegeanamnese</summary>'+fieldsHtml(admission)+'</details>';
+ const other=Object.entries(full).filter(([k,v])=>!['fields','entries','pd690','id','name','pd680','pd713Archived','pd713LongTerm','pd714Allergies'].includes(k)&&v&&typeof v==='object');
+ if(other.length)out+='<details><summary>Weitere gespeicherte Fallmodule</summary>'+other.map(([k,v])=>'<details><summary>'+esc(k)+'</summary><pre>'+esc(JSON.stringify(v,null,2))+'</pre></details>').join('')+'</details>';
+ return out+'</article>';
+}
+function refresh(){
+ const p=get(),panel=by('pd714AllergyPanel'),list=by('pd714CaseArchive');
+ if(!panel||!list)return;
+ if(!p){panel.innerHTML='';list.innerHTML='';return}
+ ensure(p);
+ const legacy=(p.fields?.allergies||'').trim();
+ panel.innerHTML='<h3>⚠ Allergien und Unverträglichkeiten – patientenübergreifend</h3>'+
+ '<p>Bekannte Allergien bleiben bei Wiederaufnahme erhalten. Angaben und Reaktionen bei jeder Aufnahme überprüfen.</p>'+
+ (legacy?'<div class="pd714-alert"><strong>Bereits dokumentiert:</strong> '+esc(legacy)+'</div>':'')+
+ '<div class="pd714-allergy-form"><label>Allergen / Wirkstoff<input id="pd714Agent" placeholder="z. B. Penicillin"></label>'+
+ '<label>Beobachtete Reaktion<input id="pd714Reaction" placeholder="z. B. Hautausschlag"></label>'+
+ '<label>Schweregrad<select id="pd714Severity"><option value="Unbekannt">Unbekannt</option><option value="Leicht">Leicht</option><option value="Mittel">Mittel</option><option value="Schwer">Schwer</option></select></label>'+
+ '<label>Status<select id="pd714Status"><option value="Unbestätigt">Unbestätigt</option><option value="Bestätigt">Bestätigt</option><option value="Widerlegt">Widerlegt</option></select></label></div>'+
+ '<div class="toolbar"><button type="button" id="pd714AddAllergy">Allergie hinzufügen</button><button type="button" class="secondary" id="pd714Reviewed">Bei Aufnahme überprüft</button></div>'+
+ '<p><small>Zuletzt überprüft: '+esc(p.pd714AllergyReviewed||'Noch nicht dokumentiert')+'</small></p>'+
+ p.pd714Allergies.map((a,i)=>'<div class="pd714-allergy-row"><strong>'+esc(a.agent)+'</strong> · '+esc(a.severity)+' · '+esc(a.status)+
+ '<div>Reaktion: '+esc(a.reaction||'Nicht angegeben')+'</div><small>Erfasst: '+esc(a.at)+'</small>'+
+ '<button type="button" class="secondary" data-pd714-allergy-remove="'+i+'">Eintrag entfernen</button></div>').join('');
+ const archived=p.pd713Archived.slice().reverse();
+ list.innerHTML='<h3>Vollständige Fallhistorie</h3><p>Frühere Aufenthalte sind schreibgeschützt. Einzeldokumentationen, Pflegeverläufe, OP-Dokumentationen und weitere gespeicherte Module können aufgeklappt werden. Nicht dokumentierte Inhalte werden nicht erfunden.</p>'+
+ (archived.length?archived.map((c,i)=>'<details><summary>Fall '+esc(c.caseNumber||'–')+' · '+esc(c.admissionDate||'–')+'</summary>'+renderArchive(c)+'</details>').join(''):'<p>Es liegen noch keine archivierten Aufenthalte vor.</p>');
+}
+function init(){
+ const h=by('history');if(!h)return;
+ if(!by('pd714AllergyPanel')){const a=document.createElement('div');a.id='pd714AllergyPanel';a.className='card';h.prepend(a)}
+ if(!by('pd714CaseArchive')){const a=document.createElement('div');a.id='pd714CaseArchive';a.className='card';h.append(a)}
+ document.addEventListener('click',e=>{
+  const p=get();if(!p)return;
+  if(e.target.id==='pd714AddAllergy'){
+   const agent=by('pd714Agent')?.value.trim(),reaction=by('pd714Reaction')?.value.trim();
+   if(!agent){alert('Bitte Allergen oder Wirkstoff angeben.');return}
+   ensure(p);p.pd714Allergies.push({agent,reaction,severity:by('pd714Severity').value,status:by('pd714Status').value,at:stamp()});
+   savePatients();refresh();
+  }
+  if(e.target.id==='pd714Reviewed'){p.pd714AllergyReviewed=stamp();savePatients();refresh()}
+  const index=e.target.dataset?.pd714AllergyRemove;
+  if(index!==undefined){if(!confirm('Allergieeintrag wirklich entfernen?'))return;ensure(p);p.pd714Allergies.splice(Number(index),1);savePatients();refresh()}
+ });
+ // Refresh after any existing patient selection, including new admission.
+ const oldSelect=selectPatient;
+ selectPatient=function(id){oldSelect(id);refresh()};
+ const oldTab=tab;
+ tab=function(id){oldTab(id);if(id==='history')refresh()};
+ refresh();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body></html>
