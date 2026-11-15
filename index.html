@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#176b68"><title>PflegeDok 5.9 – Demo</title>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#176b68"><title>PflegeDok 5.9.1 – Demo</title>
 <style>
 :root{--green:#176b68;--light:#e6f3f1;--bg:#f3f7f7;--text:#243238;--border:#dce5e5;--red:#b23b45}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}header{background:var(--green);color:white;padding:18px}header h1{margin:0;font-size:23px}header small{opacity:.85}main{max-width:1100px;margin:18px auto;padding:0 12px 40px}nav{display:flex;gap:7px;overflow-x:auto;background:var(--bg);padding:8px 0;position:sticky;top:0;z-index:8}nav button{white-space:nowrap}button{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-size:14px;font-weight:bold;cursor:pointer}button.secondary{background:#e5eeee;color:var(--text)}button.danger{background:#fff0f0;color:var(--red)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #81c8c1}input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font:inherit;background:white}textarea{min-height:75px}label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}.card,.panel>.content{background:white;border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:13px;box-shadow:0 3px 12px #00000008}.card h2,.panel h2{font-size:18px;color:var(--green);margin:0 0 13px}.grid,.form-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}.form-grid>label{grid-column:span 6;min-width:0}.form-grid>label.wide{grid-column:span 12}.form-grid>label input,.form-grid>label select,.form-grid>label textarea{margin-top:5px}.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}.field{min-width:0}.panel{display:none}.panel.active{display:block}.record{border:1px solid var(--border);border-radius:9px;padding:11px;margin:8px 0;background:#fcfefe;overflow-wrap:anywhere}.record small{color:#68777b}.warning{background:#fff7e8;border:1px solid #f0dfbd;color:#76511a;padding:12px;border-radius:9px;margin-bottom:14px;font-size:13px}.hidden{display:none!important}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.entry-list{margin-top:15px}.label-preview{margin:14px 0}.patient-label{border:1px solid #777;background:white;padding:12px;display:inline-block;min-width:220px;line-height:1.6;margin-bottom:8px}.patient-label.large{min-width:360px;padding:20px}#letterText{width:100%;min-height:500px;white-space:pre-wrap;font-family:monospace}nav button[aria-current="page"]{background:#0e4947}nav button:not([aria-current="page"]){opacity:.8}@media(max-width:650px){.s6,.s4,.s3,.form-grid>label{grid-column:span 12}.patient-label.large{min-width:0;width:100%}}@media print{header,nav,.no-print,button,.warning{display:none!important}.panel{display:none!important}.panel.active{display:block!important}body{background:white}.card,.panel>.content{box-shadow:none;border:0}.entry-list .record{break-inside:avoid}#letterText{min-height:0;border:0;overflow:visible}}
 .table-scroll{overflow-x:auto;max-width:100%}.cumulative{border-collapse:collapse;min-width:650px;width:100%;font-size:13px}.cumulative th,.cumulative td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top;white-space:nowrap}.cumulative thead th{background:var(--light)}.cumulative tbody th{position:sticky;left:0;background:#fff;z-index:1}.cumulative hr{border:0;border-top:1px solid var(--border)}
@@ -21,7 +21,8 @@
 
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}.photo-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:white}.photo-card img{width:100%;height:155px;object-fit:contain;background:#f1f4f4;border-radius:6px;cursor:zoom-in}.photo-card small{display:block;margin:7px 0;overflow-wrap:anywhere}.photo-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}.photo-form label{display:block}.photo-form input,.photo-form select,.photo-form textarea{width:100%}.photo-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.photo-compare img{width:100%;max-height:300px;object-fit:contain}.photo-status{font-size:13px;color:#40565b}
 .pd58-warning{border-left:4px solid #b45309}.pd58-allergy-summary{font-size:14px;line-height:1.5}.pd58-allergy-summary ul{margin:7px 0;padding-left:22px}.pd58-allergy-summary li{margin:5px 0}.pd58-muted{color:#58666b}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">5.9 · Allergien & Warnhinweise</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+.pd58-warning[hidden],.pd58-allergy-summary[hidden]{display:none!important}.pd591-compact{line-height:1.5}.pd58-warning details{margin-top:8px}.pd58-warning summary{cursor:pointer;color:#76511a}.pd591-quick{background:#fff7e8;border-left:4px solid #b45309;padding:10px;border-radius:7px;margin-top:10px}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">5.9.1 · Warnhinweise optimiert</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
@@ -687,21 +688,29 @@ const pd57DeleteEntry=deleteEntry;deleteEntry=function(type,id){pd57DeleteEntry(
 // 5.8: Patientenbezogene, rein lesende Warnhinweise. Keine Medikationsfreigabe oder Entscheidungsautomatik.
 function pd58RenderAllergyWarnings(){
  const p=current();
- const entries=p?(p.entries.allergy||[]):[];
+ const entries=p?(p.entries?.allergy||[]):[];
  const active=entries.filter(e=>e.data?.allergyStatus!=='Widerlegt / aufgehoben');
  const legacy=String(p?.fields?.allergies||'').trim();
  const liveLegacy=$('allergies');
  const legacyValue=p&&liveLegacy?liveLegacy.value.trim():legacy;
- const list=active.map(e=>{
+ const warnings=[];
+ if(legacyValue)warnings.push({title:'Freitext (Stammdaten)',detail:legacyValue});
+ for(const e of active){
   const d=e.data||{};
-  const head=[d.allergySubstance||'Auslöser nicht angegeben',d.allergyClassification,d.allergyType].filter(Boolean).join(' · ');
+  const title=[d.allergySubstance||'Auslöser nicht angegeben',d.allergyClassification].filter(Boolean).join(' · ');
   const detail=[d.allergyReaction&&'Reaktion: '+d.allergyReaction,d.allergySeverity&&'Schweregrad: '+d.allergySeverity,d.allergyVerification&&'Bestätigung: '+d.allergyVerification,d.allergyMeasures&&'Hinweise: '+d.allergyMeasures].filter(Boolean).join(' | ');
-  return '<li><strong>'+escapeHTML(head)+'</strong>'+(detail?'<div>'+escapeHTML(detail)+'</div>':'')+'</li>';
- }).join('');
- const html=!p?'<span class="pd58-muted">Bitte einen Testpatienten auswählen.</span>':
-  (legacyValue?'<p><strong>Freitext aus Stammdaten:</strong> '+escapeHTML(legacyValue)+'</p>':'')+
-  (list?'<ul>'+list+'</ul>':'<p class="pd58-muted">Keine aktiven strukturierten Warnhinweise erfasst. Das bedeutet nicht, dass Allergien ausgeschlossen sind.</p>');
- document.querySelectorAll('[data-allergy-summary]').forEach(el=>el.innerHTML=html);
+  warnings.push({title,detail});
+ }
+ const hasWarnings=!!p&&warnings.length>0;
+ const brief=warnings.map(w=>'<strong>'+escapeHTML(w.title)+'</strong>').join(' · ');
+ const full=warnings.map(w=>'<li><strong>'+escapeHTML(w.title)+'</strong>'+(w.detail?'<div>'+escapeHTML(w.detail)+'</div>':'')+'</li>').join('');
+ document.querySelectorAll('[data-allergy-summary]').forEach(el=>{
+  const section=el.closest('.pd58-warning');
+  if(section)section.hidden=!hasWarnings;
+  el.innerHTML=hasWarnings?'<div class="pd591-compact">'+brief+'</div><details><summary>Warnhinweise im Detail anzeigen</summary><ul>'+full+'</ul></details>':'';
+ });
+ const quick=document.querySelector('[data-allergy-summary="quick"]');
+ if(quick){quick.hidden=!hasWarnings;quick.innerHTML=hasWarnings?'<div class="pd591-quick"><strong>⚠️ Relevante Warnhinweise:</strong> '+brief+'</div>':'';}
 }
 const pd58SelectPatient=selectPatient;
 selectPatient=function(id){pd58SelectPatient(id);pd58RenderAllergyWarnings()};
