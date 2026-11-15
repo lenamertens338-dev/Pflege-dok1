@@ -85,7 +85,7 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd64-dialog .pd64-item small{display:block!important;color:#526d7b!important;font-size:12px!important;}
 .pd64-item small{display:block;color:#647886}.pd64-muted{color:#657989;font-size:.88rem}.pd64-dialog input[type=search],.pd64-dialog select{width:100%;max-width:100%;padding:10px}.pd64-dialog button{margin:3px}.pd64-selected{padding:9px;border-radius:9px;background:#eaf5f8;white-space:pre-wrap}.pd64-status{margin-top:10px}.pd64-status textarea{width:100%;min-height:70px}
 
-/* PflegeDok 6.4.7 – gemeinsame, patientenbezogene Verlaufs-Karten */
+/* PflegeDok 6.5.1 – gemeinsame, patientenbezogene Verlaufs-Karten */
 .pd644-filters{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin:15px 0}
 .pd644-timeline{display:grid;gap:13px}
 .pd644-entry{background:#fff;border:1px solid #dce6ed;border-left:5px solid #718096;border-radius:15px;padding:17px;box-shadow:0 5px 16px #16394c0a;overflow-wrap:anywhere}
@@ -120,9 +120,31 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd647-plan[data-state="stopped"]{border-left-color:#bd5b46}
 .pd647-plan .pd644-chip{background:#e7f2f7;color:#195e73}
 .pd647-plan .pd644-detail{white-space:pre-wrap}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.4.7 · Diagnosenauswahl + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+
+.pd650-head{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.pd650-head label{min-width:240px}.pd650-kicker{font-size:11px;letter-spacing:.09em;color:#607587;font-weight:700}
+.pd650-stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.pd650-stat{border:1px solid #d7e3e9;border-radius:12px;padding:12px;min-width:130px;background:#f7fafb}
+.pd650-stat strong{display:block;font-size:23px}.pd650-stat span{font-size:12px;color:#5e7080}
+.pd650-stations{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px}
+.pd650-station{display:block;text-align:left;background:#f9fcfd;color:#173447;border:1px solid #d7e3e9;border-radius:12px;padding:14px;cursor:pointer}
+.pd650-station:hover,.pd650-station[aria-pressed="true"]{border-color:#237c9e;background:#edf7fa}
+.pd650-station strong{display:block}.pd650-station small{display:block;color:#637786;margin-top:4px}
+.pd650-roomgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;margin-top:12px}
+.pd650-room{border:1px solid #d8e3e9;border-radius:12px;padding:12px;background:#fff}
+.pd650-room h4{margin:0 0 8px}.pd650-bed{display:block;width:100%;margin:5px 0;padding:8px;border:1px solid #d5e4e8;border-radius:8px;background:#f5f9fa;color:#24445a;text-align:left}
+.pd650-bed[data-occupied="true"]{background:#eaf2fa;border-color:#a5c6d8}
+.pd650-bed:disabled{opacity:.8;cursor:default}
+.pd650-meta{font-size:12px;color:#637786}
+@media(max-width:620px){.pd650-head label{min-width:100%;width:100%}.pd650-stat{flex:1;min-width:100px}}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.5.1 · Diagnosenauswahl + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
+<section class="card no-print" id="pd650Board">
+<div class="pd650-head"><div><p class="pd650-kicker">PFLEGEDOK · STATIONSMANAGEMENT</p><h2>Krankenhausübersicht</h2><p class="pd-note">13 Stationen und Funktionsbereiche · ausschließlich fiktive Testpatienten</p></div><label>Station auswählen<select id="pd650StationFilter"><option value="">Alle Stationen</option></select></label></div>
+<div id="pd650Stats" class="pd650-stats"></div><div id="pd650Stations" class="pd650-stations"></div>
+<div id="pd650Detail"></div>
+</section>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
 <div id="application" class="hidden"><div class="card no-print"><label for="pdJump">Direkt zu einem Dokumentationsbereich springen</label><select id="pdJump"><option value="">Bereich auswählen …</option><option value="quick">Schnellinfo</option><option value="opana">OP &amp; Anästhesie</option><option value="master">Stammdaten</option><option value="status">Pflegestatus</option><option value="history">Krankengeschichte</option><option value="risks">Risiken</option><option value="wounds">Wunden</option><option value="labs">Labor</option><option value="cumulative">Kumulativbefund</option><option value="consults">Konsile</option><option value="vitals">Vitalwerte</option><option value="balance">Bilanz</option><option value="devices">Zugänge / Drainagen / Katheter</option><option value="meds">Medikamente</option><option value="medplan">Medikationsplan</option><option value="notes">Bisheriger Verlauf</option><option value="nursingnotes">Pflegerischer Verlauf</option><option value="medicalvisit">Ärztliche Visite &amp; Verlauf</option><option value="chart">Patientenkurve</option><option value="graphic">Grafische Kurve</option><option value="handover">ISBAR-Übergabe</option><option value="tasks">Aufgaben</option><option value="assessments">Assessments</option><option value="care">Pflegeplanung &amp; Pflegevisite</option><option value="orders">Anordnungen</option><option value="surgery">OP / Post-OP</option><option value="discharge">Entlassmanagement</option><option value="therapy">Therapie</option><option value="respiratory">Atem- &amp; Sauerstofftherapie</option><option value="education">Pflegeberatung &amp; Edukation</option><option value="infusions">Infusionen</option><option value="neuro">Neurologisches Monitoring</option><option value="painplus">Schmerzdokumentation</option><option value="mobilization">Mobilisation / Lagerung</option><option value="hygiene">Hygiene / Isolation</option><option value="news2">NEWS2</option><option value="incidents">Ereignisse</option><option value="labels">Etiketten</option><option value="arztbrief">Arztbrief</option></select></div><nav class="no-print" id="navigation"><button type="button" data-tab="quick">Schnellinfo</button><button type="button" data-tab="opana">🏥 OP &amp; Anästhesie</button><button type="button" data-tab="master">Stammdaten</button><button type="button" data-tab="status">Pflegestatus</button><button type="button" data-tab="history">Krankengeschichte</button><button type="button" data-tab="risks">Risiken</button><button type="button" data-tab="wounds">Wunden</button><button type="button" data-tab="labs">Labor</button><button type="button" data-tab="cumulative">Kumulativbefund</button><button type="button" data-tab="consults">Konsile</button><button type="button" data-tab="vitals">Vitalwerte</button><button type="button" data-tab="balance">Bilanz</button><button type="button" data-tab="devices">Zugänge / Drainagen / Katheter</button><button type="button" data-tab="meds">Medikamente</button><button type="button" data-tab="medplan">Medikationsplan</button><button type="button" data-tab="notes">Bisheriger Verlauf</button><button type="button" data-tab="nursingnotes">Pflegerischer Verlauf</button><button type="button" data-tab="medicalvisit">Ärztliche Visite &amp; Verlauf</button><button type="button" data-tab="chart">Patientenkurve</button><button type="button" data-tab="graphic">Grafische Kurve</button><button type="button" data-tab="handover">ISBAR-Übergabe</button><button type="button" data-tab="tasks">Aufgaben</button><button type="button" data-tab="assessments">Assessments</button><button type="button" data-tab="care">Pflegeplanung &amp; Pflegevisite</button><button type="button" data-tab="orders">Anordnungen</button><button type="button" data-tab="surgery">OP / Post-OP</button><button type="button" data-tab="discharge">Entlassmanagement</button><button type="button" data-tab="therapy">Therapie</button><button type="button" data-tab="respiratory">Atem- &amp; Sauerstofftherapie</button><button type="button" data-tab="education">Pflegeberatung &amp; Edukation</button><button type="button" data-tab="infusions">Infusionen</button><button type="button" data-tab="neuro">Neurologisches Monitoring</button><button type="button" data-tab="painplus">Schmerzdokumentation</button><button type="button" data-tab="mobilization">Mobilisation / Lagerung</button><button type="button" data-tab="hygiene">Hygiene / Isolation</button><button type="button" data-tab="news2">NEWS2</button><button type="button" data-tab="incidents">Ereignisse</button><button type="button" data-tab="labels">Etiketten</button><button type="button" data-tab="arztbrief">Arztbrief</button></nav><section id="quick" class="panel"><div class="card"><h2>Schnellinfo</h2><p id="pdRenderWarning" hidden role="alert" style="color:#a12b35"></p><div id="quickInfo">Bitte einen Testpatienten auswählen.</div><div id="pd5Quick"></div><div class="pd58-allergy-summary" data-allergy-summary="quick"></div></div></section>
 <section id="opana" class="panel"><div class="card"><h2>🏥 OP &amp; Anästhesie</h2><p class="pd63-muted">Eigenständige OP-Fälle mit mehreren Protokollen pro Fall. Ausschließlich fiktive Testdaten.</p><div id="pd63App"></div></div></section><section id="master" class="panel"><div class="card"><h2>Patientenstammdaten</h2><div class="grid" id="masterFields"></div>
@@ -196,7 +218,7 @@ const choice=(id,label,opts,span=6)=>F(id,label,'select',span,opts);
 const multiline=(id,label,span=6)=>F(id,label,'textarea',span);
 const riskOptions=['Nicht beurteilt','Kein erkennbares Risiko','Risiko vorhanden','Hohes Risiko'];
 const groups={
-master:[F('firstName','Vorname'),F('lastName','Nachname'),F('birthDate','Geburtsdatum','date',4),choice('gender','Geschlecht',['','Weiblich','Männlich','Divers'],4),F('caseNumber','Fallnummer','text',4),F('admissionDate','Aufnahmedatum','date',4),F('ward','Station','text',4),F('doctor','Behandelnder Arzt','text',4),F('address','Adresse'),F('phone','Telefon'),multiline('allergies','Allergien'),multiline('diagnoses','Diagnosen'),F('height','Körpergröße (cm)','number',4),F('weight','Gewicht (kg)','number',4),F('bmi','BMI','text',4)],
+master:[F('firstName','Vorname'),F('lastName','Nachname'),F('birthDate','Geburtsdatum','date',4),choice('gender','Geschlecht',['','Weiblich','Männlich','Divers'],4),F('caseNumber','Fallnummer','text',4),F('admissionDate','Aufnahmedatum','date',4),choice('ward','Station',['','D12 – Innere Medizin','D17 – Gynäkologie / Wochenbett','D18 – Urologie','D13 – Allgemeinchirurgie','D16 – Pädiatrie','D14 – Neurologie','D14B – Stroke Unit','D11 – Intermediate Care','D11B – Intensive Care Unit','D41 – Orthopädie','D49 – Unfallchirurgie','D10 – Zentrale Aufnahme','AWR – Aufwachraum'],4),F('room650','Zimmer / Bereich','text',4),F('bed650','Bett / Platz','text',4),F('doctor','Behandelnder Arzt','text',4),F('address','Adresse'),F('phone','Telefon'),multiline('allergies','Allergien'),multiline('diagnoses','Diagnosen'),F('height','Körpergröße (cm)','number',4),F('weight','Gewicht (kg)','number',4),F('bmi','BMI','text',4)],
 status:[multiline('relatives','Angehörige / Bezugspersonen'),multiline('living','Wohnsituation'),choice('careLevel','Pflegegrad',['','Kein Pflegegrad','1','2','3','4','5'],4),choice('mobility','Mobilität',['','Selbstständig','Mit Hilfsmittel','Mit Unterstützung','Bettlägerig'],4),choice('selfCare','Selbstversorgung',['','Selbstständig','Teilweise Unterstützung','Vollständige Unterstützung'],4),multiline('nutrition','Ernährung / Kostform'),multiline('communication','Kommunikation / Orientierung'),multiline('aids','Hilfsmittel',12)],
 history:[multiline('medicalHistory','Vorerkrankungen'),multiline('operations','Operationen'),multiline('events','Krankenhausaufenthalte / Ereignisse'),multiline('historyNotes','Weitere Hinweise')],
 risks:[...['riskPressure|Dekubitusrisiko','riskFall|Sturzrisiko','riskThrombosis|Thromboserisiko','riskNutrition|Mangelernährungsrisiko','riskAspiration|Aspirationsrisiko','riskDelirium|Delirrisiko'].map(x=>choice(...x.split('|'),riskOptions)),multiline('prophylaxis','Prophylaxen / Maßnahmen',12)]};
@@ -1510,7 +1532,7 @@ btn.addEventListener('click',function(){
 </script>
 
 <script>
-/* PflegeDok 6.4.7 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
+/* PflegeDok 6.5.1 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
@@ -1546,28 +1568,4 @@ function refresh(){
  const filter=byId('pd647Status')?.value||'all',q=(byId('pd647Search')?.value||'').trim().toLocaleLowerCase('de-DE');
  const selected=rows.filter(r=>(filter==='all'||r.state===filter)&&(!q||[r.title,...r.details.flat()].join(' ').toLocaleLowerCase('de-DE').includes(q))).sort((a,b)=>a.title.localeCompare(b.title,'de'));
  summary.textContent=orders.length+' ärztliche Medikationsanordnungen · '+plans.length+' ergänzende Plan-Einträge · '+rows.length+' Positionen im gemeinsamen Plan';
- out.innerHTML=selected.length?selected.map(r=>'<article class="pd644-entry pd647-plan" data-state="'+esc(r.state)+'"><div class="pd644-top"><time>'+esc(formatDate(r.date)||'Ohne Datum')+'</time><span class="pd644-chip">'+esc(displayState(r.state))+'</span></div><h3>'+esc(r.title)+'</h3>'+r.details.filter(([,v])=>v!==''&&v!=null).map(([label,value])=>'<div class="pd644-detail"><strong>'+esc(label)+'</strong>'+esc(value)+'</div>').join('')+'</article>').join(''):'<p class="pd644-empty">Keine passenden Medikamente im Plan.</p>';
-}
-byId('pd647Status')?.addEventListener('change',refresh);
-byId('pd647Search')?.addEventListener('input',refresh);
-byId('pd647LinkPicker')?.addEventListener('change',function(){
- const ref=byId('planOrderRef647');if(ref)ref.value=this.value;
-});
-function prepareField(){
- const field=byId('planOrderRef647');
- if(!field)return;
- field.readOnly=true;
- field.placeholder='Wird durch die Auswahl oben gesetzt';
-}
-const oldSelect=selectPatient;
-selectPatient=function(id){oldSelect(id);refresh();prepareField();};
-const oldAdd=addEntry;
-addEntry=function(type){if(type==='medplan'){const field=byId('planOrderRef647');if(field)field.value=byId('pd647LinkPicker')?.value||'';}
- oldAdd(type);if(['order','medplan','medication'].includes(type)){refresh();if(type==='medplan'&&byId('pd647LinkPicker'))byId('pd647LinkPicker').value='';}
-};
-const oldDelete=deleteEntry;
-deleteEntry=function(type,id){oldDelete(type,id);if(['order','medplan','medication'].includes(type))refresh();};
-prepareField();refresh();
-})();
-</script>
-</main></body></html>
+ out.innerHTML=selected.length?selected.map(r=>'<article class="pd644-entry pd647-plan" data-state="'+esc(r.state)+'"><div class="pd644-top"><time>'+esc(formatDate(r.date)||'Ohne Datum')+'</time><span class="pd644-chip">'+esc(displayState(r.state))+'</span></div><h3>'+esc(r.title)+'</h3>'+r.details.filter(([,v])=>v!==''&&v!=null).map(([label,value])=>'<div class="pd644-detail"><strong>'+esc(label)+'</strong>'+esc(value)+'</div>').join('')+'</article>').join(''):'<p class="pd644-empty">Keine passenden Medikamente im Pla
