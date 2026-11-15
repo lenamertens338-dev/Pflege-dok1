@@ -1131,5 +1131,3 @@ $('pd60RefreshLab').addEventListener('click',pd60LabOverview);
  const originalDelete=deleteEntry;deleteEntry=function(type,id){originalDelete(type,id);if(types[type]&&!$a('atlasOverlay').hidden){draw();refreshLists()}};
  const originalSelect=selectPatient;selectPatient=function(id){originalSelect(id);if(!$a('atlasOverlay').hidden)close();const summary=$a('atlasSummary');if(summary)summary.textContent='Körperatlas bereit – Markierungen werden patientenbezogen gespeichert.';};
 })();
-</script>
-</main></body></html>
