@@ -85,7 +85,7 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd64-dialog .pd64-item small{display:block!important;color:#526d7b!important;font-size:12px!important;}
 .pd64-item small{display:block;color:#647886}.pd64-muted{color:#657989;font-size:.88rem}.pd64-dialog input[type=search],.pd64-dialog select{width:100%;max-width:100%;padding:10px}.pd64-dialog button{margin:3px}.pd64-selected{padding:9px;border-radius:9px;background:#eaf5f8;white-space:pre-wrap}.pd64-status{margin-top:10px}.pd64-status textarea{width:100%;min-height:70px}
 
-/* PflegeDok 6.6.5 – gemeinsame, patientenbezogene Verlaufs-Karten */
+/* PflegeDok 6.6.6 – gemeinsame, patientenbezogene Verlaufs-Karten */
 .pd644-filters{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin:15px 0}
 .pd644-timeline{display:grid;gap:13px}
 .pd644-entry{background:#fff;border:1px solid #dce6ed;border-left:5px solid #718096;border-radius:15px;padding:17px;box-shadow:0 5px 16px #16394c0a;overflow-wrap:anywhere}
@@ -155,7 +155,7 @@ body.pd660-patients #pd660PatientView{display:block}
 body.pd660-station #pd650Board{display:block}
 @media(max-width:780px){body{padding-left:0}#pd660Sidebar{position:sticky;top:0;width:auto;bottom:auto;flex-direction:row;align-items:center;gap:4px;padding:8px;overflow-x:auto;box-shadow:0 2px 10px #102e3d22}#pd660Sidebar .pd660-brand{font-size:13px;white-space:nowrap;margin:0 8px 0 0}#pd660Sidebar button{font-size:12px;white-space:nowrap;width:auto;padding:10px 8px}#pd660Sidebar .pd660-sidebar-note{display:none}}
 </style><style>
-/* 6.6.5: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
+/* 6.6.6: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
    Die vorhandene Bereichsauswahl #pdJump übernimmt die Navigation. */
 body.pd660-docs #application{display:block!important;min-width:0}
 body.pd660-docs #application>#navigation{display:none!important}
@@ -166,7 +166,7 @@ body.pd660-docs #application>.panel.active{display:block!important}
 body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 @media(max-width:960px){body.pd660-docs #application{display:block!important}}
 </style><style>
-/* 6.6.5 – Patientenleiste oberhalb der Dokumentation */
+/* 6.6.6 – Patientenleiste oberhalb der Dokumentation */
 .pd663-patientbar{position:sticky;top:0;z-index:40;background:#f2f9fa;border:1px solid #a9d2d5;border-radius:13px;padding:13px 17px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 3px 12px #17344716}
 .pd663-patient-info{min-width:0;display:flex;flex-direction:column;gap:5px}.pd663-eyebrow{font-size:11px;letter-spacing:.07em;color:#446977;font-weight:700}.pd663-patient-info strong{font-size:19px;overflow-wrap:anywhere;color:#173447}.pd663-tags{display:flex;gap:7px;flex-wrap:wrap}.pd663-tags span{border-radius:7px;background:white;border:1px solid #c9e0e2;padding:4px 8px;font-size:12px;color:#234b5c}
 #pd663BackStation{white-space:nowrap;min-height:44px}
@@ -181,12 +181,12 @@ body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 .pd664-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 @media(max-width:780px){.pd664-actions{width:100%;justify-content:stretch}.pd664-actions button{flex:1;white-space:normal}}
 </style><style>
-/* 6.6.5: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
+/* 6.6.6: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
 #pd663PatientBar{display:flex!important;flex-wrap:wrap;align-items:center;gap:12px;overflow:visible!important}
 #pd663PatientBar .pd664-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:10px;justify-content:stretch}
 #pd663PatientBar .pd664-actions button{display:flex!important;align-items:center;justify-content:center;visibility:visible!important;opacity:1!important;min-height:48px;min-width:0;width:100%;white-space:normal!important;line-height:1.25;text-align:center;padding:10px 7px}
 @media(max-width:580px){#pd663PatientBar .pd664-actions{grid-template-columns:1fr 1fr}#pd663BackStation{grid-column:1/-1}}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.6.5 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.6.6 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
 <aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">🏥 PflegeDok <small>6.6</small></div><button type="button" data-pd660-view="station">🏥 Stationsübersicht</button><button type="button" data-pd660-view="patients">👥 Patientenverwaltung</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><div class="pd660-sidebar-note">Demo · Nur fiktive Testdaten</div></aside>
@@ -1596,7 +1596,7 @@ btn.addEventListener('click',function(){
 </script>
 
 <script>
-/* PflegeDok 6.6.5 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
+/* PflegeDok 6.6.6 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
@@ -1658,7 +1658,7 @@ prepareField();refresh();
 </script>
 
 <script>
-/* PflegeDok 6.6.5: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
+/* PflegeDok 6.6.6: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
 (function(){
 'use strict';
 const stations=[
@@ -1706,7 +1706,7 @@ function update(){
  if(!st){get('pd650Detail').innerHTML='<p class="pd650-meta">Station auswählen, um Räume und zugeordnete Testpatienten anzuzeigen.</p>';return;}
  const ps=assigned(st[0]);
  let html='<h3>'+esc(full(st))+'</h3>';
- if(st[0]==='D10'||st[0]==='D12'){
+ if(st[0]==='D10'||st[0]==='D12'||st[0]==='D17'){
  html+='<div class="pd650-move"><label><strong>Testpatient für Bettzuweisung auswählen</strong><select id="pd650MovePatient"><option value="">Bitte Testpatient auswählen</option>'+patients.map(patientOption).join('')+'</select></label><p class="pd650-meta">Danach ein freies Bett anklicken, um den Patienten direkt dorthin zu verlegen. Ein belegtes Bett öffnet immer die Patientenakte. Ein freies Bett weist den ausgewählten Testpatienten zu.</p></div>';
  }
 
@@ -1721,6 +1721,23 @@ function update(){
       html+='<button type="button" class="pd650-bed" data-pd650-room="'+room.number+'" data-pd650-room-bed="'+bed+'" data-occupied="'+String(occupants.length>0)+'"><strong>Bett '+bed+(room.monitor?' · Monitor':'')+'</strong> · '+(occupants.length?esc(occupants.map(p=>p.name).join(', ')):'Nicht zugeordnet')+'</button>';
     }
     html+='</div>';
+  }
+  html+='</div>';
+}
+if(st[0]==='D17'){
+  html+='<p class="pd650-meta">14 Zimmer · 22 Patientenbetten: 3 Einzelzimmer (1701–1703), 3 Familienzimmer (1704–1706), 8 Zweibettzimmer (1707–1714). Dazu ein Untersuchungsraum, ein CTG-Raum und ein Stillraum ohne reguläre Patientenbetten.</p><div class="pd650-roomgrid">';
+  for(let number=1701;number<=1714;number++){
+   const kind=number<=1703?'Einzelzimmer':number<=1706?'Familienzimmer':'Zweibettzimmer';
+   const count=number<=1706?1:2;
+   html+='<div class="pd650-room"><h4>Zimmer '+number+' · '+kind+'</h4>';
+   for(let i=1;i<=count;i++){
+    const bed=String(i),occupants=ps.filter(p=>String(p.fields?.room650||'').trim()===String(number)&&String(p.fields?.bed650||'').trim()===bed);
+    html+='<button type="button" class="pd650-bed" data-pd650-d17-room="'+number+'" data-pd650-d17-bed="'+bed+'" data-occupied="'+String(occupants.length>0)+'"><strong>Bett '+bed+'</strong> · '+(occupants.length?'📋 '+esc(occupants.map(p=>p.name).join(', '))+' · Akte öffnen':'Nicht zugeordnet')+'</button>';
+   }
+   html+='</div>';
+  }
+  for(const room of ['Untersuchungsraum','CTG-Raum','Stillraum']){
+   html+='<div class="pd650-room"><h4>'+room+'</h4><p class="pd650-meta">Funktionsraum · keine reguläre Bettbelegung</p></div>';
   }
   html+='</div>';
 }
@@ -1740,7 +1757,7 @@ if(st[0]==='D10'){
  html+='<h3>Patientenzuordnung</h3>';
  if(!ps.length)html+='<p class="pd650-meta">Noch keine Testpatienten dieser Station zugeordnet.</p>';
  else html+='<div class="pd650-roomgrid">'+ps.map(p=>'<button type="button" class="pd650-bed" data-pd650-patient="'+esc(p.id)+'"><strong>'+esc(p.name)+'</strong><span class="pd650-meta">Zimmer/Bereich: '+esc(p.fields?.room650||'nicht eingetragen')+' · Bett/Platz: '+esc(p.fields?.bed650||'nicht eingetragen')+'</span></button>').join('')+'</div>';
- if(st[0]!=='D10'&&st[0]!=='D12')html+='<p class="pd650-meta">Die Zimmer- und Bettenanzahl dieser Station ist noch nicht hinterlegt. Patientenzuordnungen können bereits in den Stammdaten erfolgen.</p>';
+ if(st[0]!=='D10'&&st[0]!=='D12'&&st[0]!=='D17')html+='<p class="pd650-meta">Die Zimmer- und Bettenanzahl dieser Station ist noch nicht hinterlegt. Patientenzuordnungen können bereits in den Stammdaten erfolgen.</p>';
  get('pd650Detail').innerHTML=html;
 }
 filter.addEventListener('change',()=>{active=filter.value;update()});
@@ -1753,6 +1770,16 @@ board.addEventListener('click',e=>{
  if(station){active=station.dataset.pd650Station;filter.value=active;update();return;}
  const pat=e.target.closest('[data-pd650-patient]');
  if(pat){selectPatient(pat.dataset.pd650Patient);tab('quick');window.pd660View?.('docs');return;}
+ const d17bed=e.target.closest('[data-pd650-d17-bed]');
+ if(d17bed){
+  const room=d17bed.dataset.pd650D17Room,bed=d17bed.dataset.pd650D17Bed;
+  const matches=assigned('D17').filter(p=>String(p.fields?.room650||'').trim()===room&&String(p.fields?.bed650||'').trim()===bed);
+  if(matches.length===1){selectPatient(matches[0].id);tab('quick');window.pd660View?.('docs');}
+  else if(matches.length===0&&movingPatient){setBed(movingPatient,'D17',room,bed);return;}
+  else if(matches.length>1)alert('Mehrfachbelegung erkannt. Bitte Patientenzuordnung prüfen.');
+  else alert('Freies Bett. Bitte oben einen Testpatienten auswählen und erneut auf das Bett tippen.');
+  return;
+ }
  const d12bed=e.target.closest('[data-pd650-room-bed]');
  if(d12bed){
   const matches=assigned('D12').filter(p=>String(p.fields?.room650||'').trim()===d12bed.dataset.pd650Room&&String(p.fields?.bed650||'').trim()===d12bed.dataset.pd650RoomBed);
@@ -1807,7 +1834,7 @@ update();
  view('station');
 })();
 </script><script>
-/* PflegeDok 6.6.5: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
+/* PflegeDok 6.6.6: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
 (function(){
  const el=id=>document.getElementById(id);
  function refresh(){
@@ -1838,7 +1865,7 @@ update();
  refresh();
 })();
 </script><script>
-/* PflegeDok 6.6.5: Verlegung und Entlassung von fiktiven Testpatienten. */
+/* PflegeDok 6.6.6: Verlegung und Entlassung von fiktiven Testpatienten. */
 (function(){
  const $=id=>document.getElementById(id);
  const dialog=$('pd664Dialog'),form=$('pd664Form');
@@ -1847,11 +1874,13 @@ update();
  let mode='transfer';
  const options=(select,values,placeholder)=>{select.replaceChildren(new Option(placeholder,''));values.forEach(([value,label])=>select.add(new Option(label,value)));};
  function roomsFor(ward){
+  if(ward==='D17')return Array.from({length:14},(_,i)=>[String(1701+i),'Zimmer '+(1701+i)]);
   if(ward==='D12')return Array.from({length:12},(_,i)=>[String(1201+i),'Zimmer '+(1201+i)]);
   if(ward==='D10')return [['Aufnahmeraum','Großer Aufnahmeraum'],['Überwachungsbereich','Überwachungsbereich (8 Monitorbetten)'],['Isolationsbox','Isolationsbox (Plätze)']];
   return [];
  }
  function bedsFor(ward,room){
+  if(ward==='D17')return Array.from({length:Number(room)<=1706?1:2},(_,i)=>[String(i+1),'Bett '+(i+1)]);
   if(ward==='D12')return Array.from({length:room==='1202'?3:2},(_,i)=>[String(i+1),'Bett '+(i+1)]);
   if(ward==='D10'){
    const prefix=room==='Aufnahmeraum'?'A':room==='Überwachungsbereich'?'AW':'ISO';
