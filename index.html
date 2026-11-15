@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#176b68"><title>PflegeDok 6.1.1 – Demo</title>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#176b68"><title>PflegeDok 6.2 – Design-Refresh · Demo</title>
 <style>
 :root{--green:#176b68;--light:#e6f3f1;--bg:#f3f7f7;--text:#243238;--border:#dce5e5;--red:#b23b45}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}header{background:var(--green);color:white;padding:18px}header h1{margin:0;font-size:23px}header small{opacity:.85}main{max-width:1100px;margin:18px auto;padding:0 12px 40px}nav{display:flex;gap:7px;overflow-x:auto;background:var(--bg);padding:8px 0;position:sticky;top:0;z-index:8}nav button{white-space:nowrap}button{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-size:14px;font-weight:bold;cursor:pointer}button.secondary{background:#e5eeee;color:var(--text)}button.danger{background:#fff0f0;color:var(--red)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #81c8c1}input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font:inherit;background:white}textarea{min-height:75px}label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}.card,.panel>.content{background:white;border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:13px;box-shadow:0 3px 12px #00000008}.card h2,.panel h2{font-size:18px;color:var(--green);margin:0 0 13px}.grid,.form-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}.form-grid>label{grid-column:span 6;min-width:0}.form-grid>label.wide{grid-column:span 12}.form-grid>label input,.form-grid>label select,.form-grid>label textarea{margin-top:5px}.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}.field{min-width:0}.panel{display:none}.panel.active{display:block}.record{border:1px solid var(--border);border-radius:9px;padding:11px;margin:8px 0;background:#fcfefe;overflow-wrap:anywhere}.record small{color:#68777b}.warning{background:#fff7e8;border:1px solid #f0dfbd;color:#76511a;padding:12px;border-radius:9px;margin-bottom:14px;font-size:13px}.hidden{display:none!important}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.entry-list{margin-top:15px}.label-preview{margin:14px 0}.patient-label{border:1px solid #777;background:white;padding:12px;display:inline-block;min-width:220px;line-height:1.6;margin-bottom:8px}.patient-label.large{min-width:360px;padding:20px}#letterText{width:100%;min-height:500px;white-space:pre-wrap;font-family:monospace}nav button[aria-current="page"]{background:#0e4947}nav button:not([aria-current="page"]){opacity:.8}@media(max-width:650px){.s6,.s4,.s3,.form-grid>label{grid-column:span 12}.patient-label.large{min-width:0;width:100%}}@media print{header,nav,.no-print,button,.warning{display:none!important}.panel{display:none!important}.panel.active{display:block!important}body{background:white}.card,.panel>.content{box-shadow:none;border:0}.entry-list .record{break-inside:avoid}#letterText{min-height:0;border:0;overflow:visible}}
 .table-scroll{overflow-x:auto;max-width:100%}.cumulative{border-collapse:collapse;min-width:650px;width:100%;font-size:13px}.cumulative th,.cumulative td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top;white-space:nowrap}.cumulative thead th{background:var(--light)}.cumulative tbody th{position:sticky;left:0;background:#fff;z-index:1}.cumulative hr{border:0;border-top:1px solid var(--border)}
@@ -45,7 +45,36 @@
 .atlas-hint{font-size:12px;color:#51656a}.atlas-view{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px}
 .atlas-view button[aria-pressed="true"]{outline:3px solid #176b6880}
 @media(max-width:650px){.atlas-layout{grid-template-columns:1fr}.atlas-body{width:min(100%,310px)}.atlas-dialog{padding:10px}.atlas-fields{grid-template-columns:1fr 1fr}}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.1.1 · Kombinierte Kurve + Körperatlas</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+
+/* PflegeDok 6.2 – visuelles Redesign, bestehende Dokumentationslogik unverändert */
+:root{--green:#176a75;--light:#eaf4f6;--bg:#f3f6fa;--text:#1c3040;--border:#dce5eb;--red:#b33d48;--pd-navy:#12374a;--pd-muted:#617585}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.48;background:var(--bg)}
+header{background:linear-gradient(110deg,#12374a,#176a75);padding:22px max(18px,calc((100vw - 1480px)/2));box-shadow:0 5px 22px #102f4120}
+header h1{font-size:clamp(23px,2.5vw,30px);letter-spacing:-.7px}header small{display:block;margin-top:5px;letter-spacing:.2px}
+main{max-width:1480px;margin:22px auto;padding:0 20px 60px}
+button{transition:background .15s ease,transform .15s ease;min-height:40px}button:hover{filter:brightness(.96)}button:active{transform:translateY(1px)}
+.card,.panel>.content{border:1px solid #e1e8ef;border-radius:16px;box-shadow:0 6px 24px #183a4d0b;padding:clamp(15px,2vw,24px)}
+.card h2,.panel h2{font-size:21px;color:var(--pd-navy);letter-spacing:-.3px}
+input,select,textarea{border:1px solid #cddbe3;border-radius:10px;min-height:41px}input:focus,select:focus,textarea:focus{border-color:#197a89}
+label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
+#application{display:grid;grid-template-columns:242px minmax(0,1fr);gap:0 24px;align-items:start}
+#application>.card:first-child{grid-column:2;grid-row:1;margin-bottom:15px;padding:12px 16px}
+#application>#navigation{grid-column:1;grid-row:1 / span 50;align-self:start}
+#application>.panel{grid-column:2;min-width:0;grid-row:2}
+#navigation{display:block;position:sticky;top:12px;overflow-y:auto;overflow-x:hidden;max-height:calc(100vh - 24px);z-index:8;background:white;border:1px solid var(--border);border-radius:16px;padding:10px;box-shadow:0 6px 24px #183a4d0b}
+#navigation .pd62-nav-title{padding:8px 10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:#708390;font-weight:800}
+#navigation details{margin:2px 0 7px;border-radius:10px}
+#navigation summary{list-style:none;cursor:pointer;padding:10px 11px;color:#355367;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.55px;border-radius:9px;display:flex;align-items:center;justify-content:space-between}
+#navigation summary::-webkit-details-marker{display:none}#navigation summary:after{content:'⌄';font-size:17px;line-height:1;transform:rotate(-90deg);transition:transform .15s}#navigation details[open] summary:after{transform:rotate(0)}
+#navigation summary:hover{background:#f0f5f7}#navigation .pd62-nav-items{padding:2px 4px 7px}
+#navigation button{display:block;width:100%;text-align:left;white-space:normal;border-radius:9px;background:transparent;color:#375163;padding:9px 11px;font-size:13px;font-weight:600;min-height:37px;opacity:1!important}
+#navigation button:hover{background:#eff5f7;color:#12475a}#navigation button[aria-current="page"]{background:#e4f2f3;color:#075b68;box-shadow:inset 3px 0 #178b94;font-weight:800}
+#pdJump{max-width:100%}#atlasCard{background:linear-gradient(130deg,#f5fbfc,#fff);border:1px solid #cce4e7;border-radius:14px;padding:18px}
+.warning{border-radius:12px}.toolbar{gap:9px}.record{border-radius:12px;background:#fcfdff}
+@media(max-width:960px){main{padding:0 12px 40px}#application{grid-template-columns:minmax(0,1fr);gap:0}#application>.card:first-child{grid-column:1;grid-row:1}#application>#navigation{grid-column:1;grid-row:2;position:static;max-height:none;margin-bottom:15px}#application>.panel{grid-column:1;grid-row:3}#navigation .pd62-nav-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 8px}#navigation details:not([open]){margin-bottom:0}}
+@media(max-width:580px){header{padding:18px 14px}header h1{font-size:23px}header h1 span{display:inline-block;margin-top:7px;font-size:11px!important}#navigation .pd62-nav-groups{grid-template-columns:1fr}#navigation{padding:8px}#navigation .pd62-nav-title{padding:5px 8px}#navigation details{margin:0}#navigation summary{padding:9px 10px}#navigation .pd62-nav-items{display:grid;grid-template-columns:1fr 1fr;gap:3px}#navigation button{padding:9px 8px;font-size:12px;min-height:44px}main{margin-top:12px} .card,.panel>.content{border-radius:13px;padding:14px} .card h2,.panel h2{font-size:19px}}
+@media print{#application{display:block}#navigation{display:none!important}#application>.panel{display:none!important}#application>.panel.active{display:block!important}main{max-width:none;margin:0;padding:0}}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">6.2 · Design-Refresh + Körperatlas</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
@@ -1131,3 +1160,40 @@ $('pd60RefreshLab').addEventListener('click',pd60LabOverview);
  const originalDelete=deleteEntry;deleteEntry=function(type,id){originalDelete(type,id);if(types[type]&&!$a('atlasOverlay').hidden){draw();refreshLists()}};
  const originalSelect=selectPatient;selectPatient=function(id){originalSelect(id);if(!$a('atlasOverlay').hidden)close();const summary=$a('atlasSummary');if(summary)summary.textContent='Körperatlas bereit – Markierungen werden patientenbezogen gespeichert.';};
 })();
+</script>
+
+<script>
+/* PflegeDok 6.2: Navigation rein visuell gruppieren. Bestehende data-tab-Buttons bleiben erhalten. */
+(function(){
+ const nav=document.getElementById('navigation');if(!nav||nav.dataset.pd62Ready)return;
+ const groups=[
+  ['Übersicht',['quick','master','status','history','risks']],
+  ['Dokumentation',['notes','care','wounds','painplus','mobilization','hygiene','education']],
+  ['Monitoring & Diagnostik',['vitals','chart','graphic','labs','cumulative','balance','news2','neuro','respiratory']],
+  ['Medizin & Therapie',['meds','medplan','infusions','devices','orders','surgery','therapy','consults']],
+  ['Organisation & Übergabe',['handover','tasks','assessments','discharge','incidents','labels','arztbrief']]
+ ];
+ const buttons=Array.from(nav.querySelectorAll('button[data-tab]'));
+ const byId=new Map(buttons.map(b=>[b.dataset.tab,b]));
+ const title=document.createElement('div');title.className='pd62-nav-title';title.textContent='Dokumentationsbereiche';
+ const wrap=document.createElement('div');wrap.className='pd62-nav-groups';
+ const sections=[];
+ groups.forEach(([name,ids],idx)=>{
+  const details=document.createElement('details');details.dataset.group=String(idx);
+  const summary=document.createElement('summary');summary.textContent=name;details.appendChild(summary);
+  const inner=document.createElement('div');inner.className='pd62-nav-items';
+  ids.forEach(id=>{const b=byId.get(id);if(b){inner.appendChild(b);byId.delete(id)}});
+  details.appendChild(inner);wrap.appendChild(details);sections.push(details);
+ });
+ if(byId.size){const details=document.createElement('details');const summary=document.createElement('summary');summary.textContent='Weitere Bereiche';details.appendChild(summary);const inner=document.createElement('div');inner.className='pd62-nav-items';byId.forEach(b=>inner.appendChild(b));details.appendChild(inner);wrap.appendChild(details);sections.push(details)}
+ nav.replaceChildren(title,wrap);nav.dataset.pd62Ready='1';
+ const jump=document.getElementById('pdJump');
+ const openActive=()=>{const active=nav.querySelector('button[aria-current="page"]');if(active){const parent=active.closest('details');if(parent)parent.open=true}};
+ openActive();if(!sections.some(d=>d.open)&&sections.length)sections[0].open=true;
+ nav.addEventListener('click',e=>{const btn=e.target.closest('button[data-tab]');if(!btn)return;const parent=btn.closest('details');if(parent)parent.open=true;});
+ if(jump)jump.addEventListener('change',()=>setTimeout(openActive,0));
+ const observer=new MutationObserver(()=>openActive());
+ buttons.forEach(b=>observer.observe(b,{attributes:true,attributeFilter:['aria-current']}));
+})();
+</script>
+</main></body></html>
