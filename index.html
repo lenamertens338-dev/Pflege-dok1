@@ -85,7 +85,7 @@ label{color:#385365;font-weight:650} .pd-note,.atlas-hint{color:var(--pd-muted)}
 .pd64-dialog .pd64-item small{display:block!important;color:#526d7b!important;font-size:12px!important;}
 .pd64-item small{display:block;color:#647886}.pd64-muted{color:#657989;font-size:.88rem}.pd64-dialog input[type=search],.pd64-dialog select{width:100%;max-width:100%;padding:10px}.pd64-dialog button{margin:3px}.pd64-selected{padding:9px;border-radius:9px;background:#eaf5f8;white-space:pre-wrap}.pd64-status{margin-top:10px}.pd64-status textarea{width:100%;min-height:70px}
 
-/* PflegeDok 7.0.0 – gemeinsame, patientenbezogene Verlaufs-Karten */
+/* PflegeDok 7.1.0 – gemeinsame, patientenbezogene Verlaufs-Karten */
 .pd644-filters{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin:15px 0}
 .pd644-timeline{display:grid;gap:13px}
 .pd644-entry{background:#fff;border:1px solid #dce6ed;border-left:5px solid #718096;border-radius:15px;padding:17px;box-shadow:0 5px 16px #16394c0a;overflow-wrap:anywhere}
@@ -155,7 +155,7 @@ body.pd660-patients #pd660PatientView{display:block}
 body.pd660-station #pd650Board{display:block}
 @media(max-width:780px){body{padding-left:0}#pd660Sidebar{position:sticky;top:0;width:auto;bottom:auto;flex-direction:row;align-items:center;gap:4px;padding:8px;overflow-x:auto;box-shadow:0 2px 10px #102e3d22}#pd660Sidebar .pd660-brand{font-size:13px;white-space:nowrap;margin:0 8px 0 0}#pd660Sidebar button{font-size:12px;white-space:nowrap;width:auto;padding:10px 8px}#pd660Sidebar .pd660-sidebar-note{display:none}}
 </style><style>
-/* 7.0.0: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
+/* 7.1.0: Dokumentationsnavigation darf die Eingabemaske nicht verdrängen.
    Die vorhandene Bereichsauswahl #pdJump übernimmt die Navigation. */
 body.pd660-docs #application{display:block!important;min-width:0}
 body.pd660-docs #application>#navigation{display:none!important}
@@ -166,7 +166,7 @@ body.pd660-docs #application>.panel.active{display:block!important}
 body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 @media(max-width:960px){body.pd660-docs #application{display:block!important}}
 </style><style>
-/* 7.0.0 – Patientenleiste oberhalb der Dokumentation */
+/* 7.1.0 – Patientenleiste oberhalb der Dokumentation */
 .pd663-patientbar{position:sticky;top:0;z-index:40;background:#f2f9fa;border:1px solid #a9d2d5;border-radius:13px;padding:13px 17px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 3px 12px #17344716}
 .pd663-patient-info{min-width:0;display:flex;flex-direction:column;gap:5px}.pd663-eyebrow{font-size:11px;letter-spacing:.07em;color:#446977;font-weight:700}.pd663-patient-info strong{font-size:19px;overflow-wrap:anywhere;color:#173447}.pd663-tags{display:flex;gap:7px;flex-wrap:wrap}.pd663-tags span{border-radius:7px;background:white;border:1px solid #c9e0e2;padding:4px 8px;font-size:12px;color:#234b5c}
 #pd663BackStation{white-space:nowrap;min-height:44px}
@@ -181,7 +181,7 @@ body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 .pd664-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 @media(max-width:780px){.pd664-actions{width:100%;justify-content:stretch}.pd664-actions button{flex:1;white-space:normal}}
 </style><style>
-/* 7.0.0: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
+/* 7.1.0: Alle drei Patientenaktionen immer sichtbar, auch auf iPad. */
 #pd663PatientBar{display:flex!important;flex-wrap:wrap;align-items:center;gap:12px;overflow:visible!important}
 #pd663PatientBar .pd664-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:10px;justify-content:stretch}
 #pd663PatientBar .pd664-actions button{display:flex!important;align-items:center;justify-content:center;visibility:visible!important;opacity:1!important;min-height:48px;min-width:0;width:100%;white-space:normal!important;line-height:1.25;text-align:center;padding:10px 7px}
@@ -231,14 +231,66 @@ body.pd660-docs #pdJump{display:block;width:100%;max-width:100%;min-height:48px}
 @media(max-width:1000px){#pd650Board{grid-template-columns:160px minmax(0,1fr)}#pd650Detail .pd650-roomgrid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
 @media(max-width:650px){#pd650Board{grid-template-columns:1fr;grid-template-areas:"head" "stats" "stations" "detail"}#pd650Stations{max-height:160px;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))}#pd650Detail .pd650-roomgrid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 </style>
-</head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">7.0.0 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+<style id="pd701WardListFix">
+#pd650Board{align-items:stretch}
+#pd650Stations{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-content:stretch!important;gap:6px!important;min-height:0;max-height:65vh;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;scrollbar-gutter:stable}
+#pd650Stations .pd650-station{display:flex!important;position:static!important;transform:none!important;float:none!important;flex:0 0 auto!important;align-self:stretch!important;width:100%!important;height:auto!important;min-height:68px!important;max-height:none!important;box-sizing:border-box!important;margin:0!important;padding:10px 12px!important;line-height:1.4!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;justify-content:center!important;align-items:flex-start!important;gap:3px!important}
+#pd650Stations .pd650-station strong,#pd650Stations .pd650-station span,#pd650Stations .pd650-station small{display:block!important;position:static!important;line-height:1.4!important;white-space:normal!important;max-width:100%!important}
+@media(max-width:650px){#pd650Stations{display:flex!important;flex-direction:column!important;max-height:240px!important}}
+</style><style id="pd710ClinicalLayout">
+:root{--pd710-blue:#174d8a;--pd710-line:#b5c9df;--pd710-light:#e7f0fb}
+body{padding-left:0!important;background:#e9f0f8!important;color:#1a2e44}
+body>header{padding:10px 18px!important;margin:0!important;background:linear-gradient(95deg,#06437f,#256aab)!important;border-radius:0!important;color:#fff!important}
+body>header h1{font-size:20px!important;color:#fff!important;margin:0!important}body>header small{color:#e3f0ff!important}
+#pd660Sidebar{position:sticky!important;top:0!important;left:auto!important;bottom:auto!important;width:100%!important;height:auto!important;z-index:90!important;display:flex!important;flex-direction:row!important;align-items:stretch!important;gap:0!important;overflow-x:auto!important;padding:0 8px!important;background:linear-gradient(#e7f2ff,#b6d0ee)!important;border-bottom:2px solid #8fb4dd!important;border-right:0!important;box-shadow:0 2px 6px #34567824!important}
+#pd660Sidebar .pd660-brand{display:flex!important;flex-direction:column;justify-content:center;min-width:225px;padding:10px 14px;background:linear-gradient(90deg,#0a3e7b,#2162a4);color:#fff!important;font-size:21px!important;font-weight:800!important;white-space:nowrap}
+#pd660Sidebar .pd660-brand small{font-size:12px!important;font-weight:500}#pd660Sidebar .pd660-brand em{font-size:10px;font-style:normal;font-weight:400;opacity:.86}
+#pd660Sidebar button{flex:0 0 auto!important;width:auto!important;min-height:72px!important;min-width:118px!important;padding:14px 16px!important;color:#18395e!important;background:transparent!important;border:0!important;border-right:1px solid #adc5e1!important;border-radius:0!important;text-align:center!important;font-size:14px!important;font-weight:650!important;white-space:nowrap!important}
+#pd660Sidebar button[aria-current="page"]{background:linear-gradient(#d6e9ff,#95bdec)!important;color:#0d3e78!important;box-shadow:inset 0 -4px #266bb2!important}
+#pd660Sidebar .pd660-sidebar-note{display:none!important}
+body.pd660-station #pd650Board{display:grid!important}
+#pd650Board{margin:10px 12px 20px!important;padding:0!important;border-radius:4px!important;border:1px solid var(--pd710-line)!important;background:#f5f9fe!important;grid-template-columns:260px minmax(0,1fr)!important;grid-template-areas:"head head" "stats stats" "stations detail"!important;gap:0!important;overflow:hidden}
+#pd650Board .pd650-head{padding:10px 16px!important;border:0!important;border-radius:0!important;background:linear-gradient(#f9fcff,#d9e8f8)!important;border-bottom:1px solid var(--pd710-line)!important}
+#pd650Board .pd650-head h2{font-size:18px!important;margin:2px 0!important}.pd650-kicker{font-size:10px!important}.pd650-head .pd-note{font-size:11px!important;margin:3px 0!important}
+#pd650Stats{display:flex!important;flex-wrap:wrap;gap:8px!important;padding:8px 12px!important;border-bottom:1px solid var(--pd710-line)!important;background:#eef5fd!important}
+#pd650Stats .pd650-stat{padding:6px 12px!important;min-width:150px!important;flex:0 1 auto!important;border:1px solid #c6d7e8!important;border-radius:4px!important;background:#fff!important}
+#pd650Stats .pd650-stat strong{font-size:17px!important;color:#144f88!important}
+.pd710-station-pane{grid-area:stations;min-width:0;border-right:1px solid #b0c6e0;background:#e7f0fb}
+.pd710-pane-heading{font-size:14px;font-weight:750;padding:10px 12px;background:linear-gradient(#d4e7fc,#a9c9ed);color:#173b63;border-bottom:1px solid #91b5dd}
+#pd650Stations{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:0!important;max-height:540px!important;min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow-y:auto!important;overflow-x:hidden!important;background:#eaf2fb!important;scrollbar-gutter:auto!important}
+#pd650Stations .pd650-station{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:6px!important;flex:0 0 auto!important;min-height:40px!important;height:auto!important;width:100%!important;max-width:100%!important;padding:8px 10px!important;margin:0!important;border:0!important;border-bottom:1px solid #c4d6e9!important;border-radius:0!important;background:#f5f9ff!important;line-height:1.3!important;text-align:left!important;box-sizing:border-box!important}
+#pd650Stations .pd650-station:nth-child(even){background:#e9f2fd!important}
+#pd650Stations .pd650-station[aria-pressed="true"]{background:linear-gradient(#2772bd,#0c4c98)!important;color:#fff!important;box-shadow:none!important}
+#pd650Stations .pd650-station .pd710-station-label{display:block!important;flex:1!important;min-width:0!important;font-size:12px!important;white-space:normal!important;overflow-wrap:normal!important;line-height:1.3!important}
+#pd650Stations .pd650-station strong{display:inline!important;font-size:12px!important;color:inherit!important;white-space:nowrap!important}
+#pd650Stations .pd650-station small{flex:0 0 auto!important;display:block!important;font-size:11px!important;white-space:nowrap!important;background:#d1e3f8!important;color:#1c4d7c!important;border-radius:5px;padding:3px 5px}
+#pd650Stations .pd650-station[aria-pressed="true"] small{background:#d7e8fb!important;color:#11457f!important}
+.pd710-function-heading{margin-top:8px}.pd710-quick{display:flex;flex-direction:column}.pd710-quick button{background:#f5f9ff;border:0;border-bottom:1px solid #c8d9ea;border-radius:0;text-align:left;padding:12px;color:#1c4773;font-size:13px;cursor:pointer;min-height:42px}
+#pd650Detail{grid-area:detail;min-width:0!important;padding:12px 14px!important;border:0!important;border-radius:0!important;background:#f9fbff!important}
+#pd650Detail>h3:first-child{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:10px 12px!important;margin:-12px -14px 12px!important;background:linear-gradient(#fff,#e7f1fb);border-bottom:1px solid #b9cfe7!important;color:#10365d!important;font-size:19px!important}
+.pd710-ward-count{font-size:12px;font-weight:500;background:#d8ebff;color:#1d527f;padding:5px 9px;border-radius:4px}.pd710-ward-icon{font-size:20px}
+#pd700WardTools{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:8px 0;margin:0 0 10px!important;border-bottom:1px solid #d8e4f0}
+#pd700WardSearch{min-width:220px;max-width:360px;min-height:43px!important;background:#fff;border:1px solid #a7c1dd!important;border-radius:5px!important;padding:8px 12px!important}
+#pd650Detail .pd650-roomgrid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))!important;gap:12px!important;margin:12px 0 16px!important}
+#pd650Detail .pd650-room{min-width:0!important;padding:0 7px 7px!important;border:1px solid #a8c4e4!important;border-radius:7px!important;background:#fff!important;overflow:hidden!important;box-shadow:0 1px 2px #123e6620!important}
+#pd650Detail .pd650-room h4{display:flex!important;align-items:center;justify-content:space-between;gap:6px;margin:0 -7px 7px!important;padding:10px 11px!important;border-bottom:1px solid #b6cde9!important;background:linear-gradient(#e6f1ff,#c6dcf5)!important;color:#153b64!important;font-size:14px!important}
+.pd710-room-count{font-weight:700;color:#184f86;background:#fff9;padding:2px 5px;border-radius:4px;white-space:nowrap}
+#pd650Detail .pd650-bed{display:block!important;min-height:58px!important;padding:9px 10px!important;margin:6px 0!important;border-radius:5px!important;border:1px solid #a6dfb5!important;border-left:4px solid #56b877!important;background:#d7f6df!important;color:#173b2a!important;font-size:12px!important;line-height:1.45!important;text-align:left!important;overflow-wrap:anywhere!important;touch-action:manipulation}
+#pd650Detail .pd650-bed[data-occupied="true"],#pd650Detail .pd650-bed.pd710-occupied{background:#ffdfcb!important;border-color:#e9b99b!important;border-left-color:#e28b53!important;color:#5d321c!important}
+#pd650Detail .pd650-bed strong{font-size:13px!important}
+#pd650Detail .pd650-move{padding:10px!important;margin:10px 0!important;border:1px solid #b8cfe8!important;border-radius:5px!important;background:#eef6ff!important}
+#pd650Detail .pd650-move select{min-height:43px!important}
+#pd650Detail .pd650-room[hidden]{display:none!important}
+@media(max-width:1100px){#pd650Board{grid-template-columns:205px minmax(0,1fr)!important}#pd650Detail .pd650-roomgrid{grid-template-columns:repeat(auto-fill,minmax(195px,1fr))!important}#pd660Sidebar button{min-width:100px!important}}
+@media(max-width:700px){#pd650Board{grid-template-columns:1fr!important;grid-template-areas:"head" "stats" "stations" "detail"!important}.pd710-station-pane{border-right:0;border-bottom:1px solid #b0c6e0}#pd650Stations{max-height:205px!important}#pd660Sidebar .pd660-brand{min-width:170px!important}#pd660Sidebar button{min-height:60px!important}}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">7.1.0 · Stations- und Bettenverwaltung + Anästhesiekurven + getrennte Visiten</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
-<aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">🏥 PflegeDok <small>6.6</small></div><button type="button" data-pd660-view="station">🏥 Stationsübersicht</button><button type="button" data-pd660-view="patients">👥 Patientenverwaltung</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><div class="pd660-sidebar-note">Demo · Nur fiktive Testdaten</div></aside>
+<aside id="pd660Sidebar" class="no-print" aria-label="Hauptnavigation"><div class="pd660-brand">✚ PflegeDok <small>7.1.0</small><em>Patientenmanagement · Pflege · Dokumentation</em></div><button type="button" data-pd660-view="station">🛏️ Station</button><button type="button" data-pd660-view="patients">👥 Patienten</button><button type="button" data-pd660-view="docs">📋 Dokumentation</button><div class="pd660-sidebar-note">DEMO · Nur fiktive Testdaten</div></aside>
 <div id="pd660PatientView" class="card no-print" hidden><h2>Patientenverwaltung</h2><p>Wähle oben einen Testpatienten aus oder lege einen neuen an. Über „Dokumentation“ gelangst du zu seiner Akte.</p><button type="button" id="pd660OpenDoc">Ausgewählte Patientenakte öffnen</button></div>
 <section class="card no-print" id="pd650Board">
 <div class="pd650-head"><div><p class="pd650-kicker">PFLEGEDOK · STATIONSMANAGEMENT</p><h2>Krankenhausübersicht</h2><p class="pd-note">13 Stationen und Funktionsbereiche · ausschließlich fiktive Testpatienten</p></div><label>Station auswählen<select id="pd650StationFilter"><option value="">Alle Stationen</option></select></label></div>
-<div id="pd650Stats" class="pd650-stats"></div><div id="pd650Stations" class="pd650-stations"></div>
+<div id="pd650Stats" class="pd650-stats"></div><div class="pd710-station-pane"><div class="pd710-pane-heading">Bereiche / Stationen</div><div id="pd650Stations" class="pd650-stations"></div><div class="pd710-pane-heading pd710-function-heading">Funktionen</div><div class="pd710-quick"><button type="button" data-pd710-action="new">⊕ Patient aufnehmen</button><button type="button" data-pd710-action="patients">▤ Patientenverwaltung</button><button type="button" data-pd710-action="docs">▤ Dokumentation öffnen</button><button type="button" data-pd710-action="export">⇩ Backup exportieren</button></div></div>
 <div id="pd650Detail"></div>
 </section>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
@@ -1719,7 +1771,7 @@ btn.addEventListener('click',function(){
 </script>
 
 <script>
-/* PflegeDok 7.0.0 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
+/* PflegeDok 7.1.0 – gemeinsame, lesende Medikationsplanansicht mit expliziter Referenz. */
 (function(){
 'use strict';
 const byId=id=>document.getElementById(id);
@@ -1781,14 +1833,15 @@ prepareField();refresh();
 </script>
 
 <script>
-/* PflegeDok 7.0.0: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
+/* PflegeDok 7.1.0: Stationsübersicht. Bettenzahlen unbekannter Stationen werden nicht erfunden. */
 (function(){
 'use strict';
 const stations=[
-['D12','Innere Medizin'],['D17','Gynäkologie / Wochenbett'],['D18','Urologie'],
-['D13','Allgemeinchirurgie'],['D16','Pädiatrie'],['D14','Neurologie'],
-['D14B','Stroke Unit'],['D11','Intermediate Care'],['D11B','Intensive Care Unit'],
-['D41','Orthopädie'],['D49','Unfallchirurgie'],['D10','Zentrale Aufnahme'],['AWR','Aufwachraum']
+['D10','Zentrale Aufnahme'],['D11','Intermediate Care'],['D11B','Intensive Care Unit'],
+['D12','Innere Medizin'],['D13','Allgemeinchirurgie'],['D14','Neurologie'],
+['D14B','Stroke Unit'],['D16','Pädiatrie'],['D17','Gynäkologie / Wochenbett'],
+['D18','Urologie'],['D41','Orthopädie'],['D49','Unfallchirurgie'],
+['AWR','Aufwachraum']
 ];
 let movingPatient='';
 function patientOption(p){return '<option value="'+esc(p.id)+'"'+(movingPatient===p.id?' selected':'')+'>'+esc(p.name||'Testpatient')+' ('+esc(code(p.fields?.ward)||'ohne Station')+')</option>';}
@@ -1818,17 +1871,18 @@ const board=get('pd650Board');
 const filter=get('pd650StationFilter');
 if(!board||!filter)return;
 for(const st of stations)filter.add(new Option(full(st),st[0]));
-let active='';
+let active='D41';
+filter.value=active;
 function assigned(st){return patients.filter(p=>code(p.fields?.ward)===st);}
 function update(){
  const all=patients.filter(p=>stations.some(st=>st[0]===code(p.fields?.ward)));
  get('pd650Stats').innerHTML='<div class="pd650-stat"><strong>'+stations.length+'</strong><span>Stationen / Bereiche</span></div><div class="pd650-stat"><strong>'+all.length+'</strong><span>Zuordnungen von Testpatienten</span></div><div class="pd650-stat"><strong>'+patients.filter(p=>!code(p.fields?.ward)).length+'</strong><span>Ohne Stationszuordnung</span></div>';
- const shown=stations.filter(st=>!active||st[0]===active);
- get('pd650Stations').innerHTML=shown.map(st=>'<button type="button" class="pd650-station" data-pd650-station="'+esc(st[0])+'" aria-pressed="'+String(active===st[0])+'"><strong>'+esc(st[0])+'</strong><span>'+esc(st[1])+'</span><small>'+assigned(st[0]).length+' Testpatient(en) zugeordnet</small></button>').join('');
+ const shown=stations;
+ get('pd650Stations').innerHTML=shown.map(st=>'<button type="button" class="pd650-station" data-pd650-station="'+esc(st[0])+'" aria-pressed="'+String(active===st[0])+'"><span class="pd710-station-label"><strong>'+esc(st[0])+'</strong> – '+esc(st[1])+'</span><small>'+assigned(st[0]).length+' Pat.</small></button>').join('');
  const st=stations.find(st=>st[0]===active);
  if(!st){get('pd650Detail').innerHTML='<p class="pd650-meta">Station auswählen, um Räume und zugeordnete Testpatienten anzuzeigen.</p>';return;}
  const ps=assigned(st[0]);
- let html='<h3>'+esc(full(st))+'</h3>';
+ let html='<h3><span class="pd710-ward-icon">▣</span> '+esc(full(st))+' <span class="pd710-ward-count">'+ps.length+' zugeordnete Testpatienten</span></h3>';
  if(st[0]==='D10'||st[0]==='D12'||st[0]==='D17'||st[0]==='D18'||st[0]==='D13'||st[0]==='D16'||st[0]==='D14'||st[0]==='D14B'||st[0]==='D11'||st[0]==='D11B'||st[0]==='D41'||st[0]==='D49'||st[0]==='AWR'){
  html+='<div class="pd650-move"><label><strong>Testpatient für Bettzuweisung auswählen</strong><select id="pd650MovePatient"><option value="">Bitte Testpatient auswählen</option>'+patients.map(patientOption).join('')+'</select></label><p class="pd650-meta">Danach ein freies Bett anklicken, um den Patienten direkt dorthin zu verlegen. Ein belegtes Bett öffnet immer die Patientenakte. Ein freies Bett weist den ausgewählten Testpatienten zu.</p></div>';
  }
@@ -2037,9 +2091,10 @@ if(st[0]==='D10'){
  get('pd650Detail').innerHTML=html;
  const detail=get('pd650Detail');
  const tools=document.createElement('div');tools.id='pd700WardTools';
- tools.innerHTML='<label for="pd700WardSearch"><strong>Zimmer / Bett suchen</strong></label><input id="pd700WardSearch" type="search" placeholder="Zimmernummer oder Patient suchen…" aria-label="Zimmer oder Patient suchen"><div class="pd700-legend"><span><i class="pd700-dot" style="background:#369465"></i>Frei</span><span><i class="pd700-dot" style="background:#c46a45"></i>Belegt</span></div>';
+ tools.innerHTML='<input id="pd700WardSearch" type="search" placeholder="⌕ Suche: Patient, Zimmer, Bett…" aria-label="Zimmer oder Patient suchen"><div class="pd700-legend"><span><i class="pd700-dot" style="background:#bdf0cb"></i>Frei</span><span><i class="pd700-dot" style="background:#ffd4b4"></i>Belegt</span></div>';
  const grid=detail.querySelector('.pd650-roomgrid');
- if(grid)grid.before(tools);
+ if(grid)detail.querySelector('h3')?.after(tools);
+ detail.querySelectorAll('.pd650-room').forEach(room=>{const beds=[...room.querySelectorAll('.pd650-bed')];if(!beds.length)return;const title=room.querySelector('h4');if(title){const occupied=beds.filter(b=>b.dataset.occupied==='true').length;const n=document.createElement('span');n.className='pd710-room-count';n.textContent=occupied+'/'+beds.length;title.append(n);}beds.forEach(b=>{if(b.dataset.occupied==='true')b.classList.add('pd710-occupied');else b.classList.add('pd710-free');});});
  const search=tools.querySelector('input');
  search.addEventListener('input',()=>{
   const q=search.value.trim().toLocaleLowerCase('de');
@@ -2050,6 +2105,7 @@ if(st[0]==='D10'){
 
 }
 filter.addEventListener('change',()=>{active=filter.value;update()});
+board.addEventListener('click',e=>{const action=e.target.closest('[data-pd710-action]')?.dataset.pd710Action;if(!action)return;if(action==='new')document.getElementById('newPatient')?.click();if(action==='patients')window.pd660View?.('patients');if(action==='docs')window.pd660View?.('docs');if(action==='export')document.getElementById('exportBackup')?.click();});
 board.addEventListener('change',e=>{
  if(e.target.id==='pd650MovePatient'){movingPatient=e.target.value;}
 });
@@ -2223,7 +2279,7 @@ update();
  view('station');
 })();
 </script><script>
-/* PflegeDok 7.0.0: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
+/* PflegeDok 7.1.0: Patientenkopf folgt der aktuellen Auswahl und den Stammdaten. */
 (function(){
  const el=id=>document.getElementById(id);
  function refresh(){
@@ -2254,7 +2310,7 @@ update();
  refresh();
 })();
 </script><script>
-/* PflegeDok 7.0.0: Verlegung und Entlassung von fiktiven Testpatienten. */
+/* PflegeDok 7.1.0: Verlegung und Entlassung von fiktiven Testpatienten. */
 (function(){
  const $=id=>document.getElementById(id);
  const dialog=$('pd664Dialog'),form=$('pd664Form');
