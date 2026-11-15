@@ -18,7 +18,9 @@
 .pd-score{font-size:22px;font-weight:bold;color:var(--green);padding:12px 0}
 @media(max-width:650px){.pd-task{display:block}}
 @media print{.pd-chart{min-width:0}}
-</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">4.0 · 34 Bereiche</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
+
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}.photo-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:white}.photo-card img{width:100%;height:155px;object-fit:contain;background:#f1f4f4;border-radius:6px;cursor:zoom-in}.photo-card small{display:block;margin:7px 0;overflow-wrap:anywhere}.photo-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}.photo-form label{display:block}.photo-form input,.photo-form select,.photo-form textarea{width:100%}.photo-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.photo-compare img{width:100%;max-height:300px;object-fit:contain}.photo-status{font-size:13px;color:#40565b}
+</style></head><body><header><h1>PflegeDok <span style="font-size:14px;background:#fff;color:#176b68;padding:5px 9px;border-radius:8px;vertical-align:middle">4.2 · Wundfotografie</span></h1><small>Digitale Pflegedokumentation · Demo</small></header><main>
 <div class="warning"><strong>Hinweis:</strong> Nicht zertifizierter Demo-Prototyp. Browser-Speicherung und JSON-Backups sind unverschlüsselt; es gibt keine Zugriffskontrolle, revisionssichere Dokumentation oder klinische Validierung. Ausschließlich fiktive Testdaten verwenden. Nicht für echte Patienten, medizinische Entscheidungen oder rechtsverbindliche Dokumentation.</div>
 <div class="card no-print"><div class="grid"><div class="field s6"><label for="patientSelect">Patient auswählen</label><select id="patientSelect"><option value="">Patient auswählen</option></select></div><div class="field s3"><label>&nbsp;</label><button id="newPatient">+ Testpatient anlegen</button></div><div class="field s3"><label>&nbsp;</label><button id="exportBackup" class="secondary">Backup exportieren</button></div></div><div class="toolbar"><button id="deletePatient" class="danger" type="button" disabled>Ausgewählten Testpatienten löschen</button><button id="importButton" class="secondary">Backup importieren</button><button id="printAll" class="secondary">Aktuelle Ansicht drucken</button><input id="backupFile" type="file" accept=".json,application/json" class="hidden"></div></div>
 <div id="empty" class="card"><h2>Willkommen bei PflegeDok</h2><p>Lege zunächst einen fiktiven Testpatienten an.</p><button id="firstPatient">Ersten Testpatienten anlegen</button></div>
@@ -27,7 +29,20 @@
 <section id="status" class="panel"><div class="card"><h2>Pflegestatus</h2><div class="grid" id="statusFields"></div></div></section>
 <section id="history" class="panel"><div class="card"><h2>Krankengeschichte / Anamnese</h2><div class="grid" id="historyFields"></div></div></section>
 <section id="risks" class="panel"><div class="card"><h2>Risikoeinschätzungen</h2><p>Freitextbasierte Erfassung, keine validierten Scores.</p><div class="grid" id="risksFields"></div></div></section>
-<section id="wounds" class="panel"><div class="content"><h2>🩹 Wunddokumentation</h2><div class="form-grid" id="woundFields"></div><button data-add="wound">Wunddokumentation speichern</button><div id="woundList" class="entry-list"></div></div></section>
+<section id="wounds" class="panel"><div class="content"><h2>🩹 Wunddokumentation</h2><div class="form-grid" id="woundFields"></div><button data-add="wound">Wunddokumentation speichern</button><div id="woundList" class="entry-list"></div>
+<div class="card" style="margin-top:18px"><h3>📷 Wundfotodokumentation (nur fiktive Testdaten)</h3>
+<p class="pd-note">Auf dem Smartphone kannst du direkt die Kamera verwenden oder ein vorhandenes Bild wählen. Auf dem PC kannst du eine Bilddatei hochladen. Bilder bleiben nur in diesem Browser (IndexedDB) und sind <strong>nicht im JSON-Backup</strong> enthalten. Keine echten Patientenbilder verwenden.</p>
+<div class="photo-form">
+<label>Wunde zuordnen<select id="photoWound"><option value="">Wunde auswählen</option></select></label>
+<label>Aufnahmedatum / Uhrzeit<input type="datetime-local" id="photoDate"></label>
+<label>Foto aufnehmen / auswählen<input type="file" id="photoFile" accept="image/jpeg,image/png,image/webp,image/*" capture="environment"></label>
+<label>Beschreibung / Verlauf<textarea id="photoNote" rows="2" placeholder="z. B. Wundrand, Verbandwechsel, Verlauf"></textarea></label>
+</div>
+<button type="button" id="photoSave">Foto zur ausgewählten Wunde speichern</button><p id="photoStatus" class="photo-status" role="status"></p>
+<h4>Fotogalerie</h4><div class="photo-form"><label>Wunde filtern<select id="photoFilter"><option value="">Alle Wunden</option></select></label></div>
+<div id="photoGallery" class="photo-grid"></div>
+<h4>Verlaufsvergleich</h4><div class="photo-form"><label>Älteres Foto<select id="photoBefore"><option value="">Foto wählen</option></select></label><label>Neueres Foto<select id="photoAfter"><option value="">Foto wählen</option></select></label></div><div id="photoComparison" class="photo-compare"></div>
+</div></div></section>
 <section id="labs" class="panel"><div class="content"><h2>🧪 Laborwerte</h2><div class="form-grid" id="labFields"></div><button data-add="lab">Laborwert speichern</button><div id="labList" class="entry-list"></div></div></section>
 <section id="cumulative" class="panel"><div class="content"><h2>📊 Kumulativbefund – Labor</h2><p>Automatische Verlaufsübersicht aus den dokumentierten Laborwerten. Werte und Einheiten werden unverändert übernommen; es erfolgt keine automatische medizinische Bewertung.</p><div class="toolbar no-print"><button type="button" id="refreshCumulative">Tabelle aktualisieren</button></div><div id="cumulativeTable" class="table-scroll"></div></div></section>
 <section id="consults" class="panel"><div class="content"><h2>🩺 Konsile</h2><div class="form-grid" id="consultFields"></div><button data-add="consult">Konsil speichern</button><div id="consultList" class="entry-list"></div></div></section>
@@ -141,7 +156,7 @@ function addEntry(type){if(type==='news2'||type==='neuro'){calculatePD4();if(typ
 function renderEntries(type){const p=current(),target=$(type+'List');if(!p||!target)return;const entries=p.entries[type]||[];if(!entries.length){target.textContent='Noch keine Einträge vorhanden.';return}const labels=Object.fromEntries(entryGroups[type].map(f=>[f.id,f.label]));target.innerHTML=entries.map(e=>'<div class="record"><small>Erfasst: '+escapeHTML(formatDate(e.created))+'</small>'+Object.entries(e.data||{}).filter(([,v])=>v!==''&&v!=null).map(([key,v])=>'<div><strong>'+escapeHTML(labels[key]||key)+':</strong> '+escapeHTML(v)+'</div>').join('')+'<div class="toolbar no-print"><button class="danger" type="button" data-delete-type="'+escapeHTML(type)+'" data-delete-id="'+escapeHTML(e.id)+'">Eintrag löschen</button></div></div>').join('')}
 function renderAllEntries(){for(const k of Object.keys(entryGroups))renderEntries(k);renderCumulative();renderPatientChart()}
 function deleteEntry(type,id){const p=current();if(!p||!entryGroups[type]||!confirm('Diesen Eintrag wirklich löschen?'))return;p.entries[type]=(p.entries[type]||[]).filter(e=>e.id!==id);savePatients();renderEntries(type);if(type==='lab')renderCumulative()}
-function exportBackup(){saveCurrentPatient();const blob=new Blob([JSON.stringify(patients,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='PflegeDok-Demo-Backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportBackup(){alert("Hinweis: Das JSON-Backup enthält keine Wundfotos. Diese werden separat lokal im Browser gespeichert.");saveCurrentPatient();const blob=new Blob([JSON.stringify(patients,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='PflegeDok-Demo-Backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 async function importBackup(event){const file=event.target.files?.[0];if(!file)return;try{if(file.size>10*1024*1024)throw Error('Datei ist zu groß (maximal 10 MB).');const parsed=JSON.parse(await file.text());if(!Array.isArray(parsed)||!parsed.every(validPatient)||new Set(parsed.map(p=>p.id)).size!==parsed.length)throw Error('Ungültiges Backup-Format.');if(!confirm('Import ersetzt alle vorhandenen Demo-Daten. Fortfahren?'))return;patients=parsed;currentPatientId=null;savePatients();selectPatient('');renderPatientSelect();alert('Backup importiert.')}catch(e){alert('Backup konnte nicht importiert werden: '+e.message)}finally{event.target.value=''}}
 function formatDate(value){if(!value)return 'Keine Angabe';const d=new Date(value);return Number.isNaN(d.getTime())?String(value).replace('T',' '):d.toLocaleString('de-DE')}
 function generateArztbrief(){const p=current();if(!p)return;saveCurrentPatient();const f=p.fields;const section=(title,content)=>'\n'+title.toUpperCase()+'\n'+'-'.repeat(title.length)+'\n'+(content||'Keine Angaben')+'\n';const listing=type=>{const items=p.entries[type]||[];if(!items.length)return 'Keine Einträge dokumentiert.';const labels=Object.fromEntries(entryGroups[type].map(x=>[x.id,x.label]));return items.map((e,i)=>(i+1)+'. '+Object.entries(e.data||{}).filter(([,v])=>v!==''&&v!=null).map(([k,v])=>(labels[k]||k)+': '+v).join('\n   ')).join('\n\n')};let letter='ARZTBRIEF – ENTWURF\nErstellt am: '+new Date().toLocaleString('de-DE')+'\n\nPATIENTENDATEN\nName: '+p.name+'\nGeburtsdatum: '+(f.birthDate||'')+'\nGeschlecht: '+(f.gender||'')+'\nFallnummer: '+(f.caseNumber||'')+'\nAufnahmedatum: '+(f.admissionDate||'')+'\nStation: '+(f.ward||'')+'\nBehandelnder Arzt: '+(f.doctor||'')+'\n';for(const [title,key] of [['Diagnosen','diagnoses'],['Allergien','allergies'],['Vorerkrankungen','medicalHistory'],['Operationen','operations'],['Krankenhausaufenthalte / Ereignisse','events'],['Weitere Krankengeschichte / Hinweise','historyNotes']])letter+=section(title,f[key]);letter+=section('Pflegestatus',[['Mobilität','mobility'],['Selbstversorgung','selfCare'],['Pflegegrad','careLevel'],['Ernährung','nutrition'],['Kommunikation / Orientierung','communication'],['Hilfsmittel','aids'],['Angehörige / Bezugspersonen','relatives'],['Wohnsituation','living']].map(([label,key])=>label+': '+(f[key]||'Keine Angabe')).join('\n'));letter+=section('Risikoeinschätzungen',[['Dekubitus','riskPressure'],['Sturz','riskFall'],['Thrombose','riskThrombosis'],['Mangelernährung','riskNutrition'],['Aspiration','riskAspiration'],['Delir','riskDelirium'],['Prophylaxen / Maßnahmen','prophylaxis']].map(([label,key])=>label+': '+(f[key]||'Keine Angabe')).join('\n'));for(const [title,key] of [['ISBAR-Übergaben','handover'],['Aufgaben / Maßnahmen','task'],['Assessments','assessment'],['Pflege- und ärztlicher Verlauf','note'],['Konsile','consult'],['Medikationsplan / Anordnungen','medplan'],['Wunddokumentation','wound'],['Vitalwerte und Schmerz','vital'],['Laborwerte','lab'],['Ein- und Ausfuhr / Bilanz','balance'],['Zugänge, Katheter und Drainagen','device'],['Medikamentengaben','medication']])letter+=section(title,listing(key));letter+='\nABSCHLIESSENDE BEURTEILUNG / WEITERES VORGEHEN\n\n[Bitte ärztlich ergänzen]\n\nMit freundlichen Grüßen\n\n________________________________\nBehandelnde Ärztin / behandelnder Arzt\n\nHINWEIS: Automatisch erstellter Demo-Entwurf; fachliche Prüfung und Freigabe erforderlich.\n';$('letterText').value=letter;saveCurrentPatient();tab('arztbrief')}
@@ -402,6 +417,68 @@ function refreshPD4(){calculatePD4();const p=current();if(!p)return;
 document.addEventListener('input',e=>{if(e.target.id.startsWith('news2')||e.target.id.startsWith('neuro'))calculatePD4()});
 document.addEventListener('change',e=>{if(e.target.id.startsWith('news2')||e.target.id.startsWith('neuro'))calculatePD4()});
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.add&&['neuro','news2','hygiene'].includes(b.dataset.add))setTimeout(refreshPD4,0);if(b.dataset.deleteType&&['neuro','news2','hygiene'].includes(b.dataset.deleteType))setTimeout(refreshPD4,0)});
+
+
+/* PflegeDok 4.2: Wundbilder separat im lokalen IndexedDB speichern.
+   Nicht für reale Patientendaten. Kein Serverupload, keine Cloud, kein JSON-Bildbackup. */
+const PHOTO_DB='PflegeDokDemoWundbilder_v1';
+let photoDBPromise=null,photoURLs=[],photoRenderToken=0;
+function photoDB(){
+ if(!('indexedDB' in window))return Promise.reject(Error('Bildspeicherung wird von diesem Browser nicht unterstützt.'));
+ if(!photoDBPromise)photoDBPromise=new Promise((resolve,reject)=>{
+  const req=indexedDB.open(PHOTO_DB,1);
+  req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains('photos')){const store=db.createObjectStore('photos',{keyPath:'id'});store.createIndex('patientId','patientId',{unique:false})}};
+  req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||Error('Bilddatenbank nicht verfügbar'));
+ }).catch(e=>{photoDBPromise=null;throw e});
+ return photoDBPromise;
+}
+async function photoTransaction(mode,operation){const db=await photoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('photos',mode),store=tx.objectStore('photos');let result;try{result=operation(store)}catch(e){reject(e);return}tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error||Error('Speicherfehler'));tx.onabort=()=>reject(tx.error||Error('Speicherabbruch'))})}
+async function listWoundPhotos(patientId){const db=await photoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('photos','readonly');const req=tx.objectStore('photos').index('patientId').getAll(patientId);req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error)})}
+function photoMessage(message){$('photoStatus').textContent=message}
+function woundOptions(){const p=current();return (p?.entries?.wound||[]).map(w=>({id:w.id,label:(w.data?.woundLocation||'Wunde ohne Lokalisation')+' · '+formatDate(w.data?.woundDate||w.created)}))}
+function setPhotoOptions(select,items,placeholder){const previous=select.value;select.replaceChildren(new Option(placeholder,''));for(const item of items)select.add(new Option(item.label,item.id));if(items.some(i=>i.id===previous))select.value=previous}
+function photoRevoke(){for(const url of photoURLs)URL.revokeObjectURL(url);photoURLs=[]}
+function photoImage(blob){const url=URL.createObjectURL(blob);photoURLs.push(url);const img=document.createElement('img');img.src=url;img.alt='Fiktives Wundfoto';img.loading='lazy';img.addEventListener('click',()=>window.open(url,'_blank','noopener'));return img}
+async function refreshWoundPhotos(){
+ const token=++photoRenderToken,p=current();photoRevoke();$('photoGallery').replaceChildren();$('photoComparison').replaceChildren();
+ if(!p)return;
+ const wounds=woundOptions();setPhotoOptions($('photoWound'),wounds,'Wunde auswählen');setPhotoOptions($('photoFilter'),wounds,'Alle Wunden');
+ try{
+  const photos=(await listWoundPhotos(p.id)).sort((a,b)=>String(a.takenAt).localeCompare(String(b.takenAt)));
+  if(token!==photoRenderToken||current()?.id!==p.id)return;
+  const selected=$('photoFilter').value,filtered=photos.filter(x=>!selected||x.woundId===selected);
+  if(!filtered.length)$('photoGallery').textContent='Noch keine Fotos für diese Auswahl gespeichert.';
+  for(const item of filtered){const card=document.createElement('div');card.className='photo-card';card.append(photoImage(item.blob));const info=document.createElement('small');const wound=wounds.find(w=>w.id===item.woundId);info.textContent=(wound?.label||item.woundLabel||'Wunde')+' | '+formatDate(item.takenAt)+' | '+(item.note||'Ohne Beschreibung');card.append(info);const button=document.createElement('button');button.type='button';button.className='danger';button.textContent='Foto löschen';button.addEventListener('click',()=>removeWoundPhoto(item.id));card.append(button);$('photoGallery').append(card)}
+  const selections=photos.filter(x=>!selected||x.woundId===selected).map(x=>({id:x.id,label:formatDate(x.takenAt)+' – '+(x.note||'Foto')}));
+  setPhotoOptions($('photoBefore'),selections,'Älteres Foto wählen');setPhotoOptions($('photoAfter'),selections,'Neueres Foto wählen');
+  const first=photos.find(x=>x.id===$('photoBefore').value),second=photos.find(x=>x.id===$('photoAfter').value);
+  if(first&&second){for(const [title,item] of [['Vorher',first],['Nachher',second]]){const box=document.createElement('div');const h=document.createElement('strong');h.textContent=title+' · '+formatDate(item.takenAt);box.append(h,photoImage(item.blob));$('photoComparison').append(box)}}
+ }catch(e){photoMessage('Bildspeicher nicht verfügbar: '+e.message)}
+}
+async function saveWoundPhoto(){
+ const p=current(),woundId=$('photoWound').value,file=$('photoFile').files?.[0];
+ if(!p||!woundId){photoMessage('Bitte zuerst eine dokumentierte Wunde auswählen.');return}
+ if(!file){photoMessage('Bitte ein Foto auswählen oder aufnehmen.');return}
+ if(!['image/jpeg','image/png','image/webp'].includes(file.type)){photoMessage('Bitte ein JPG-, PNG- oder WebP-Foto verwenden.');return}
+ if(file.size>8*1024*1024){photoMessage('Das Foto ist zu groß (maximal 8 MB).');return}
+ const wound=woundOptions().find(w=>w.id===woundId);if(!wound){photoMessage('Die ausgewählte Wunde existiert nicht mehr.');return}
+ const takenAt=$('photoDate').value||new Date().toISOString(),patientId=p.id;
+ try{await photoTransaction('readwrite',store=>store.put({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),patientId,woundId,woundLabel:wound.label,takenAt,note:$('photoNote').value.trim(),blob:file,created:new Date().toISOString()}));$('photoFile').value='';$('photoNote').value='';photoMessage('Foto lokal gespeichert. Es wird nicht in das JSON-Backup aufgenommen.');if(current()?.id===patientId)await refreshWoundPhotos()}
+ catch(e){photoMessage('Foto konnte nicht gespeichert werden: '+e.message)}
+}
+async function removeWoundPhoto(id){const p=current();if(!p||!confirm('Dieses Wundfoto dauerhaft aus diesem Browser löschen?'))return;try{const records=await listWoundPhotos(p.id);if(!records.some(x=>x.id===id))return;await photoTransaction('readwrite',store=>store.delete(id));photoMessage('Foto gelöscht.');await refreshWoundPhotos()}catch(e){photoMessage('Löschen fehlgeschlagen: '+e.message)}}
+async function deletePatientPhotos(patientId){const photos=await listWoundPhotos(patientId);await photoTransaction('readwrite',store=>{for(const item of photos)store.delete(item.id)})}
+$('photoSave').addEventListener('click',saveWoundPhoto);
+for(const id of ['photoFilter','photoBefore','photoAfter'])$(id).addEventListener('change',refreshWoundPhotos);
+// Patientenauswahl, Wundspeicherung und Wundlöschung aktualisieren die Fotogalerie.
+const originalSelectPatient=selectPatient;
+selectPatient=function(id){originalSelectPatient(id);photoMessage('');refreshWoundPhotos()};
+const originalAddEntry=addEntry;
+addEntry=function(type){originalAddEntry(type);if(type==='wound')refreshWoundPhotos()};
+const originalDeleteEntry=deleteEntry;
+deleteEntry=function(type,id){originalDeleteEntry(type,id);if(type==='wound')refreshWoundPhotos()};
+const originalDeleteSelectedPatient=deleteSelectedPatient;
+deleteSelectedPatient=function(){const id=current()?.id;originalDeleteSelectedPatient();if(id&&!patients.some(p=>p.id===id))deletePatientPhotos(id).catch(e=>alert('Patient gelöscht, aber Wundbilder konnten nicht vollständig entfernt werden: '+e.message))};
 
 loadPatients();if(patients.length)selectPatient(patients[0].id);
 </script></main></body></html>
