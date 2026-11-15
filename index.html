@@ -901,4 +901,11 @@ $('pd60RefreshLab').addEventListener('click',pd60LabOverview);
  }
  metricEl.addEventListener('change',render);periodEl.addEventListener('change',render);labEl.addEventListener('change',render);
  document.getElementById('pd611Refresh').addEventListener('click',render);
- document.getElementById('refreshChart
+ document.getElementById('refreshChart').addEventListener('click',render);
+ const oldSelect=selectPatient;selectPatient=function(id){oldSelect(id);render()};
+ document.addEventListener('click',e=>{if(e.target.closest('[data-tab="chart"]'))render();if(e.target.closest('[data-add="vital"], [data-add="lab"]'))setTimeout(render,0)});
+ document.getElementById('pdJump').addEventListener('change',e=>{if(e.target.value==='chart')render()});
+ const oldRender=renderPatientChart;renderPatientChart=function(){oldRender();render()};
+ render();
+})();
+</script></main></body></html>
