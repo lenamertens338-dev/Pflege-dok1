@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a3565"><title>PflegeDok 7.8 – Klinikblau · Demo</title>
+<html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a3565"><title>PflegeDok 7.9 – Klinikblau · Demo</title>
 <style>
 :root{--green:#176b68;--light:#e6f3f1;--bg:#f3f7f7;--text:#243238;--border:#dce5e5;--red:#b23b45}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}header{background:var(--green);color:white;padding:18px}header h1{margin:0;font-size:23px}header small{opacity:.85}main{max-width:1100px;margin:18px auto;padding:0 12px 40px}nav{display:flex;gap:7px;overflow-x:auto;background:var(--bg);padding:8px 0;position:sticky;top:0;z-index:8}nav button{white-space:nowrap}button{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-size:14px;font-weight:bold;cursor:pointer}button.secondary{background:#e5eeee;color:var(--text)}button.danger{background:#fff0f0;color:var(--red)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #81c8c1}input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font:inherit;background:white}textarea{min-height:75px}label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}.card,.panel>.content{background:white;border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:13px;box-shadow:0 3px 12px #00000008}.card h2,.panel h2{font-size:18px;color:var(--green);margin:0 0 13px}.grid,.form-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}.form-grid>label{grid-column:span 6;min-width:0}.form-grid>label.wide{grid-column:span 12}.form-grid>label input,.form-grid>label select,.form-grid>label textarea{margin-top:5px}.s12{grid-column:span 12}.s6{grid-column:span 6}.s4{grid-column:span 4}.s3{grid-column:span 3}.field{min-width:0}.panel{display:none}.panel.active{display:block}.record{border:1px solid var(--border);border-radius:9px;padding:11px;margin:8px 0;background:#fcfefe;overflow-wrap:anywhere}.record small{color:#68777b}.warning{background:#fff7e8;border:1px solid #f0dfbd;color:#76511a;padding:12px;border-radius:9px;margin-bottom:14px;font-size:13px}.hidden{display:none!important}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.entry-list{margin-top:15px}.label-preview{margin:14px 0}.patient-label{border:1px solid #777;background:white;padding:12px;display:inline-block;min-width:220px;line-height:1.6;margin-bottom:8px}.patient-label.large{min-width:360px;padding:20px}#letterText{width:100%;min-height:500px;white-space:pre-wrap;font-family:monospace}nav button[aria-current="page"]{background:#0e4947}nav button:not([aria-current="page"]){opacity:.8}@media(max-width:650px){.s6,.s4,.s3,.form-grid>label{grid-column:span 12}.patient-label.large{min-width:0;width:100%}}@media print{header,nav,.no-print,button,.warning{display:none!important}.panel{display:none!important}.panel.active{display:block!important}body{background:white}.card,.panel>.content{box-shadow:none;border:0}.entry-list .record{break-inside:avoid}#letterText{min-height:0;border:0;overflow:visible}}
 .table-scroll{overflow-x:auto;max-width:100%}.cumulative{border-collapse:collapse;min-width:650px;width:100%;font-size:13px}.cumulative th,.cumulative td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top;white-space:nowrap}.cumulative thead th{background:var(--light)}.cumulative tbody th{position:sticky;left:0;background:#fff;z-index:1}.cumulative hr{border:0;border-top:1px solid var(--border)}
@@ -471,7 +471,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid color-mix(in srgb,var(
 <div class="card" id="pd77Gabe">
 <h3>Medikamentengabe direkt im Medikationsplan</h3>
 <p class="pd-note">Eine angeordnete Medikation ist nicht automatisch gegeben. Bitte nur bei tatsächlich erfolgter Gabe bestätigen. Für jede Gabe wird ein eigener Eintrag mit Zeitpunkt und Handzeichen gespeichert.</p>
-<div class="form-grid no-print"><label>OP-Fall für diese Gabe (optional)<select id="pd78OpCase"><option value="">Keine OP-Zuordnung (Stationsmedikation)</option></select></label></div><div id="pd77OrderChecklist" aria-live="polite"></div>
+<div class="form-grid no-print"><label>OP-Fall für diese Gabe (optional)<select id="pd78OpCase"><option value="">Keine OP-Zuordnung (Stationsmedikation)</option></select></label></div><div class="form-grid no-print"><label>Tag der Medikamentengabekurve<input type="date" id="pd79CurveDate"></label></div><div id="pd77OrderChecklist" aria-live="polite"></div>
 <div class="form-grid no-print"><label>Tatsächlicher Zeitpunkt *<input type="datetime-local" id="pd77GivenAt"></label><label>Handzeichen / durchführende Person *<input type="text" id="pd77Signer" placeholder="Kürzel / Name"></label></div>
 <p id="pd77Feedback" role="status" aria-live="polite"></p>
 </div>
@@ -2922,7 +2922,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 <script>
-/* PflegeDok 7.8 – Medikamentenanordnung: robuste Eventdelegation */
+/* PflegeDok 7.9 – Medikamentenanordnung: robuste Eventdelegation */
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
@@ -2992,7 +2992,9 @@ document.addEventListener('click',function(e){
  if(target)target.click();else if(typeof tab==='function')tab(id);
 });
 </script>
-<style id="pd77Styles">
+<style id="pd79CurveStyles">
+.pd79-scroll{overflow-x:auto}.pd79-table{width:100%;border-collapse:collapse;min-width:650px}.pd79-table th,.pd79-table td{padding:12px;border:1px solid #b8cadc;text-align:center}.pd79-table td:first-child{text-align:left;min-width:220px}.pd79-table small{display:block;white-space:pre-wrap}.pd79-cell{display:flex;flex-direction:column;align-items:center;gap:5px}.pd79-cell input{width:22px;height:22px;accent-color:#2367a0}
+</style><style id="pd77Styles">
 #meds{display:none!important}
 #pd77OrderChecklist{display:grid;gap:10px;margin:12px 0}
 .pd77-order{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px;border:1px solid #c9d9eb;border-radius:10px;background:rgba(110,160,210,.07)}
@@ -3007,14 +3009,21 @@ const $id=id=>document.getElementById(id);
 function patient(){try{return typeof current==='function'?current():null}catch(e){return null}}
 function esc(t){return String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function medicationOrders(){return (patient()?.entries?.order||[]).filter(e=>e.data?.orderCategory==='Medikamente'&&!['Pausiert','Abgesetzt'].includes(e.data?.orderStatus))}
+const slots=[['m','Morgens'],['n','Mittags'],['e','Abends'],['l','Nachts']];
+function selectedDay(){return $id('pd79CurveDate')?.value||localNow().slice(0,10)}
+function recorded(orderId,day,slot){return (patient()?.entries?.medication||[]).some(e=>e.linkedOrderId===orderId&&e.pd79Day===day&&e.pd79Slot===slot&&e.data?.medStatus==='Verabreicht')}
 function redraw(){
  const box=$id('pd77OrderChecklist');if(!box)return;
  const p=patient();if(!p){box.textContent='Bitte zuerst einen Testpatienten auswählen.';return}
- const orders=medicationOrders();if(!orders.length){box.textContent='Noch keine aktive Medikationsanordnung vorhanden.';return}
- box.innerHTML=orders.map(e=>{
+ const orders=medicationOrders(),day=selectedDay();
+ if(!orders.length){box.textContent='Noch keine aktive Medikationsanordnung vorhanden.';return}
+ box.innerHTML='<div class="pd79-scroll"><table class="pd79-table"><thead><tr><th>Medikation / Anordnung</th>'+slots.map(s=>'<th>'+s[1]+'</th>').join('')+'</tr></thead><tbody>'+orders.map(e=>{
  const d=e.data||{};
- return '<div class="pd77-order"><div class="pd77-info"><strong>'+esc(d.orderTitle||'Unbenannt')+'</strong><small>'+esc(d.orderDetails||'Keine Dosierungsangaben')+'</small></div><label class="pd77-check"><input type="checkbox" data-pd77-give="'+esc(e.id)+'"> Als gegeben dokumentieren</label></div>';
- }).join('');
+ return '<tr><td><strong>'+esc(d.orderTitle||'Unbenannt')+'</strong><small>'+esc(d.orderDetails||'Keine Dosierungsangaben')+'</small></td>'+slots.map(slot=>{
+ const done=recorded(e.id,day,slot[0]);
+ return '<td><label class="pd79-cell"><input type="checkbox" data-pd77-give="'+esc(e.id)+'" data-pd79-slot="'+slot[0]+'" '+(done?'checked disabled':'')+'><span>'+(done?'Dokumentiert':'Gabe')+'</span></label></td>';
+ }).join('')+'</tr>';
+ }).join('')+'</tbody></table></div><p class="pd-note">Die Zeitfenster sind Dokumentationsfelder, keine automatisch berechneten Fälligkeiten. Bitte vor jeder Bestätigung ärztliche Anordnung, Dosis und tatsächliche Gabe prüfen. Bereits dokumentierte Gaben werden für diesen Tag und dieses Zeitfenster gesperrt.</p>';
 }
 function localNow(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,16)}
 function integrate(){
@@ -3027,14 +3036,16 @@ function integrate(){
   target.querySelector('.content')?.appendChild(card);
  }
  // Existing IDs and handlers are preserved by moving, not duplicating, their elements.
- const now=$id('pd77GivenAt');if(now&&!now.value)now.value=localNow();
+ const now=$id('pd77GivenAt');if(now&&!now.value)now.value=localNow();const curveDay=$id('pd79CurveDate');if(curveDay&&!curveDay.value)curveDay.value=localNow().slice(0,10);
  const oldGo=$id('pd75GoGabe');if(oldGo){const replacement=oldGo.cloneNode(true);oldGo.replaceWith(replacement);replacement.addEventListener('click',()=>{if(typeof tab==='function')tab('medplan');$id('pd77Gabe')?.scrollIntoView({behavior:'smooth',block:'start'});});}
  document.addEventListener('change',e=>{
   const btn=e.target.closest('[data-pd77-give]');if(!btn||!btn.checked)return;
   const msg=$id('pd77Feedback'),p=patient();
   const order=medicationOrders().find(o=>o.id===btn.dataset.pd77Give);
   if(!p||!order){msg.textContent='Anordnung nicht gefunden oder nicht mehr aktiv.';redraw();return}
-  const when=$id('pd77GivenAt')?.value||'',signer=($id('pd77Signer')?.value||'').trim();
+  const when=$id('pd77GivenAt')?.value||'',signer=($id('pd77Signer')?.value||'').trim(),slot=btn.dataset.pd79Slot||'',day=selectedDay();
+  if(slot&&recorded(order.id,day,slot)){msg.textContent='Für diesen Tag und dieses Zeitfenster ist die Gabe bereits dokumentiert.';redraw();return}
+  if(slot&&when.slice(0,10)!==day){msg.textContent='Datum der tatsächlichen Gabe und Kurventag stimmen nicht überein.';return}
   if(!when||!signer){msg.textContent='Bitte Zeitpunkt und Handzeichen eintragen.';return}
   const d=order.data||{};
   const details=d.orderDetails||'';
@@ -3052,6 +3063,7 @@ function integrate(){
   if((p.entries.medication||[]).length>before){
     const opId=$id('pd78OpCase')?.value||'';
     const entry=p.entries.medication[p.entries.medication.length-1];
+    if(entry){entry.linkedOrderId=order.id;entry.pd79Day=day;entry.pd79Slot=slot;try{savePatients()}catch(err){msg.textContent='Gabe gespeichert, aber Zuordnung zur Kurve konnte nicht gespeichert werden: '+err.message;return}}
     if(opId&&p.opCases?.some(c=>c.id===opId)&&entry){
       entry.opCaseId=opId;
       entry.linkedOrderId=order.id;
@@ -3064,7 +3076,7 @@ function integrate(){
   }
   else msg.textContent='Die Gabe wurde nicht gespeichert. Bitte Hinweise prüfen.';
  });
- document.addEventListener('change',e=>{if(e.target.id==='pd77GivenAt')redraw()});
+ document.addEventListener('change',e=>{if(e.target.id==='pd77GivenAt'||e.target.id==='pd79CurveDate')redraw()});
  document.addEventListener('click',e=>{if(e.target.closest('[data-tab], [data-pd660-view], [data-add], [data-delete-type], #pd75SaveOrder'))setTimeout(redraw,80)});
  // Update after patient selection or orders changed, even when app calls tab programmatically.
  if(typeof selectPatient==='function'){const orig=selectPatient;selectPatient=function(){const ret=orig.apply(this,arguments);redraw();return ret}}
@@ -3109,4 +3121,8 @@ function renderAnesthesia(){
 function refresh(){updateCaseSelect();renderAnesthesia()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh);else refresh();
 document.addEventListener('pd78MedicationSaved',refresh);
-document.addEventListener('change',e=>{if(e.target.id==='pd63Case'||e.target.id==
+document.addEventListener('change',e=>{if(e.target.id==='pd63Case'||e.target.id==='patientSelect')setTimeout(refresh,0)});
+document.addEventListener('click',e=>{if(e.target.closest('[data-tab="opana"],[data-pd63-kind],#pd63NewCase,#pd63EditCase,[data-pd660-view]'))setTimeout(refresh,100)});
+})();
+</script>
+</body></html>
