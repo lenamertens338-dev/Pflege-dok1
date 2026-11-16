@@ -3162,7 +3162,21 @@ function setup(){const root=document.getElementById('pd73Curve');if(!root)return
  const toggle=toolbar.querySelector('[data-action="toggle"]'),sel=toolbar.querySelector('select');sel.value=kind;
  function refresh(){layer.replaceChildren();for(const stroke of points){if(!Array.isArray(stroke.xy)||!stroke.xy.length)continue;const path=document.createElementNS('http://www.w3.org/2000/svg','polyline');path.setAttribute('points',stroke.xy.map(q=>q.join(',')).join(' '));path.setAttribute('fill','none');path.setAttribute('stroke',colors[stroke.kind]||colors.hr);path.setAttribute('stroke-width','3');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');layer.appendChild(path)}layer.style.pointerEvents=mode?'auto':'none';toggle.textContent=mode?'Zeichnen ausschalten':'Zeichnen einschalten';toggle.setAttribute('aria-pressed',String(mode));}
  function coord(e){const r=layer.getBoundingClientRect();return [Math.max(0,Math.min(1000,Math.round((e.clientX-r.left)/r.width*1000))),Math.max(0,Math.min(300,Math.round((e.clientY-r.top)/r.height*300)))]}
- toggle.onclick=()=>{mode=!mode;refresh()};sel.onchange=()=>{kind=sel.value};
+ const oldBodyOverflow=document.body.style.overflow;
+ const oldHtmlOverflow=document.documentElement.style.overflow;
+ const oldScrollTouch=scroll.style.touchAction;
+ const oldScrollOverflow=scroll.style.overflow;
+ function setDrawLock(){
+   document.body.style.overflow=mode?'hidden':oldBodyOverflow;
+   document.documentElement.style.overflow=mode?'hidden':oldHtmlOverflow;
+   scroll.style.touchAction=mode?'none':oldScrollTouch;
+   scroll.style.overflow=mode?'hidden':oldScrollOverflow;
+   wrap.style.touchAction=mode?'none':'';
+   layer.style.touchAction='none';
+ }
+ toggle.onclick=()=>{mode=!mode;setDrawLock();refresh()};sel.onchange=()=>{kind=sel.value};
+ layer.addEventListener('touchstart',e=>{if(mode)e.preventDefault()},{passive:false});
+ layer.addEventListener('touchmove',e=>{if(mode)e.preventDefault()},{passive:false});
  toolbar.querySelector('[data-action="undo"]').onclick=()=>{points.pop();save();refresh()};
  toolbar.querySelector('[data-action="clear"]').onclick=()=>{if(points.length&&confirm('Alle Stiftzeichnungen für diesen Zeitraum löschen?')){points=[];save();refresh()}};
  layer.addEventListener('pointerdown',e=>{if(!mode||!e.isPrimary)return;e.preventDefault();layer.setPointerCapture(e.pointerId);active={kind,xy:[coord(e)]};points.push(active);refresh()});
