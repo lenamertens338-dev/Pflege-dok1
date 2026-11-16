@@ -1,5 +1,5 @@
 
-const CACHE_VERSION = "pflegedok-v2";
+const CACHE_VERSION = "pflegedok-v74";
 
 const APP_FILES = [
   "./",
