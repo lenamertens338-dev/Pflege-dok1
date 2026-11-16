@@ -1,93 +1,63 @@
 
-const CACHE_VERSION = "pflegedok-v74";
+/* PflegeDok 7.4 – Service Worker
+   HTML navigation: network first, never serve stale HTML from cache.
+   Static assets: network first with offline cache fallback.
+*/
+const CACHE_VERSION = "pflegedok-v74-network-first-1";
+const APP_FILES = ["./icon.svg", "./manifest.json"];
 
-const APP_FILES = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icon.svg"
-];
-
-// App installieren
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_VERSION)
-      .then(cache => cache.addAll(APP_FILES))
-      .then(() => self.skipWaiting())
-  );
+self.addEventListener("install", (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_VERSION);
+    await Promise.allSettled(APP_FILES.map(async (url) => {
+      const response = await fetch(url, { cache: "no-store" });
+      if (response.ok) await cache.put(url, response);
+    }));
+    await self.skipWaiting();
+  })());
 });
 
-// Alte Caches löschen und neue Version aktivieren
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys =>
-        Promise.all(
-          keys
-            .filter(key =>
-              key.startsWith("pflegedok-") &&
-              key !== CACHE_VERSION
-            )
-            .map(key => caches.delete(key))
-        )
-      )
-      .then(() => self.clients.claim())
-  );
+self.addEventListener("activate", (event) => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys
+      .filter((key) => key.startsWith("pflegedok-") && key !== CACHE_VERSION)
+      .map((key) => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
 
-// Dateien laden und zwischenspeichern
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (event) => {
   const request = event.request;
-
   if (request.method !== "GET") return;
+  if (new URL(request.url).origin !== self.location.origin) return;
 
-  const url = new URL(request.url);
-
-  if (url.origin !== self.location.origin) return;
-
-  // Bei Seitenaufrufen zuerst die aktuelle Version laden
-  if (request.mode === "navigate") {
-    event.respondWith(
-      fetch(request)
-        .then(response => {
-          if (response.ok) {
-            const copy = response.clone();
-
-            caches.open(CACHE_VERSION)
-              .then(cache =>
-                cache.put("./index.html", copy)
-              );
-          }
-
-          return response;
-        })
-        .catch(async () => {
-          return (
-            await caches.match("./index.html")
-          ) || (
-            await caches.match("./")
-          );
-        })
-    );
-
+  // The application itself must always be fetched freshly.
+  // Do not use a cached old index.html as offline fallback.
+  if (request.mode === "navigate" ||
+      new URL(request.url).pathname.endsWith("/index.html")) {
+    event.respondWith(fetch(request, { cache: "no-store" }).catch(() =>
+      new Response(
+        "<!doctype html><html lang='de'><meta charset='utf-8'><title>PflegeDok offline</title><body><h2>Keine Netzwerkverbindung</h2><p>Bitte verbinde dich mit dem Internet und lade PflegeDok erneut.</p></body></html>",
+        { status: 503, headers: { "Content-Type": "text/html; charset=utf-8" } }
+      )
+    ));
     return;
   }
 
-  // Andere App-Dateien aus dem Cache laden
-  event.respondWith(
-    caches.match(request)
-      .then(async cached => {
-        if (cached) return cached;
-
-        const response = await fetch(request);
-
-        if (response.ok) {
-          const copy = response.clone();
-          const cache = await caches.open(CACHE_VERSION);
-          await cache.put(request, copy);
-        }
-
-        return response;
-      })
-  );
+  // Other same-origin assets: prefer network; use cached assets offline.
+  event.respondWith((async () => {
+    try {
+      const response = await fetch(request);
+      if (response.ok) {
+        const cache = await caches.open(CACHE_VERSION);
+        await cache.put(request, response.clone());
+      }
+      return response;
+    } catch (error) {
+      const cached = await caches.match(request);
+      if (cached) return cached;
+      throw error;
+    }
+  })());
 });
